@@ -14,8 +14,9 @@ public class ListaClientes {
         return listaClientes;
     }
 
-    public void addClienteToModel(Cliente cliente){
+    public boolean addClienteToModel(Cliente cliente){
         listaClientes.add(cliente);
+        return true;
     }
 
 }

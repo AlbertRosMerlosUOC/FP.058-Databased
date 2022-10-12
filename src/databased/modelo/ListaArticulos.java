@@ -15,10 +15,10 @@ public class ListaArticulos{
     }
 
 
-    public void addArticuloToModel(Articulo articulo){
-        listaArticulos.add(articulo);
-    }
-    public void deleteArticuloFromModel(String codigoArticulo){
+    public boolean addArticuloToModel(Articulo articulo){
         //TODO
+        listaArticulos.add(articulo);
+        return true;
     }
+
 }

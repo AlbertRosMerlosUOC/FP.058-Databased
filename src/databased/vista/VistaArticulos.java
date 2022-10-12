@@ -1,4 +1,4 @@
 package src.databased.vista;
 
-public class Mocker {
+public class VistaArticulos {
 }

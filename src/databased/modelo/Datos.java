@@ -17,17 +17,23 @@ public class Datos {
     public List<Cliente> getClientes() {
         return clientes.getListaClientes();
     }
+    public List<Cliente> getClientes(String tipoCliente) {
+        //TODO
+        return null;
+    }
 
-    public void addCliente(Cliente cliente) {
+    public boolean addCliente(Cliente cliente) {
         clientes.addClienteToModel(cliente);
+        return true;
     }
 
     public List<Articulo> getArticulos() {
         return articulos.getListaArticulos();
     }
 
-    public void addArticulo(Articulo articulo) {
+    public boolean addArticulo(Articulo articulo) {
         articulos.addArticuloToModel(articulo);
+        return  true;
     }
 
 
@@ -35,11 +41,12 @@ public class Datos {
         return pedidos.getListaPedidos();
     }
 
-    public void addPedido(Pedido pedido) {
+    public boolean addPedido(Pedido pedido) {
         pedidos.addPedidoToModel(pedido);
+        return true;
     }
 
-    public boolean removePedido(int idPedido) {
+    public boolean deletePedido(int idPedido) {
         //TODO
         return  false;
     }

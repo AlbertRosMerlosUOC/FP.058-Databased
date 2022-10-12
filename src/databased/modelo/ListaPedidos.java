@@ -14,10 +14,13 @@ public class ListaPedidos {
         return listaPedidos;
     }
 
-    public void addPedidoToModel(Pedido pedido){
-        listaPedidos.add(pedido);
-    }
-    public void deletePedidoFromModel(int numeroPedido){
+    public boolean addPedidoToModel(Pedido pedido){
         //TODO
+        listaPedidos.add(pedido);
+        return true;
+    }
+    public boolean deletePedidoFromModel(int numeroPedido){
+        //TODO
+        return true;
     }
 }
