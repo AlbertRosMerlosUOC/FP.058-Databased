@@ -4,11 +4,11 @@ public class Articulo {
 
     private String codigo;
     private String descripcion;
-    private float precioVenta;
-    private float gastosEnvio;
+    private double precioVenta;
+    private double gastosEnvio;
     private int tiempoPreparacion;
 
-    public Articulo(String codigo, String descripcion, float precioVenta, float gastosEnvio, int tiempoPreparacion) {
+    public Articulo(String codigo, String descripcion, double precioVenta, double gastosEnvio, int tiempoPreparacion) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.precioVenta = precioVenta;
@@ -32,7 +32,7 @@ public class Articulo {
         this.descripcion = descripcion;
     }
 
-    public float getPrecioVenta() {
+    public double getPrecioVenta() {
         return precioVenta;
     }
 
@@ -40,7 +40,7 @@ public class Articulo {
         this.precioVenta = precioVenta;
     }
 
-    public float getGastosEnvio() {
+    public double getGastosEnvio() {
         return gastosEnvio;
     }
 
