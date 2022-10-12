@@ -1,4 +1,4 @@
 package src.databased.vista;
 
-public class VistaPedido {
+public class VistaPedidos {
 }
