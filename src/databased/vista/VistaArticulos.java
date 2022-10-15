@@ -1,4 +1,4 @@
-package databased.vista;
+package src.databased.vista;
 
 public class VistaArticulos {
 }
