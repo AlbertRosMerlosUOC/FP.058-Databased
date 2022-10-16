@@ -21,14 +21,15 @@ public class Datos {
 
     public List<Cliente> getClientes(String tipoCliente) {
         List<Cliente> clientesFiltro = new ArrayList<>();
-        String clase;
         for (int i=0; i < clientes.listaClientes.size(); i++) {
-            if ((clientes.listaClientes.get(i).getClass().toString()).contains("ClientePremium")) {
-                ClientePremium clienteNuevo = (ClientePremium) clientes.listaClientes.get(i).clona(clientes.listaClientes.get(i));
-                clientesFiltro.add(clienteNuevo);
-            } else {
-                ClienteStandard clienteNuevo = (ClienteStandard) clientes.listaClientes.get(i).clona(clientes.listaClientes.get(i));
-                clientesFiltro.add(clienteNuevo);
+            if ((clientes.listaClientes.get(i).getClass().toString()).contains(tipoCliente)) {
+                if (tipoCliente.equals("ClientePremium")) {
+                    ClientePremium clienteNuevo = (ClientePremium) clientes.listaClientes.get(i).clona(clientes.listaClientes.get(i));
+                    clientesFiltro.add(clienteNuevo);
+                } else {
+                    ClienteStandard clienteNuevo = (ClienteStandard) clientes.listaClientes.get(i).clona(clientes.listaClientes.get(i));
+                    clientesFiltro.add(clienteNuevo);
+                }
             }
         }
         return null;
