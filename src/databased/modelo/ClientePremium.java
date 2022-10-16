@@ -20,6 +20,22 @@ public class ClientePremium extends Cliente {
         return null;
     }
 
+    public int getCuota() {
+        return cuota;
+    }
+
+    public void setCuota(int cuota) {
+        this.cuota = cuota;
+    }
+
+    public int getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(int descuento) {
+        this.descuento = descuento;
+    }
+
     @Override
     public double calcAnual() {
         //TODO
@@ -42,5 +58,18 @@ public class ClientePremium extends Cliente {
                 ", nombre='" + nombre + '\'' +
                 ", domicilio='" + domicilio + '\'' +
                 '}';
+    }
+
+    /**
+     * Método sobrecargado de Cliente usado para clonar objetos de tipo Cliente (casteado a ClientePremium)
+     * @param clienteOld Objeto de tipo Cliente del que se va a hacer la copia
+     * @return Objeto ClientePremium que es una copia del objeto Cliente pasado por parámetro
+     * @see Cliente
+     */
+    @Override
+    public Cliente clona(Cliente clienteOld) {
+        ClientePremium clienteNew = (ClientePremium) clienteOld;
+        return new ClientePremium(clienteNew.getEmail(), clienteNew.getNif(), clienteNew.getNombre(),
+                                  clienteNew.getDomicilio(), clienteNew.getCuota(), clienteNew.getDescuento());
     }
 }

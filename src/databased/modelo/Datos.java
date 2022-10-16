@@ -1,5 +1,6 @@
 package src.databased.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //el controlador solo llamará a los métodos de esta clase.
@@ -17,8 +18,19 @@ public class Datos {
     public List<Cliente> getClientes() {
         return clientes.getListaClientes();
     }
+
     public List<Cliente> getClientes(String tipoCliente) {
-        //TODO
+        List<Cliente> clientesFiltro = new ArrayList<>();
+        String clase;
+        for (int i=0; i < clientes.listaClientes.size(); i++) {
+            if ((clientes.listaClientes.get(i).getClass().toString()).contains("ClientePremium")) {
+                ClientePremium clienteNuevo = (ClientePremium) clientes.listaClientes.get(i).clona(clientes.listaClientes.get(i));
+                clientesFiltro.add(clienteNuevo);
+            } else {
+                ClienteStandard clienteNuevo = (ClienteStandard) clientes.listaClientes.get(i).clona(clientes.listaClientes.get(i));
+                clientesFiltro.add(clienteNuevo);
+            }
+        }
         return null;
     }
 

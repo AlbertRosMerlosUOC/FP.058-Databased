@@ -49,4 +49,13 @@ public abstract class Cliente {
     abstract public double calcAnual();
     abstract public double descuentoEnvio();
 
+    /**
+     * Método que simula una clonación de subtipos Cliente (ClientePremium, ClienteStandard)
+     * @param clienteOld Objeto tipo Cliente que será clonado
+     * @return Objeto tipo Producto clonado
+     * @see ClientePremium
+     * @see ClienteStandard
+     */
+    public abstract Cliente clona(Cliente clienteOld);
+
 }
