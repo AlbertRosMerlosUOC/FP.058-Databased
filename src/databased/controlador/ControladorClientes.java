@@ -1,8 +1,8 @@
-package databased.controlador;
+package src.databased.controlador;
 
-import databased.modelo.Articulo;
-import databased.modelo.Cliente;
-import databased.vista.VistaArticulos;
+import src.databased.modelo.Articulo;
+import src.databased.modelo.Cliente;
+import src.databased.vista.VistaArticulos;
 
 public class ControladorClientes {
     private VistaArticulos vistaArticulos;
