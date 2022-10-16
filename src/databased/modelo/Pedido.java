@@ -1,4 +1,4 @@
-package src.databased.modelo;
+package databased.modelo;
 
 import java.time.LocalDateTime;
 
