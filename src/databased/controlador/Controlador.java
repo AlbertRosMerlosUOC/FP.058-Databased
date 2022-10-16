@@ -1,10 +1,10 @@
-package src.databased.vista;
+package databased.controlador;
 
-import src.databased.modelo.Articulo;
-import src.databased.modelo.Cliente;
-import src.databased.modelo.Datos;
-
-import java.util.List;
+import databased.modelo.Articulo;
+import databased.modelo.Cliente;
+import databased.modelo.Datos;
+import databased.vista.GestionOS;
+import databased.vista.OnlineStore;
 
 public class Controlador {
     private Datos model;
