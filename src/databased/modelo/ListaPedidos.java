@@ -15,7 +15,7 @@ public class ListaPedidos {
     }
 
     public boolean addPedidoToModel(Pedido pedido){
-        //TODO
+        //TODO El articulo en el momento de añadir un pedido debe existir.
         listaPedidos.add(pedido);
         return true;
     }
