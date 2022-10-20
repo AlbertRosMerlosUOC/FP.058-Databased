@@ -9,8 +9,7 @@ public class ClienteStandard extends Cliente {
 
     @Override
     public String tipoCliente() {
-        //TODO
-        return null;
+        return "Standard";
     }
 
     @Override
