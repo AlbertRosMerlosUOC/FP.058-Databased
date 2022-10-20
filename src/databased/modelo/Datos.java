@@ -5,9 +5,9 @@ import java.util.List;
 
 //el controlador solo llamará a los métodos de esta clase.
 public class Datos {
-    private ListaClientes clientes;
-    private ListaArticulos articulos;
-    private ListaPedidos pedidos;
+    private final ListaClientes clientes;
+    private final ListaArticulos articulos;
+    private final ListaPedidos pedidos;
 
     public Datos() {
         this.clientes = new ListaClientes();
@@ -22,7 +22,7 @@ public class Datos {
     public List<Cliente> getClientes(String tipoCliente) {
         List<Cliente> clientesFiltro = new ArrayList<>();
         for (int i=0; i < clientes.listaClientes.size(); i++) {
-            if ((clientes.listaClientes.get(i).getClass().toString()).contains(tipoCliente)) {
+            if ((clientes.listaClientes.get(i).tipoCliente().equals(tipoCliente))) {
                 if (tipoCliente.equals("ClientePremium")) {
                     ClientePremium clienteNuevo = (ClientePremium) clientes.listaClientes.get(i).clona(clientes.listaClientes.get(i));
                     clientesFiltro.add(clienteNuevo);
@@ -32,7 +32,7 @@ public class Datos {
                 }
             }
         }
-        return null;
+        return clientesFiltro;
     }
 
     public boolean addCliente(Cliente cliente) {

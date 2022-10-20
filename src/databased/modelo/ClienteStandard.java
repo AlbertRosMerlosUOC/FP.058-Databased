@@ -9,18 +9,16 @@ public class ClienteStandard extends Cliente {
 
     @Override
     public String tipoCliente() {
-        return "Standard";
+        return "ClienteStandard";
     }
 
     @Override
     public double calcAnual() {
-        //TODO
         return 0;
     }
 
     @Override
     public double descuentoEnvio() {
-        //TODO
         return 0;
     }
 

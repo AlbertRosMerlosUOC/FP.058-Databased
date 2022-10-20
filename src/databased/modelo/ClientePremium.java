@@ -16,7 +16,7 @@ public class ClientePremium extends Cliente {
 
     @Override
     public String tipoCliente() {
-        return "Premium";
+        return "ClientePremium";
     }
 
     public int getCuota() {
