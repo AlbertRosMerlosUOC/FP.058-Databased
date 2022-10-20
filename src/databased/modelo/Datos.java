@@ -1,4 +1,4 @@
-package src.databased.modelo;
+package databased.modelo;
 
 import java.util.ArrayList;
 import java.util.List;

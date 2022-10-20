@@ -1,4 +1,4 @@
-package src.databased.modelo;
+package databased.modelo;
 
 import java.time.LocalDateTime;
 
@@ -64,7 +64,7 @@ public class Pedido {
     public float precioEnvio(){
         //TODO
         return 0;
-    };
+    }
     //TODO
     // El método toString debe construir una cadena con los datos siguientes:
     // número de pedido, fecha y hora del pedido, Nif y nombre del cliente, código y descripción del artículo,

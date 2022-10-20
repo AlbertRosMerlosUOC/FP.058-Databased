@@ -1,9 +1,9 @@
-package src.databased.vista;
+package databased.vista;
 
 public class VistaPrincipal {
-    private VistaArticulos vistaArticulos;
-    private VistaClientes vistaClientes;
-    private VistaPedidos vistaPedidos;
+    private final VistaArticulos vistaArticulos;
+    private final VistaClientes vistaClientes;
+    private final VistaPedidos vistaPedidos;
 
     public VistaPrincipal(VistaArticulos vistaArticulos, VistaClientes vistaClientes, VistaPedidos vistaPedidos) {
         this.vistaArticulos = vistaArticulos;
