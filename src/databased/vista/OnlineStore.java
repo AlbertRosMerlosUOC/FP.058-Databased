@@ -1,7 +1,7 @@
 package databased.vista;
 
 import databased.modelo.EscrituraAccesoDatoException;
-
+ //prueba push Alex
 import java.util.Scanner;
 
 public class OnlineStore {
