@@ -1,38 +1,33 @@
 package databased.controlador;
 
-import databased.modelo.Articulo;
-import databased.modelo.Cliente;
+import databased.modelo.*;
 import databased.modelo.Datos;
-import databased.vista.GestionOS;
-import databased.vista.OnlineStore;
 
 public class Controlador {
-    private Datos model;
-    private GestionOS view;
+    private Datos datos;
+    public Controlador() {
+        datos = new Datos ();
+    }
+    // TO-BE-DONE
 
-    public Controlador(Datos model, GestionOS view) {
-        this.model = model;
-        this.view = view;
-
-        this.view.setController(this);
+    public Datos getDatos() {
+        return datos;
     }
 
-    public void displayListaArticulos() {
-        view.showArticulos(model.getArticulos());
+    public void setDatos(Datos datos) {
+        this.datos = datos;
     }
 
-    public void addArticulo(Articulo articulo) {
-        model.addArticulo(articulo);
+    public boolean addArticulo (String codigo, String descripcion, double precioVenta, double gastosEnvio, int tiempoPreparacion) throws EscrituraAccesoDatoException {
+        Articulo articulo = new Articulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion);
 
+        ListaArticulos listaArticulos = datos.getListaArticulos();
+        boolean okAddArt =  listaArticulos.add(articulo);
+        return okAddArt;
     }
-
-    public void getListaClientes() {
-        view.showClientes(model.getClientes());
+    public void listArticulos(){
+        ListaArticulos listaArticulos = datos.getListaArticulos();
+        listaArticulos.list();
     }
-
-    public void addCliente(Cliente cliente) {
-        model.addCliente(cliente);
-    }
-
-
 }
+

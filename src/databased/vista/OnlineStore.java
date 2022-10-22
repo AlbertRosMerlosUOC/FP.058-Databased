@@ -1,16 +1,12 @@
 package databased.vista;
 
-import databased.controlador.Controlador;
-import databased.modelo.Datos;
+import databased.modelo.EscrituraAccesoDatoException;
+
+import java.util.Scanner;
 
 public class OnlineStore {
-    public static void main(String[] args) {
-
-        GestionOS view = new GestionOS();
-        Datos model = new Datos();
-        Controlador ctrl = new Controlador(model,view );
-        System.out.println("Test MVC OnlineStore");
-        //Arrancar el menu de la vistas
-        view.run();
+    public static void main(String[] args) throws EscrituraAccesoDatoException {
+        GestionOS gestion = new GestionOS();
+        gestion.inicio();
     }
 }

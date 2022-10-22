@@ -1,55 +1,41 @@
 package databased.modelo;
 
-import java.util.List;
+import databased.modelo.ListaArticulos;
+import databased.modelo.ListaClientes;
+import databased.modelo.ListaPedidos;
 
-//el controlador solo llamará a los métodos de esta clase.
 public class Datos {
-    private ListaClientes clientes;
-    private ListaArticulos articulos;
-    private ListaPedidos pedidos;
+    private ListaArticulos listaArticulos;
+    private ListaClientes listaClientes;
+    private ListaPedidos listaPedidos;
+    public Datos (){
+        listaArticulos = new ListaArticulos();
+        listaClientes = new ListaClientes();
+        listaPedidos = new ListaPedidos();
+    }
+// TO-BE-DONE
 
-    public Datos() {
-        this.clientes = new ListaClientes();
-        this.articulos = new ListaArticulos();
-        this.pedidos = new ListaPedidos();
+    public ListaArticulos getListaArticulos() {
+        return listaArticulos;
     }
 
-    public List<Cliente> getClientes() {
-        return clientes.getListaClientes();
-    }
-    public List<Cliente> getClientes(String tipoCliente) {
-        //TODO
-        return null;
+    public void setListaArticulos(ListaArticulos listaArticulos) {
+        this.listaArticulos = listaArticulos;
     }
 
-    public boolean addCliente(Cliente cliente) {
-        clientes.addClienteToModel(cliente);
-        return true;
+    public ListaClientes getListaClientes() {
+        return listaClientes;
     }
 
-    public List<Articulo> getArticulos() {
-        return articulos.getListaArticulos();
+    public void setListaClientes(ListaClientes listaClientes) {
+        this.listaClientes = listaClientes;
     }
 
-    public boolean addArticulo(Articulo articulo) {
-        articulos.addArticuloToModel(articulo);
-        return  true;
+    public ListaPedidos getListaPedidos() {
+        return listaPedidos;
     }
 
-
-    public List<Pedido> getPedidos() {
-        return pedidos.getListaPedidos();
+    public void setListaPedidos(ListaPedidos listaPedidos) {
+        this.listaPedidos = listaPedidos;
     }
-
-    public boolean addPedido(Pedido pedido) {
-        pedidos.addPedidoToModel(pedido);
-        return true;
-    }
-
-    public boolean deletePedido(int idPedido) {
-        //TODO
-        return  false;
-    }
-
-
 }
