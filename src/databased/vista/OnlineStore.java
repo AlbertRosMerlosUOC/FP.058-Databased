@@ -11,8 +11,6 @@ public class OnlineStore {
         Controlador ctrl = new Controlador(model,view );
         System.out.println("Test MVC OnlineStore");
         //Arrancar el menu de la vistas
-
-
-        //view.run();
+        view.run();
     }
 }
