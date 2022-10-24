@@ -19,12 +19,25 @@ public class Controlador {
         this.datos = datos;
     }
 
-    public boolean addArticulo (String codigo, String descripcion, double precioVenta, double gastosEnvio, int tiempoPreparacion) throws EscrituraAccesoDatoException, EscrituraAccesoDatoException {
+    public int addArticulo (String codigo, String descripcion, double precioVenta, double gastosEnvio, int tiempoPreparacion) throws EscrituraAccesoDatoException, EscrituraAccesoDatoException {
+        //0 = OK; 1 = error al insertar; 2 = el codigo de articulo ya existe
+        int logAdd = 0;
+        boolean okAddArt = false;
         Articulo articulo = new Articulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion);
 
         ListaArticulos listaArticulos = datos.getListaArticulos();
-        boolean okAddArt =  listaArticulos.add(articulo);
-        return okAddArt;
+        boolean encontrado =  listaArticulos.compruebaArticulo(codigo);
+        if(encontrado == false){
+            okAddArt =  listaArticulos.add(articulo);
+            if(okAddArt == true){
+                logAdd = 0;
+            }else{
+                logAdd = 1;
+            }
+        }else{
+            logAdd = 2;
+        }
+        return logAdd;
     }
     public void listArticulos(){
         ListaArticulos listaArticulos = datos.getListaArticulos();

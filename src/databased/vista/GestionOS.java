@@ -96,11 +96,13 @@ public class GestionOS {
         System.out.println("Ingrese tiempo de preparación del Artículo");
         int tiempoPreparacion = teclado.nextInt();
 
-        boolean addOkArt = controlador.addArticulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion);
-        if(addOkArt == true){
+        int addOkArt = controlador.addArticulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion);
+        if(addOkArt == 0){
             System.out.println("Artículo " + codigo + " creado correctamente");
-        }else{
+        }else if(addOkArt == 1){
             System.out.println("Error al añadir el artículo" + codigo);
+        }else if(addOkArt == 2){
+            System.out.println("El código de artículo " + codigo + " es erróneo, ya existe");
         }
         return codigo;
     }
