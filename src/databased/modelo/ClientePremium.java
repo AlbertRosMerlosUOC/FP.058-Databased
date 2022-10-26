@@ -14,6 +14,11 @@ public class ClientePremium extends Cliente {
         this.descuento = descuento;
     }
 
+    @Override
+    public String tipoCliente() {
+        return "ClientePremium";
+    }
+
     public int getCuota() {
         return cuota;
     }
@@ -28,12 +33,6 @@ public class ClientePremium extends Cliente {
 
     public void setDescuento(int descuento) {
         this.descuento = descuento;
-    }
-
-    @Override
-    public String tipoCliente() {
-        //TODO
-        return null;
     }
 
     @Override
@@ -70,6 +69,6 @@ public class ClientePremium extends Cliente {
     public Cliente clona(Cliente clienteOld) {
         ClientePremium clienteNew = (ClientePremium) clienteOld;
         return new ClientePremium(clienteNew.getEmail(), clienteNew.getNif(), clienteNew.getNombre(),
-                clienteNew.getDomicilio(), clienteNew.getCuota(), clienteNew.getDescuento());
+                                  clienteNew.getDomicilio(), clienteNew.getCuota(), clienteNew.getDescuento());
     }
 }

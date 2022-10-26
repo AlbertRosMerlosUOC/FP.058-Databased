@@ -1,41 +1,68 @@
 package databased.modelo;
 
-import databased.modelo.ListaArticulos;
-import databased.modelo.ListaClientes;
-import databased.modelo.ListaPedidos;
+import java.util.ArrayList;
+import java.util.List;
 
+//el controlador solo llamará a los métodos de esta clase.
 public class Datos {
-    private ListaArticulos listaArticulos;
-    private ListaClientes listaClientes;
-    private ListaPedidos listaPedidos;
-    public Datos (){
-        listaArticulos = new ListaArticulos();
-        listaClientes = new ListaClientes();
-        listaPedidos = new ListaPedidos();
-    }
-// TO-BE-DONE
+    private final ListaClientes clientes;
+    private final ListaArticulos articulos;
+    private final ListaPedidos pedidos;
 
-    public ListaArticulos getListaArticulos() {
-        return listaArticulos;
+    public Datos() {
+        this.clientes = new ListaClientes();
+        this.articulos = new ListaArticulos();
+        this.pedidos = new ListaPedidos();
     }
 
-    public void setListaArticulos(ListaArticulos listaArticulos) {
-        this.listaArticulos = listaArticulos;
+    public List<Cliente> getClientes() {
+        return clientes.getListaClientes();
     }
 
-    public ListaClientes getListaClientes() {
-        return listaClientes;
+    public List<Cliente> getClientes(String tipoCliente) {
+        List<Cliente> clientesFiltro = new ArrayList<>();
+        for (int i=0; i < clientes.listaClientes.size(); i++) {
+            if ((clientes.listaClientes.get(i).tipoCliente().equals(tipoCliente))) {
+                if (tipoCliente.equals("ClientePremium")) {
+                    ClientePremium clienteNuevo = (ClientePremium) clientes.listaClientes.get(i).clona(clientes.listaClientes.get(i));
+                    clientesFiltro.add(clienteNuevo);
+                } else {
+                    ClienteStandard clienteNuevo = (ClienteStandard) clientes.listaClientes.get(i).clona(clientes.listaClientes.get(i));
+                    clientesFiltro.add(clienteNuevo);
+                }
+            }
+        }
+        return clientesFiltro;
     }
 
-    public void setListaClientes(ListaClientes listaClientes) {
-        this.listaClientes = listaClientes;
+    public boolean addCliente(Cliente cliente) {
+        clientes.addClienteToModel(cliente);
+        return true;
     }
 
-    public ListaPedidos getListaPedidos() {
-        return listaPedidos;
+    public List<Articulo> getArticulos() {
+        return articulos.getListaArticulos();
     }
 
-    public void setListaPedidos(ListaPedidos listaPedidos) {
-        this.listaPedidos = listaPedidos;
+    public boolean addArticulo(Articulo articulo) {
+        articulos.addArticuloToModel(articulo);
+        return  true;
     }
+
+
+    public List<Pedido> getPedidos() {
+        return pedidos.getListaPedidos();
+    }
+
+    public boolean addPedido(Pedido pedido) {
+        pedidos.addPedidoToModel(pedido);
+        return true;
+    }
+
+    public boolean deletePedido(int idPedido) {
+        //TODO
+        return  false;
+    }
+
+
 }

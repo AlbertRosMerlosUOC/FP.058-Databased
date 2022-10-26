@@ -9,19 +9,16 @@ public class ClienteStandard extends Cliente {
 
     @Override
     public String tipoCliente() {
-        //TODO
-        return null;
+        return "ClienteStandard";
     }
 
     @Override
     public double calcAnual() {
-        //TODO
         return 0;
     }
 
     @Override
     public double descuentoEnvio() {
-        //TODO
         return 0;
     }
 
@@ -34,6 +31,7 @@ public class ClienteStandard extends Cliente {
                 ", domicilio='" + domicilio + '\'' +
                 '}';
     }
+
     /**
      * Método sobrecargado de Cliente usado para clonar objetos de tipo Cliente (casteado a ClienteStandard)
      * @param clienteOld Objeto de tipo Cliente del que se va a hacer la copia
