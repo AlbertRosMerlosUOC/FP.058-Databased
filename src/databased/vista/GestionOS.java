@@ -25,7 +25,7 @@ public class GestionOS {
             opcio = pedirOpcion();
             switch (opcio) {
                 case '1':
-                    gestArticulo();
+                    getArticulos();
                     break;
                 case '2':
 // TO-BE-DONE
@@ -59,7 +59,7 @@ public class GestionOS {
         return resp.charAt(0);
     }
 
-    public void gestArticulo() throws EscrituraAccesoDatoException {
+    public void getArticulos() throws EscrituraAccesoDatoException {
         boolean salirArt = false;
         char opcioArt;
         do {
