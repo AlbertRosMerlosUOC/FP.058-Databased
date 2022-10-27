@@ -15,19 +15,19 @@ public class Datos {
         this.pedidos = new ListaPedidos();
     }
 
-/*    public List<Cliente> getClientes() {
-        return (ArrayList<Cliente>) clientes.getArreyList();
+    public List<Cliente> getClientes() {
+        return clientes.getArrayList();
     }
 
     public List<Cliente> getClientes(String tipoCliente) {
         List<Cliente> clientesFiltro = new ArrayList<>();
-        for (int i=0; i < clientes.getLista().size(); i++) {
-            if ((clientes.getLista().get(i).tipoCliente().equals(tipoCliente))) {
+        for (int i=0; i < clientes.getArrayList().size(); i++) {
+            if ((clientes.getArrayList().get(i).tipoCliente().equals(tipoCliente))) {
                 if (tipoCliente.equals("ClientePremium")) {
-                    ClientePremium clienteNuevo = (ClientePremium) clientes.getLista().get(i).clona(clientes.getLista().get(i));
+                    ClientePremium clienteNuevo = (ClientePremium) clientes.getArrayList().get(i).clona(clientes.getArrayList().get(i));
                     clientesFiltro.add(clienteNuevo);
                 } else {
-                    ClienteStandard clienteNuevo = (ClienteStandard) clientes.getLista().get(i).clona(clientes.getLista().get(i));
+                    ClienteStandard clienteNuevo = (ClienteStandard) clientes.getArrayList().get(i).clona(clientes.getArrayList().get(i));
                     clientesFiltro.add(clienteNuevo);
                 }
             }
@@ -36,10 +36,9 @@ public class Datos {
     }
 
     public boolean addCliente(Cliente cliente) {
-        clientes.add(cliente);
-        return true;
+        return clientes.add(cliente);
     }
-*/
+
     public List<Articulo> getArticulos() {
         return articulos.getArrayList();
     }

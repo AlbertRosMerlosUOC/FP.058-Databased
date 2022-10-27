@@ -58,4 +58,13 @@ public abstract class Cliente {
      */
     public abstract Cliente clona(Cliente clienteOld);
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Cliente)) return false;
+        Cliente empObject = (Cliente) o;
+        if (!email.equals(empObject.email)) return false;
+
+        return true;
+    }
 }

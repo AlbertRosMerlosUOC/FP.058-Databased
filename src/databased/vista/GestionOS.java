@@ -18,17 +18,18 @@ public class GestionOS {
         boolean salir = false;
         char opcio;
         do {
+            printCabecera("Menu Principal");
             System.out.println("1. Gestión Articulos");
             System.out.println("2. Gestión Clientes");
             System.out.println("3. Gestión Pedidos");
             System.out.println("0. Salir");
-            opcio = pedirOpcion();
+            opcio = printGetOpcion("Elige una opción (1,2,3 o 0): \"");
             switch (opcio) {
                 case '1':
-                    getArticulos();
+                    printMenuArticulos();
                     break;
                 case '2':
-// TO-BE-DONE
+                    printMenuClientes();
                     break;
                 case '3':
 // TO-BE-DONE
@@ -38,18 +39,12 @@ public class GestionOS {
             }
         } while (!salir);
     }
-
-    char pedirOpcion() {
-        String resp;
-        System.out.println("Elige una opción (1,2,3 o 0): ");
-        resp = teclado.nextLine();
-        if (resp.isEmpty()) {
-            resp = " ";
-        }
-        return resp.charAt(0);
+    public void printCabecera(String seccion){
+        System.out.println("*********************");
+        System.out.println("*  "+seccion+"  *");
+        System.out.println("*********************");
     }
-
-    char pedirOpcion(String texto) {
+    char printGetOpcion(String texto) {
         String resp;
         System.out.println(texto);
         resp = teclado.nextLine();
@@ -58,43 +53,46 @@ public class GestionOS {
         }
         return resp.charAt(0);
     }
-
-    public void getArticulos() throws EscrituraAccesoDatoException {
+    /*
+    Gestión Articulos
+    */
+    public void printMenuArticulos() throws EscrituraAccesoDatoException {
         boolean salirArt = false;
         char opcioArt;
         do {
+            printCabecera("Gestion Articulos");
             System.out.println("1. Añadir Artículo");
             System.out.println("2. Mostrar Artículos");
             System.out.println("0. Salir");
-            opcioArt = pedirOpcion("Elige una opción (1,2 o 0): ");
-            //          opcioArt = pedirOpcion();
+            opcioArt = printGetOpcion("Elige una opción (1,2 o 0): ");
+
             switch (opcioArt) {
                 case '1':
-                    addArticulo();
+                    printAddArticulo();
                     break;
                 case '2':
                     //TBD
-                    listArticulo();
+                    printListArticulos();
                     break;
                 case '0':
                     salirArt = true;
             }
         }while (!salirArt);
     }
-
-    public String addArticulo() throws EscrituraAccesoDatoException {
-        System.out.println("Ingrese código alfanumérico del Artículo");
+    public void printAddArticulo() throws EscrituraAccesoDatoException {
+        System.out.print("Ingrese código alfanumérico del Artículo: ");
         String codigo = teclado.nextLine();
         //habrá que comprobar que este código exista en la lista
         //TBD!!!
-        System.out.println("Ingrese descripción del Artículo");
+        System.out.print("Ingrese descripción del Artículo: ");
         String descripcion =  teclado.nextLine();
-        System.out.println("Ingrese precio de venta del Artículo");
+        System.out.print("Ingrese precio de venta del Artículo: ");
         double precioVenta = teclado.nextDouble();
-        System.out.println("Ingrese gastos de envío del Artículo");
+        System.out.print("Ingrese gastos de envío del Artículo: ");
         double gastosEnvio = teclado.nextDouble();
-        System.out.println("Ingrese tiempo de preparación del Artículo");
+        System.out.print("Ingrese tiempo de preparación del Artículo: ");
         int tiempoPreparacion = teclado.nextInt();
+        teclado.nextLine();//nextInt omite el salto de linea. Se fuerza leer la nueva linea para evitar repetir la aparicion del menú
 
         boolean addOkArt = controlador.addArticulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion);
         if(addOkArt){
@@ -102,9 +100,8 @@ public class GestionOS {
         }else{
             System.out.println("El código de artículo " + codigo + " es erróneo, ya existe");
         }
-        return codigo;
     }
-    public void listArticulo(){
+    public void printListArticulos(){
         if(controlador.listArticulos().isEmpty()){
             System.out.println("No hay Articulos");
         }else{
@@ -112,6 +109,110 @@ public class GestionOS {
                 System.out.println(art);
             }
         }
+
     }
+    /*
+    Gestión Clientes
+    */
+    public void printMenuClientes() throws EscrituraAccesoDatoException {
+        boolean salirArt = false;
+        char opcioArt;
+        do {
+            printCabecera("Gestion Clientes");
+            System.out.println("1. Añadir Cliente");
+            System.out.println("2. Mostrar Clientes");
+            System.out.println("3. Mostrar Clientes Standard");
+            System.out.println("4. Mostrar Clientes Premium");
+            System.out.println("0. Salir");
+            opcioArt = printGetOpcion("Elige una opción (1,2 o 0): ");
+
+            switch (opcioArt) {
+                case '1':
+                    printAddCliente();
+                    break;
+                case '2':
+                    //TBD
+                    printListClientesAll();
+                    break;
+                case '3':
+                    //TBD
+                    printListClientesStandard();
+                    break;
+                case '4':
+                    //TBD
+                    printListClientesPremium();
+                    break;
+                case '0':
+                    salirArt = true;
+            }
+        }while (!salirArt);
+    }
+    public void printAddCliente() throws EscrituraAccesoDatoException {
+        System.out.print("Ingrese el email del cliente: ");
+        String email = teclado.nextLine();
+        System.out.print("Ingrese el NIF del cliente: ");
+        String nif =  teclado.nextLine();
+        System.out.print("Ingrese el nombre del cliente: ");
+        String nombre = teclado.nextLine();
+        System.out.print("Ingrese el domicilio del cliente: ");
+        String domicilio = teclado.nextLine();
+
+        boolean tipoCliente = pritnGetTipoCliente();
+        boolean addOkClt;
+        if (tipoCliente){
+            addOkClt = controlador.addClienteStandar(email, nif, nombre, domicilio);
+        }else{
+            addOkClt = controlador.addClientePremium(email, nif, nombre, domicilio);
+        }
+
+        if(addOkClt){
+            System.out.println("Cliente " + email + " creado correctamente");
+        }else{
+            System.out.println("El email "+email+" ya existe");
+        }
+    }
+
+    private boolean pritnGetTipoCliente() {
+        do {
+            char tipoCliente = printGetOpcion("Seleccione el tipo de cliente: [(1: standard),(2: premium)]");
+            if (tipoCliente == '1') {
+                return true;
+            } else if (tipoCliente == '2') {
+                return false;
+            }
+        }while(true);
+    }
+
+    public void printListClientesAll(){
+        if(controlador.listClientes().isEmpty()){
+            System.out.println("No hay Clientes");
+        }else{
+            for(Cliente clt : controlador.listClientes()) {
+                System.out.println(clt);
+            }
+        }
+
+    }
+    public void printListClientesPremium(){
+        if(controlador.listClientesPremium().isEmpty()){
+            System.out.println("No hay Clientes Premium");
+        }else{
+            for(Cliente clt : controlador.listClientesPremium()) {
+                System.out.println(clt);
+            }
+        }
+
+    }
+    public void printListClientesStandard(){
+        if(controlador.listClientesStandard().isEmpty()){
+            System.out.println("No hay Clientes Standard");
+        }else{
+            for(Cliente clt : controlador.listClientesStandard()) {
+                System.out.println(clt);
+            }
+        }
+
+    }
+
 }
 

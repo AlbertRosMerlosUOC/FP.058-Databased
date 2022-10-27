@@ -41,6 +41,6 @@ public class ClienteStandard extends Cliente {
     @Override
     public Cliente clona(Cliente clienteOld) {
         ClienteStandard clienteNew = (ClienteStandard) clienteOld;
-        return new ClientePremium(clienteNew.getEmail(), clienteNew.getNif(), clienteNew.getNombre(), clienteNew.getDomicilio());
+        return new ClienteStandard(clienteNew.getEmail(), clienteNew.getNif(), clienteNew.getNombre(), clienteNew.getDomicilio());
     }
 }
