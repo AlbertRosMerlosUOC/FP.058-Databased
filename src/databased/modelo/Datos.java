@@ -15,19 +15,19 @@ public class Datos {
         this.pedidos = new ListaPedidos();
     }
 
-    public List<Cliente> getClientes() {
-        return clientes.getListaClientes();
+/*    public List<Cliente> getClientes() {
+        return (ArrayList<Cliente>) clientes.getArreyList();
     }
 
     public List<Cliente> getClientes(String tipoCliente) {
         List<Cliente> clientesFiltro = new ArrayList<>();
-        for (int i=0; i < clientes.listaClientes.size(); i++) {
-            if ((clientes.listaClientes.get(i).tipoCliente().equals(tipoCliente))) {
+        for (int i=0; i < clientes.getLista().size(); i++) {
+            if ((clientes.getLista().get(i).tipoCliente().equals(tipoCliente))) {
                 if (tipoCliente.equals("ClientePremium")) {
-                    ClientePremium clienteNuevo = (ClientePremium) clientes.listaClientes.get(i).clona(clientes.listaClientes.get(i));
+                    ClientePremium clienteNuevo = (ClientePremium) clientes.getLista().get(i).clona(clientes.getLista().get(i));
                     clientesFiltro.add(clienteNuevo);
                 } else {
-                    ClienteStandard clienteNuevo = (ClienteStandard) clientes.listaClientes.get(i).clona(clientes.listaClientes.get(i));
+                    ClienteStandard clienteNuevo = (ClienteStandard) clientes.getLista().get(i).clona(clientes.getLista().get(i));
                     clientesFiltro.add(clienteNuevo);
                 }
             }
@@ -36,33 +36,33 @@ public class Datos {
     }
 
     public boolean addCliente(Cliente cliente) {
-        clientes.addClienteToModel(cliente);
+        clientes.add(cliente);
         return true;
     }
-
+*/
     public List<Articulo> getArticulos() {
-        return articulos.getListaArticulos();
+        return articulos.getArrayList();
     }
 
-    public boolean addArticulo(Articulo articulo) {
-        articulos.addArticuloToModel(articulo);
-        return  true;
+    public boolean addArticulo(Articulo articulo){
+        return articulos.add(articulo);
     }
 
+/*
 
     public List<Pedido> getPedidos() {
-        return pedidos.getListaPedidos();
+        return pedidos.getLista();
     }
 
     public boolean addPedido(Pedido pedido) {
-        pedidos.addPedidoToModel(pedido);
+        pedidos.add(pedido);
         return true;
     }
 
     public boolean deletePedido(int idPedido) {
         //TODO
         return  false;
-    }
+    }*/
 
 
 }

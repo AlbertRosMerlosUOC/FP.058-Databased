@@ -66,4 +66,13 @@ public class Articulo {
                 ", tiempoPreparacion=" + tiempoPreparacion +
                 '}';
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Articulo)) return false;
+        Articulo empObject = (Articulo) o;
+        if (!codigo.equals(empObject.codigo)) return false;
+
+        return true;
+    }
 }

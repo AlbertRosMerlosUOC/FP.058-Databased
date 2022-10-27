@@ -2,45 +2,39 @@ package databased.modelo;
 
 import java.util.ArrayList;
 
+
 public class Lista<T> {
     protected ArrayList<T> lista;
     public Lista() {
         lista = new ArrayList<>();
     }
     public int getSize() {
-// TO-BE-DONE
-        return 0;
+        return lista.size();
     }
-    public boolean add(T t) throws EscrituraAccesoDatoException {
-        if(t == null){
-            throw new EscrituraAccesoDatoException("Error al insertar un objeto null");
-        }
-        if(lista.contains(t)){
-            throw new EscrituraAccesoDatoException("Error el objeto con id " + t + " existe en repositorio");
-        }
-        boolean addOk =   lista.add(t);
-        return addOk;
+    public boolean add(T t) {
+        if(lista.contains(t))
+            return false;
+        lista.add(t);
+        return true;
     }
-    public void borrar(T t) {
-// TO-BE-DONE
+    public boolean delete(T t) {
+        if(lista.contains(t))
+            return false;
+
+        lista.remove(t);
+        return true;
     }
     public T getAt(int position) {
-// TO-BE-DONE
-        return null;
+        return lista.get(position);
     }
     public void clear() {
-// TO-BE-DONE
+        lista.clear();
     }
     public boolean isEmpty() {
-// TO-BE-DONE
-        return false;
+        return lista.isEmpty();
     }
     public ArrayList<T> getArrayList() {
         ArrayList<T> arrlist = new ArrayList<>(lista);
         return arrlist;
-    }
-    public void list(){
-        System.out.println("---Artículos en el sistema----");
-        lista.forEach(System.out::println);
     }
 }
