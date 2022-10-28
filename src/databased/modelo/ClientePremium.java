@@ -38,13 +38,13 @@ public class ClientePremium extends Cliente {
     @Override
     public double calcAnual() {
         //TODO
-        return 0;
+        return this.cuota;
     }
 
     @Override
     public double descuentoEnvio() {
         //TODO
-        return 0;
+        return this.descuento;
     }
 
     @Override
