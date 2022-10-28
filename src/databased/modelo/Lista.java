@@ -20,7 +20,6 @@ public class Lista<T> {
     public boolean delete(T t) {
         if(lista.contains(t))
             return false;
-
         lista.remove(t);
         return true;
     }

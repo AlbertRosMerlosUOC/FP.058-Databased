@@ -16,15 +16,15 @@ public class GestionOS {
 
     public void inicio() throws  EscrituraAccesoDatoException{
         boolean salir = false;
-        char opcio;
+        char opt;
         do {
             printCabecera("Menu Principal");
             System.out.println("1. Gestión Articulos");
             System.out.println("2. Gestión Clientes");
             System.out.println("3. Gestión Pedidos");
             System.out.println("0. Salir");
-            opcio = printGetOpcion("Elige una opción (1,2,3 o 0): \"");
-            switch (opcio) {
+            opt = printGetOpcion("Elige una opción (1,2,3 o 0): \"");
+            switch (opt) {
                 case '1':
                     printMenuArticulos();
                     break;
@@ -32,13 +32,72 @@ public class GestionOS {
                     printMenuClientes();
                     break;
                 case '3':
-// TO-BE-DONE
+                    printMenuPedidos();
                     break;
                 case '0':
                     salir = true;
             }
         } while (!salir);
     }
+
+    private void printMenuPedidos() {
+        boolean salir = false;
+        char opt;
+        do {
+            printCabecera("Gestion Pedidos");
+            System.out.println("1. Añadir Pedido");
+            System.out.println("2. Mostrar pedidos");
+            System.out.println("3. Eliminar pedido");
+            System.out.println("0. Salir");
+            opt = printGetOpcion("Elige una opción (1,2,3 o 0): ");
+
+            switch (opt) {
+                case '1':
+                    printAddPedido();
+                    break;
+                case '2':
+                    printListPedidos();
+                    break;
+                case '3':
+                    printDeletePedidos();
+                    break;
+                case '0':
+                    salir = true;
+            }
+        }while (!salir);
+    }
+
+    private void printDeletePedidos() {
+    }
+
+    private void printListPedidos() {
+        if(controlador.listPedidos().isEmpty()){
+            System.out.println("No hay pedidos");
+        }else{
+            for(Pedido pd : controlador.listPedidos()) {
+                System.out.println(pd);
+            }
+        }
+    }
+
+    private void printAddPedido() {
+        int numPedido = controlador.listPedidos().size() + 1;
+        //Pedir Cliente:
+        System.out.print("Ingrese el email del cliente: ");
+        String email = teclado.nextLine();
+        Cliente cliente= controlador.getClienteByEmail(email);
+        if(cliente == null){
+            System.out.println("El cliente no exixte");
+        }else{
+            System.out.println();
+        }
+        //Pedir codigo articulo
+        //Chek articulo
+        //Pdir otros datos
+        //insertar
+
+    }
+
     public void printCabecera(String seccion){
         System.out.println("*********************");
         System.out.println("*  "+seccion+"  *");
@@ -57,16 +116,16 @@ public class GestionOS {
     Gestión Articulos
     */
     public void printMenuArticulos() throws EscrituraAccesoDatoException {
-        boolean salirArt = false;
-        char opcioArt;
+        boolean salir = false;
+        char opt;
         do {
             printCabecera("Gestion Articulos");
             System.out.println("1. Añadir Artículo");
             System.out.println("2. Mostrar Artículos");
             System.out.println("0. Salir");
-            opcioArt = printGetOpcion("Elige una opción (1,2 o 0): ");
+            opt = printGetOpcion("Elige una opción (1,2 o 0): ");
 
-            switch (opcioArt) {
+            switch (opt) {
                 case '1':
                     printAddArticulo();
                     break;
@@ -75,19 +134,20 @@ public class GestionOS {
                     printListArticulos();
                     break;
                 case '0':
-                    salirArt = true;
+                    salir = true;
             }
-        }while (!salirArt);
+        }while (!salir);
     }
     public void printAddArticulo() throws EscrituraAccesoDatoException {
         System.out.print("Ingrese código alfanumérico del Artículo: ");
         String codigo = teclado.nextLine();
-        //habrá que comprobar que este código exista en la lista
-        //TBD!!!
+
         System.out.print("Ingrese descripción del Artículo: ");
         String descripcion =  teclado.nextLine();
         System.out.print("Ingrese precio de venta del Artículo: ");
         double precioVenta = teclado.nextDouble();
+
+
         System.out.print("Ingrese gastos de envío del Artículo: ");
         double gastosEnvio = teclado.nextDouble();
         System.out.print("Ingrese tiempo de preparación del Artículo: ");
@@ -115,8 +175,8 @@ public class GestionOS {
     Gestión Clientes
     */
     public void printMenuClientes() throws EscrituraAccesoDatoException {
-        boolean salirArt = false;
-        char opcioArt;
+        boolean salir = false;
+        char opt;
         do {
             printCabecera("Gestion Clientes");
             System.out.println("1. Añadir Cliente");
@@ -124,9 +184,9 @@ public class GestionOS {
             System.out.println("3. Mostrar Clientes Standard");
             System.out.println("4. Mostrar Clientes Premium");
             System.out.println("0. Salir");
-            opcioArt = printGetOpcion("Elige una opción (1,2 o 0): ");
+            opt = printGetOpcion("Elige una opción (1,2 o 0): ");
 
-            switch (opcioArt) {
+            switch (opt) {
                 case '1':
                     printAddCliente();
                     break;
@@ -143,9 +203,9 @@ public class GestionOS {
                     printListClientesPremium();
                     break;
                 case '0':
-                    salirArt = true;
+                    salir= true;
             }
-        }while (!salirArt);
+        }while (!salir);
     }
     public void printAddCliente() throws EscrituraAccesoDatoException {
         System.out.print("Ingrese el email del cliente: ");

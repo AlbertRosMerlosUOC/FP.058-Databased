@@ -20,19 +20,11 @@ public class Datos {
     }
 
     public List<Cliente> getClientes(String tipoCliente) {
-        List<Cliente> clientesFiltro = new ArrayList<>();
-        for (int i=0; i < clientes.getArrayList().size(); i++) {
-            if ((clientes.getArrayList().get(i).tipoCliente().equals(tipoCliente))) {
-                if (tipoCliente.equals("ClientePremium")) {
-                    ClientePremium clienteNuevo = (ClientePremium) clientes.getArrayList().get(i).clona(clientes.getArrayList().get(i));
-                    clientesFiltro.add(clienteNuevo);
-                } else {
-                    ClienteStandard clienteNuevo = (ClienteStandard) clientes.getArrayList().get(i).clona(clientes.getArrayList().get(i));
-                    clientesFiltro.add(clienteNuevo);
-                }
-            }
-        }
-        return clientesFiltro;
+        return clientes.getClientes(tipoCliente);
+    }
+
+    public Cliente getClienteByEmail(String email) {
+        return clientes.getClienteByEmail(email);
     }
 
     public boolean addCliente(Cliente cliente) {
@@ -47,10 +39,9 @@ public class Datos {
         return articulos.add(articulo);
     }
 
-/*
 
     public List<Pedido> getPedidos() {
-        return pedidos.getLista();
+        return pedidos.getArrayList();
     }
 
     public boolean addPedido(Pedido pedido) {
@@ -61,7 +52,7 @@ public class Datos {
     public boolean deletePedido(int idPedido) {
         //TODO
         return  false;
-    }*/
+    }
 
 
 }

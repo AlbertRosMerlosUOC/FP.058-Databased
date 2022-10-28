@@ -100,4 +100,12 @@ public class Pedido {
                 ", Enviado: " + this.pedidoEnviado() +
                 '}';
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Pedido)) return false;
+        Pedido empObject = (Pedido) o;
+        if (numPedido != empObject.numPedido) return false;
+        return true;
+    }
 }
