@@ -1,9 +1,9 @@
 package databased.controlador;
 
 import databased.modelo.*;
+import databased.vista.EscrituraAccesoDatoException;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Controlador {
@@ -53,6 +53,9 @@ public class Controlador {
     public Cliente getClienteByEmail(String email){
         return datos.getClienteByEmail(email);
     }
+    public boolean existCliente(String email){
+        return datos.getClienteByEmail(email) != null;
+    }
     public List<Pedido> listPedidos() { return datos.getPedidos();}
     public boolean addPedido(int numPedido, Cliente cliente, Articulo articulo, int cantidad, LocalDateTime fechaPedido){
         Pedido pedido = new Pedido(numPedido, cliente, articulo, cantidad, fechaPedido);
@@ -60,5 +63,17 @@ public class Controlador {
     };
     public boolean deletePedido(int idPedido){
         return deletePedido(idPedido);
+    }
+
+    public String printListaArticulos(){
+        String retorno = "";
+        if(this.listArticulos().isEmpty()){
+            retorno = "No hay Articulos";
+        }else{
+            for(Articulo art : this.listArticulos()) {
+                retorno += art.toString();
+            }
+        }
+        return retorno;
     }
 }

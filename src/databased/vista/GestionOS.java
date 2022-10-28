@@ -85,12 +85,19 @@ public class GestionOS {
         //Pedir Cliente:
         System.out.print("Ingrese el email del cliente: ");
         String email = teclado.nextLine();
-        Cliente cliente= controlador.getClienteByEmail(email);
+        boolean existe = controlador.existCliente(email);
+        if (existe) {
+            System.out.println("El cliente no exixte");
+        } else {
+            System.out.println();
+        }
+        /*Cliente cliente= controlador.getClienteByEmail(email);
         if(cliente == null){
             System.out.println("El cliente no exixte");
         }else{
             System.out.println();
-        }
+        }*/
+
         //Pedir codigo articulo
         //Chek articulo
         //Pdir otros datos
@@ -161,16 +168,10 @@ public class GestionOS {
             System.out.println("El código de artículo " + codigo + " es erróneo, ya existe");
         }
     }
-    public void printListArticulos(){
-        if(controlador.listArticulos().isEmpty()){
-            System.out.println("No hay Articulos");
-        }else{
-            for(Articulo art : controlador.listArticulos()) {
-                System.out.println(art);
-            }
-        }
-
+    public void printListArticulos() {
+        System.out.println(controlador.printListaArticulos());
     }
+
     /*
     Gestión Clientes
     */
