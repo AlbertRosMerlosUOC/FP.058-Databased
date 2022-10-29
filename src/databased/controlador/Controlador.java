@@ -89,7 +89,7 @@ public class Controlador {
         String retorno ="";
 
         if(this.listClientes().isEmpty()){
-
+            retorno = colores.consola("No hay Clientes", 42);
         }else{
             for(Cliente clt : this.listClientes()) {
                 retorno = clt.toString();
@@ -101,7 +101,7 @@ public class Controlador {
     public String printListaClientesPremium(){
         String retorno ="";
         if(this.listClientesPremium().isEmpty()){
-            retorno = "No hay Clientes Premium";
+            retorno = colores.consola("No hay Clientes Premium", 42);
         }else{
             for(Cliente clt : this.listClientesPremium()) {
                 retorno = clt.toString();
@@ -112,7 +112,7 @@ public class Controlador {
     public String printListaClientesStandard(){
         String retorno ="";
         if(this.listClientesStandard().isEmpty()){
-            retorno = "No hay Clientes Standard";
+            retorno = colores.consola("No hay Clientes Standard", 42);
         }else{
             for(Cliente clt : this.listClientesStandard()) {
                 retorno = clt.toString();
@@ -124,7 +124,7 @@ public class Controlador {
     public String printListaPedidos() {
         String retorno ="";
         if(this.listPedidos().isEmpty()){
-            retorno = "No hay pedidos";
+            retorno = colores.consola("No hay Pedidos", 42);
         }else{
             for(Pedido pd : this.listPedidos()) {
                 retorno = pd.toString();
@@ -132,5 +132,4 @@ public class Controlador {
         }
         return retorno;
     }
-
 }
