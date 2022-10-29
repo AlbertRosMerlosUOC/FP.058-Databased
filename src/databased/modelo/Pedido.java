@@ -38,7 +38,6 @@ public class Pedido {
         return articulo;
     }
 
-
     public void setArticulo(Articulo articulo) {
         this.articulo = articulo;
     }
@@ -62,10 +61,8 @@ public class Pedido {
     public boolean pedidoEnviado(){
         //Se debe indicar si ha transcurrido el tiempo de preparación
         long minutosTranscurridos = ChronoUnit.MINUTES.between(this.getFechaPedido(), LocalDateTime.now());
-        if(articulo.getTiempoPreparacion() < minutosTranscurridos)
-            return false;
-        else
-            return true;
+        if(articulo.getTiempoPreparacion() < minutosTranscurridos) return false;
+        else return true;
     }
 
     public Double precioEnvio(){

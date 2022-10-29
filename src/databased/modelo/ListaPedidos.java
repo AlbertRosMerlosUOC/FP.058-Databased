@@ -1,10 +1,13 @@
 package databased.modelo;
 
-import java.util.ArrayList;
-import java.util.List;
+public class ListaPedidos extends Lista<Pedido> {
 
-public class ListaPedidos extends Lista<Pedido>{
-
-
-
+    public Pedido getPedidoById(int idPedido){
+        for(Pedido pe : this.getArrayList()){
+            if(pe.getNumPedido() == idPedido){
+                return pe;
+            }
+        }
+        return null;
+    }
 }

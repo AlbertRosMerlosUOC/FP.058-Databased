@@ -42,13 +42,16 @@ public class Datos {
         return pedidos.getArrayList();
     }
 
+    public Pedido getPedidoById(int idPedido) {
+        return pedidos.getPedidoById(idPedido);
+    }
+
     public boolean addPedido(Pedido pedido) {
         pedidos.add(pedido);
         return true;
     }
 
-    public boolean deletePedido(int idPedido) {
-        //TODO
-        return  false;
+    public boolean deletePedido(Pedido pedido) {
+        return pedidos.delete(pedido);
     }
 }

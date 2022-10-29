@@ -3,6 +3,8 @@ package databased.vista;
 import databased.controlador.Controlador;
 import java.util.Scanner;
 
+import static java.lang.Integer.parseInt;
+
 public class GestionOS {
     private Controlador controlador;
     private ColoresConsola colores;
@@ -243,7 +245,10 @@ public class GestionOS {
     }
 
     private void printDeletePedidos() {
-        // TODO
+        // TODO try catch de parseInt?
+        System.out.print("Ingrese el número de pedido a eliminar: ");
+        int numPedido = parseInt(teclado.nextLine());
+        System.out.println(controlador.deletePedido(numPedido));
     }
 
     private void printListPedidos() {
@@ -260,7 +265,7 @@ public class GestionOS {
             printAddCliente(email);
         }
         // TODO Pedir codigo articulo
-        // TODO Chek articulo
+        // TODO Check articulo
         // TODO Pedir otros datos
         // TODO insertar
 

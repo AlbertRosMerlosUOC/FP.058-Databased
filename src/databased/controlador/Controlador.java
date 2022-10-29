@@ -70,8 +70,21 @@ public class Controlador {
         return datos.addPedido(pedido);
     }
 
-    public boolean deletePedido(int idPedido){
-        return deletePedido(idPedido);
+    public String deletePedido(int numPedido){
+        Pedido pedido = datos.getPedidoById(numPedido);
+        if (pedido != null) {
+            if (!(pedido.pedidoEnviado())) {
+                if (datos.deletePedido(pedido)) {
+                    return colores.consola("Pedido eliminado correctamente", 43);
+                } else {
+                    return colores.consola("Error eliminando el pedido", 42);
+                }
+            } else {
+                return colores.consola("El pedido ya ha sido enviado y no se ha podido eliminar", 42);
+            }
+        } else {
+            return colores.consola("No se ha encontrado ningún pedido con el número indicado", 42);
+        }
     }
 
     public String printListaArticulos() {
@@ -87,7 +100,6 @@ public class Controlador {
     }
     public String printListaClientesAll(){
         String retorno ="";
-
         if(this.listClientes().isEmpty()){
             retorno = colores.consola("No hay Clientes", 42);
         }else{
