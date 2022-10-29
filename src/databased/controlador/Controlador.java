@@ -1,16 +1,17 @@
 package databased.controlador;
 
 import databased.modelo.*;
-import databased.vista.EscrituraAccesoDatoException;
+import databased.vista.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class Controlador {
     private Datos datos;
-    //vista
+    private ColoresConsola colores;
     public Controlador() {
         datos = new Datos ();
+        colores = new ColoresConsola();
     }
     // TO-BE-DONE
 
@@ -76,7 +77,7 @@ public class Controlador {
     public String printListaArticulos() {
         String retorno = "";
         if(this.listArticulos().isEmpty()){
-            retorno = "No hay Artículos";
+            retorno = colores.consola("No hay Artículos", 42);
         }else{
             for(Articulo art : this.listArticulos()) {
                 retorno += art.toString();

@@ -6,10 +6,15 @@ import java.util.Scanner;
 
 public class GestionOS {
     private Controlador controlador;
+    private ColoresConsola colores;
+    private String tabulador;
+
     Scanner teclado = new Scanner(System.in);
 
     public GestionOS() {
         controlador = new Controlador();
+        colores = new ColoresConsola();
+        tabulador = "   ";
     }
 
     public void inicio() throws  EscrituraAccesoDatoException{
@@ -17,11 +22,11 @@ public class GestionOS {
         char opt;
         do {
             printCabecera("Menú Principal");
-            System.out.println("1. Gestión Articulos");
-            System.out.println("2. Gestión Clientes");
-            System.out.println("3. Gestión Pedidos");
-            System.out.println("0. Salir");
-            opt = printGetOpcion("Elige una opción (1,2,3 o 0): \"");
+            System.out.println(tabulador + colores.consola("1", 45) + ". Gestión Artículos");
+            System.out.println(tabulador + colores.consola("2", 45) + ". Gestión Clientes");
+            System.out.println(tabulador + colores.consola("3", 45) + ". Gestión Pedidos");
+            System.out.println(tabulador + colores.consola("0", 42) + ". Salir");
+            opt = printGetOpcion("Elige una opción (1,2,3 o 0): ");
             switch (opt) {
                 case '1':
                     printMenuArticulos();
@@ -39,13 +44,15 @@ public class GestionOS {
     }
 
     public void printCabecera(String seccion){
-        System.out.println("*********************");
-        System.out.println("*  " + seccion + "  *");
-        System.out.println("*********************");
+        System.out.println("\n" +
+                           colores.consola("*********************", 45) + "\n" +
+                           colores.consola("*  ", 45) + colores.consola(seccion, 57, 45) + colores.consola("  *", 45) + "\n" +
+                           colores.consola("*********************", 45));
     }
+
     char printGetOpcion(String texto) {
         String resp;
-        System.out.println(texto);
+        System.out.print(texto);
         resp = teclado.nextLine();
         if (resp.isEmpty()) {
             resp = " ";
@@ -59,9 +66,9 @@ public class GestionOS {
         char opt;
         do {
             printCabecera("Gestión Articulos");
-            System.out.println("1. Añadir Artículo");
-            System.out.println("2. Mostrar Artículos");
-            System.out.println("0. Salir");
+            System.out.println(tabulador + colores.consola("1", 45) + ". Añadir Artículo");
+            System.out.println(tabulador + colores.consola("2", 45) + ". Mostrar Artículos");
+            System.out.println(tabulador + colores.consola("0", 42) + ". Volver");
             opt = printGetOpcion("Elige una opción (1,2 o 0): ");
 
             switch (opt) {
@@ -109,11 +116,11 @@ public class GestionOS {
         char opt;
         do {
             printCabecera("Gestión Clientes");
-            System.out.println("1. Añadir Cliente");
-            System.out.println("2. Mostrar Clientes");
-            System.out.println("3. Mostrar Clientes Standard");
-            System.out.println("4. Mostrar Clientes Premium");
-            System.out.println("0. Salir");
+            System.out.println(tabulador + colores.consola("1", 45) + ". Añadir Cliente");
+            System.out.println(tabulador + colores.consola("2", 45) + ". Mostrar Clientes");
+            System.out.println(tabulador + colores.consola("3", 45) + ". Mostrar Clientes Standard");
+            System.out.println(tabulador + colores.consola("4", 45) + ". Mostrar Clientes Premium");
+            System.out.println(tabulador + colores.consola("0", 42) + ". Volver");
             opt = printGetOpcion("Elige una opción (1,2,3,4 o 0): ");
 
             switch (opt) {
@@ -200,7 +207,7 @@ public class GestionOS {
     public void printListClientesAll(){
         // TODO Eliminar el uso de la clase Cliente del modelo
         if(controlador.listClientes().isEmpty()){
-            System.out.println("No hay Clientes");
+            System.out.println(colores.consola("No hay Clientes", 42));
         }else{
             for(Cliente clt : controlador.listClientes()) {
                 System.out.println(clt);
@@ -211,7 +218,7 @@ public class GestionOS {
     public void printListClientesPremium() {
         // TODO Eliminar el uso de la clase Cliente del modelo
         if(controlador.listClientesPremium().isEmpty()){
-            System.out.println("No hay Clientes Premium");
+            System.out.println(colores.consola("No hay Clientes Premium", 42));
         }else{
             for(Cliente clt : controlador.listClientesPremium()) {
                 System.out.println(clt);
@@ -222,7 +229,7 @@ public class GestionOS {
     public void printListClientesStandard() {
         // TODO Eliminar el uso de la clase Cliente del modelo
         if(controlador.listClientesStandard().isEmpty()){
-            System.out.println("No hay Clientes Standard");
+            System.out.println(colores.consola("No hay Clientes Standard", 42));
         }else{
             for(Cliente clt : controlador.listClientesStandard()) {
                 System.out.println(clt);
@@ -236,10 +243,10 @@ public class GestionOS {
         char opt;
         do {
             printCabecera("Gestión Pedidos");
-            System.out.println("1. Añadir Pedido");
-            System.out.println("2. Mostrar pedidos");
-            System.out.println("3. Eliminar pedido");
-            System.out.println("0. Salir");
+            System.out.println(tabulador + colores.consola("1", 45) + ". Añadir Pedido");
+            System.out.println(tabulador + colores.consola("2", 45) + ". Mostrar pedidos");
+            System.out.println(tabulador + colores.consola("3", 45) + ". Eliminar pedido");
+            System.out.println(tabulador + colores.consola("0", 42) + ". Volver");
             opt = printGetOpcion("Elige una opción (1,2,3 o 0): ");
 
             switch (opt) {
@@ -265,7 +272,7 @@ public class GestionOS {
     private void printListPedidos() {
         // TODO Eliminar el uso de la clase Pedido del modelo
         if(controlador.listPedidos().isEmpty()){
-            System.out.println("No hay pedidos");
+            System.out.println(colores.consola("No hay Pedidos", 42));
         }else{
             for(Pedido pd : controlador.listPedidos()) {
                 System.out.println(pd);
