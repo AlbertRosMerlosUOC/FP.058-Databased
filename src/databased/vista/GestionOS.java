@@ -1,7 +1,6 @@
 package databased.vista;
 
 import databased.controlador.Controlador;
-import databased.modelo.*; //TODO Eliminar
 import java.util.Scanner;
 
 public class GestionOS {
@@ -205,36 +204,14 @@ public class GestionOS {
     }
 
     public void printListClientesAll(){
-        // TODO Eliminar el uso de la clase Cliente del modelo
-        if(controlador.listClientes().isEmpty()){
-            System.out.println(colores.consola("No hay Clientes", 42));
-        }else{
-            for(Cliente clt : controlador.listClientes()) {
-                System.out.println(clt);
-            }
-        }
-
+        System.out.println(controlador.printListaClientesAll());
     }
     public void printListClientesPremium() {
-        // TODO Eliminar el uso de la clase Cliente del modelo
-        if(controlador.listClientesPremium().isEmpty()){
-            System.out.println(colores.consola("No hay Clientes Premium", 42));
-        }else{
-            for(Cliente clt : controlador.listClientesPremium()) {
-                System.out.println(clt);
-            }
-        }
+        System.out.println(controlador.printListaClientesPremium());
     }
 
     public void printListClientesStandard() {
-        // TODO Eliminar el uso de la clase Cliente del modelo
-        if(controlador.listClientesStandard().isEmpty()){
-            System.out.println(colores.consola("No hay Clientes Standard", 42));
-        }else{
-            for(Cliente clt : controlador.listClientesStandard()) {
-                System.out.println(clt);
-            }
-        }
+        System.out.println(controlador.printListaClientesStandard());
     }
 
     /* Gestión Pedidos */
@@ -270,14 +247,7 @@ public class GestionOS {
     }
 
     private void printListPedidos() {
-        // TODO Eliminar el uso de la clase Pedido del modelo
-        if(controlador.listPedidos().isEmpty()){
-            System.out.println(colores.consola("No hay Pedidos", 42));
-        }else{
-            for(Pedido pd : controlador.listPedidos()) {
-                System.out.println(pd);
-            }
-        }
+        System.out.println(controlador.printListaPedidos());
     }
 
     private void printAddPedido() {

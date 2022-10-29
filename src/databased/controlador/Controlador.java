@@ -85,4 +85,52 @@ public class Controlador {
         }
         return retorno;
     }
+    public String printListaClientesAll(){
+        String retorno ="";
+
+        if(this.listClientes().isEmpty()){
+
+        }else{
+            for(Cliente clt : this.listClientes()) {
+                retorno = clt.toString();
+            }
+        }
+        return retorno;
+    }
+
+    public String printListaClientesPremium(){
+        String retorno ="";
+        if(this.listClientesPremium().isEmpty()){
+            retorno = "No hay Clientes Premium";
+        }else{
+            for(Cliente clt : this.listClientesPremium()) {
+                retorno = clt.toString();
+            }
+        }
+        return retorno;
+    }
+    public String printListaClientesStandard(){
+        String retorno ="";
+        if(this.listClientesStandard().isEmpty()){
+            retorno = "No hay Clientes Standard";
+        }else{
+            for(Cliente clt : this.listClientesStandard()) {
+                retorno = clt.toString();
+            }
+        }
+        return retorno;
+    }
+
+    public String printListaPedidos() {
+        String retorno ="";
+        if(this.listPedidos().isEmpty()){
+            retorno = "No hay pedidos";
+        }else{
+            for(Pedido pd : this.listPedidos()) {
+                retorno = pd.toString();
+            }
+        }
+        return retorno;
+    }
+
 }
