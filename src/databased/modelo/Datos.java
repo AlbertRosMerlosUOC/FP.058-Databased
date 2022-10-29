@@ -1,6 +1,5 @@
 package databased.modelo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 //el controlador solo llamará a los métodos de esta clase.
@@ -39,7 +38,6 @@ public class Datos {
         return articulos.add(articulo);
     }
 
-
     public List<Pedido> getPedidos() {
         return pedidos.getArrayList();
     }
@@ -53,6 +51,4 @@ public class Datos {
         //TODO
         return  false;
     }
-
-
 }

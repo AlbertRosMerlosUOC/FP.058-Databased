@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListaClientes extends Lista<Cliente> {
-
     public List<Cliente> getClientes(String tipoCliente) {
         List<Cliente> clientesFiltro = new ArrayList<>();
         for(Cliente clt : this.getArrayList()){

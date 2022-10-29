@@ -67,6 +67,7 @@ public class Pedido {
         else
             return true;
     }
+
     public Double precioEnvio(){
         //Para calcular el precio del pedido hay que tener en cuenta el precio de venta,
         // las unidades pedidas,
@@ -78,7 +79,7 @@ public class Pedido {
         Double precioTotal = articulo.getPrecioVenta() * this.cantidad - gastosEnvio;
 
         return precioTotal;
-    };
+    }
 
     // El método toString debe construir una cadena con los datos siguientes:
     // número de pedido, fecha y hora del pedido, Nif y nombre del cliente, código y descripción del artículo,
@@ -100,6 +101,7 @@ public class Pedido {
                 ", Enviado: " + this.pedidoEnviado() +
                 '}';
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
