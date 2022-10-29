@@ -24,7 +24,7 @@ public class ClienteStandard extends Cliente {
 
     @Override
     public String toString() {
-        return "ClienteStandard{" +
+        return "\nClienteStandard{" +
                 "email='" + email + '\'' +
                 ", nif='" + nif + '\'' +
                 ", nombre='" + nombre + '\'' +

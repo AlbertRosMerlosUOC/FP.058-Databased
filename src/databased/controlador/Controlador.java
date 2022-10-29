@@ -92,7 +92,7 @@ public class Controlador {
             retorno = colores.consola("No hay Clientes", 42);
         }else{
             for(Cliente clt : this.listClientes()) {
-                retorno = clt.toString();
+                retorno += clt.toString();
             }
         }
         return retorno;
@@ -104,7 +104,7 @@ public class Controlador {
             retorno = colores.consola("No hay Clientes Premium", 42);
         }else{
             for(Cliente clt : this.listClientesPremium()) {
-                retorno = clt.toString();
+                retorno += clt.toString();
             }
         }
         return retorno;
@@ -115,7 +115,7 @@ public class Controlador {
             retorno = colores.consola("No hay Clientes Standard", 42);
         }else{
             for(Cliente clt : this.listClientesStandard()) {
-                retorno = clt.toString();
+                retorno += clt.toString();
             }
         }
         return retorno;
