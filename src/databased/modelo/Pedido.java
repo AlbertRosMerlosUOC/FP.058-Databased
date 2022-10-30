@@ -84,7 +84,7 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" +
+        return "\nPedido{" +
                 "Núm. pedido: " + numPedido +
                 ",Fecha y hora del pedido: " + fechaPedido +
                 ", NIF: " + cliente.getNif() +

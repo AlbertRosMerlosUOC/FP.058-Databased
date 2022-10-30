@@ -23,7 +23,6 @@ public class ListaClientes extends Lista<Cliente> {
         for(Cliente cl : this.getArrayList()){
         //    if(cl.getNif().equals(email)){
               if(cl.getEmail().equals(email)){
-
                 return cl;
             }
         }

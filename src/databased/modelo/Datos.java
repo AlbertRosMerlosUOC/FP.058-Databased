@@ -51,8 +51,7 @@ public class Datos {
     }
 
     public boolean addPedido(Pedido pedido) {
-        pedidos.add(pedido);
-        return true;
+        return pedidos.add(pedido);
     }
 
     public boolean deletePedido(Pedido pedido) {

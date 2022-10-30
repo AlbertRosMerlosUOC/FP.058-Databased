@@ -3,6 +3,7 @@ package databased.vista;
 import databased.controlador.Controlador;
 
 import java.time.LocalDateTime;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
@@ -20,7 +21,7 @@ public class GestionOS {
         tabulador = "   ";
     }
 
-    public void inicio() throws  EscrituraAccesoDatoException{
+    public void inicio(){
         boolean salir = false;
         char opt;
         do {
@@ -64,7 +65,7 @@ public class GestionOS {
     }
 
     /* Gestión Articulos */
-    public void printMenuArticulos() throws EscrituraAccesoDatoException {
+    public void printMenuArticulos(){
         boolean salir = false;
         char opt;
         do {
@@ -88,18 +89,50 @@ public class GestionOS {
         }while (!salir);
     }
 
-    public void printAddArticulo() throws EscrituraAccesoDatoException {
+    public void printAddArticulo(){
         System.out.print("Ingrese código alfanumérico del Artículo: ");
         String codigo = teclado.nextLine();
         System.out.print("Ingrese descripción del Artículo: ");
         String descripcion =  teclado.nextLine();
-        System.out.print("Ingrese precio de venta del Artículo: ");
-        double precioVenta = teclado.nextDouble();
-        System.out.print("Ingrese gastos de envío del Artículo: ");
-        double gastosEnvio = teclado.nextDouble();
-        System.out.print("Ingrese tiempo de preparación del Artículo: ");
-        int tiempoPreparacion = teclado.nextInt();
-        teclado.nextLine();//nextInt omite el salto de linea. Se fuerza leer la nueva linea para evitar repetir la aparicion del menú
+        boolean continuar;
+        double precioVenta= 0;
+        do {
+            try {
+                continuar = false;
+                System.out.print("Ingrese precio de venta del Artículo: ");
+                precioVenta = getDecimalTeclado(teclado);
+            } catch (NoDecimalInsertException e) {
+                System.out.println(e.getMessage());
+                continuar = true;
+            }
+            teclado.nextLine();
+        }while(continuar);
+
+        double gastosEnvio = 0;
+        do {
+            try {
+                continuar = false;
+                System.out.print("Ingrese gastos de envío del Artículo: ");
+                gastosEnvio = getDecimalTeclado(teclado);
+            } catch (NoDecimalInsertException e) {
+                System.out.println(e.getMessage());
+                continuar=true;
+            }
+            teclado.nextLine();
+        }while(continuar);
+
+        int tiempoPreparacion = 0;
+        do {
+            try {
+                continuar = false;
+                System.out.print("Ingrese tiempo de preparación del Artículo: ");
+                tiempoPreparacion = getEnteroTeclado(teclado);
+            } catch (NoEnteroInsertException e) {
+                System.out.println(e.getMessage());
+                continuar=true;
+            }
+            teclado.nextLine();
+        }while(continuar);
 
         boolean addOkArt = controlador.addArticulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion);
         if (addOkArt) {
@@ -219,7 +252,7 @@ public class GestionOS {
     }
 
     /* Gestión Pedidos */
-    private void printMenuPedidos() throws EscrituraAccesoDatoException {
+    private void printMenuPedidos(){
         boolean salir = false;
         char opt;
         do {
@@ -247,9 +280,19 @@ public class GestionOS {
     }
 
     private void printDeletePedidos() {
-        // TODO try catch de parseInt?
-        System.out.print("Ingrese el número de pedido a eliminar: ");
-        int numPedido = parseInt(teclado.nextLine());
+        boolean continuar;
+        int numPedido = 0;
+        do {
+            try {
+                continuar = false;
+                System.out.print("Ingrese el número de pedido a eliminar: ");
+                numPedido = getEnteroTeclado(teclado);
+            } catch (NoEnteroInsertException e) {
+                System.out.println(e.getMessage());
+                continuar=true;
+            }
+            teclado.nextLine();
+        } while (continuar);
         System.out.println(controlador.deletePedido(numPedido));
     }
 
@@ -273,15 +316,29 @@ public class GestionOS {
         do {
             System.out.print("Ingrese código alfanumérico del Artículo: ");
             codigo = teclado.nextLine();
+
             if (!(codigo.equals("SALIR"))) {
                 existe = controlador.existArticulo(codigo);
                 if (!(existe))
                     System.out.println(colores.consola("El artículo informado no existe. Por favor, ingrese un código de artículo valido (o SALIR para salir)", 44));
             }
         } while (!(existe) && (!(codigo.equals("SALIR"))));
+
         if (!(codigo.equals("SALIR"))) {
-            System.out.print("Ingrese la cantidad de artículos: ");
-            cantidad = parseInt(teclado.nextLine());
+            boolean continuar;
+            cantidad = 0;
+            do {
+                try {
+                    continuar = false;
+                    System.out.print("Ingrese la cantidad de artículos: ");
+                    cantidad = getEnteroTeclado(teclado);
+                } catch (NoEnteroInsertException e) {
+                    System.out.println(e.getMessage());
+                    continuar=true;
+                }
+                teclado.nextLine();
+            } while (continuar);
+
             if (controlador.addPedido(numPedido,controlador.getClienteByEmail(email),controlador.getArticuloByCodigo(codigo),cantidad, LocalDateTime.now())) {
                 System.out.println(colores.consola("Pedido creado correctamente", 43));
             } else {
@@ -289,6 +346,23 @@ public class GestionOS {
             }
         } else {
             System.out.println(colores.consola("Acción cancelada por el usuario", 42));
+        }
+    }
+
+    private int getEnteroTeclado(Scanner teclado) throws NoEnteroInsertException {
+
+        try {
+            return teclado.nextInt();
+        } catch( InputMismatchException e) {
+            throw new NoEnteroInsertException();
+        }
+    }
+    private double getDecimalTeclado(Scanner teclado) throws NoDecimalInsertException {
+
+        try {
+            return teclado.nextDouble();
+        } catch( InputMismatchException e) {
+            throw new NoDecimalInsertException();
         }
     }
 }

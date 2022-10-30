@@ -13,7 +13,7 @@ public class Controlador {
         datos = new Datos ();
         colores = new ColoresConsola();
     }
-    // TO-BE-DONE
+
 
     public Datos getDatos() {
         return datos;
@@ -26,8 +26,8 @@ public class Controlador {
     public List<Articulo> listArticulos(){
         return datos.getArticulos();
     }
-
-    public boolean addArticulo (String codigo, String descripcion, double precioVenta, double gastosEnvio, int tiempoPreparacion) throws EscrituraAccesoDatoException {
+    
+    public boolean addArticulo (String codigo, String descripcion, double precioVenta, double gastosEnvio, int tiempoPreparacion){
         //0 = OK; 1 = error al insertar; 2 = el codigo de articulo ya existe
         Articulo articulo = new Articulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion);
         return datos.addArticulo(articulo);
@@ -147,7 +147,7 @@ public class Controlador {
             retorno = colores.consola("No hay Pedidos", 42);
         }else{
             for(Pedido pd : this.listPedidos()) {
-                retorno = pd.toString();
+                retorno += pd.toString();
             }
         }
         return retorno;
