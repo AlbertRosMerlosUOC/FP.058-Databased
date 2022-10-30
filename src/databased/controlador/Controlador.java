@@ -33,6 +33,14 @@ public class Controlador {
         return datos.addArticulo(articulo);
     }
 
+    public Articulo getArticuloByCodigo(String codigo){
+        return datos.getArticuloByCodigo(codigo);
+    }
+
+    public boolean existArticulo(String codigo){
+        return datos.getArticuloByCodigo(codigo) != null;
+    }
+
     public List<Cliente> listClientesStandard() {
         return datos.getClientes("ClienteStandard");
     }

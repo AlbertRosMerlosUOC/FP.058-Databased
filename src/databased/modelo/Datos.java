@@ -34,6 +34,10 @@ public class Datos {
         return articulos.getArrayList();
     }
 
+    public Articulo getArticuloByCodigo(String codigo) {
+        return articulos.getArticuloByCodigo(codigo);
+    }
+
     public boolean addArticulo(Articulo articulo){
         return articulos.add(articulo);
     }

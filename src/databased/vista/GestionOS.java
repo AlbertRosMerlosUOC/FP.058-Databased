@@ -1,6 +1,8 @@
 package databased.vista;
 
 import databased.controlador.Controlador;
+
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
@@ -188,9 +190,9 @@ public class GestionOS {
         }
 
         if (addOkClt) {
-            System.out.println("Cliente " + email + " creado correctamente");
+            System.out.println(colores.consola("Cliente " + email + " creado correctamente", 43));
         } else{
-            System.out.println("El email " + email + " ya existe");
+            System.out.println(colores.consola("El email " + email + " ya existe", 42));
         }
     }
 
@@ -257,18 +259,37 @@ public class GestionOS {
 
     private void printAddPedido() {
         int numPedido = controlador.listPedidos().size() + 1;
+        String codigo;
+        int cantidad;
         System.out.print("Ingrese el email del cliente: ");
         String email = teclado.nextLine();
         boolean existe = controlador.existCliente(email);
         if (!(existe)) {
-            System.out.println("El cliente informado no existe. Para poder continuar deberá crear un nuevo cliente.");
-            printAddCliente(email);
+            System.out.println(colores.consola("El cliente informado no existe. Para poder continuar deberá crear un nuevo cliente.", 44));
+            do {
+                printAddCliente(email);
+            } while(!(controlador.existCliente(email))); // Se crea un bucle para controlar errores en la inserción del cliente.
         }
-        // TODO Pedir codigo articulo
-        // TODO Check articulo
-        // TODO Pedir otros datos
-        // TODO insertar
-
+        do {
+            System.out.print("Ingrese código alfanumérico del Artículo: ");
+            codigo = teclado.nextLine();
+            if (!(codigo.equals("SALIR"))) {
+                existe = controlador.existArticulo(codigo);
+                if (!(existe))
+                    System.out.println(colores.consola("El artículo informado no existe. Por favor, ingrese un código de artículo valido (o SALIR para salir)", 44));
+            }
+        } while (!(existe) && (!(codigo.equals("SALIR"))));
+        if (!(codigo.equals("SALIR"))) {
+            System.out.print("Ingrese la cantidad de artículos: ");
+            cantidad = parseInt(teclado.nextLine());
+            if (controlador.addPedido(numPedido,controlador.getClienteByEmail(email),controlador.getArticuloByCodigo(codigo),cantidad, LocalDateTime.now())) {
+                System.out.println(colores.consola("Pedido creado correctamente", 43));
+            } else {
+                System.out.println(colores.consola("Error en la creación del pedido", 42));
+            }
+        } else {
+            System.out.println(colores.consola("Acción cancelada por el usuario", 42));
+        }
     }
 }
 
