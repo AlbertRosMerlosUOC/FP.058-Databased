@@ -4,16 +4,15 @@ import databased.modelo.*;
 import databased.vista.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
+
 
 public class Controlador {
     private Datos datos;
-    private ColoresConsola colores;
+    private final ColoresConsola colores;
     public Controlador() {
         datos = new Datos ();
         colores = new ColoresConsola();
     }
-
 
     public Datos getDatos() {
         return datos;
@@ -23,61 +22,97 @@ public class Controlador {
         this.datos = datos;
     }
 
-    public List<Articulo> listArticulos(){
-        return datos.getArticulos();
+    public String listArticulos(){
+        String retorno = "";
+        if(datos.getArticulos().isEmpty()){
+            retorno = colores.consola("No hay Artículos", 42);
+        }else{
+            for(Articulo art : datos.getArticulos()) {
+                retorno += art.toString();
+            }
+        }
+        return retorno;
+
     }
-    
     public boolean addArticulo (String codigo, String descripcion, double precioVenta, double gastosEnvio, int tiempoPreparacion){
         //0 = OK; 1 = error al insertar; 2 = el codigo de articulo ya existe
         Articulo articulo = new Articulo(codigo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion);
         return datos.addArticulo(articulo);
     }
-
     public Articulo getArticuloByCodigo(String codigo){
         return datos.getArticuloByCodigo(codigo);
     }
-
     public boolean existArticulo(String codigo){
         return datos.getArticuloByCodigo(codigo) != null;
     }
 
-    public List<Cliente> listClientesStandard() {
-        return datos.getClientes("ClienteStandard");
+    public String listClientes() {
+        String retorno ="";
+        if(datos.getClientes().isEmpty()){
+            retorno = colores.consola("No hay Clientes", 42);
+        }else{
+            for(Cliente clt : datos.getClientes()) {
+                retorno += clt.toString();
+            }
+        }
+        return retorno;
+    }
+    public String listClientesStandard() {
+        String retorno ="";
+        if(datos.getClientes("ClienteStandard").isEmpty()){
+            retorno = colores.consola("No hay Clientes Standard", 42);
+        }else{
+            for(Cliente clt : datos.getClientes("ClienteStandard")) {
+                retorno += clt.toString();
+            }
+        }
+        return retorno;
+    }
+    public String listClientesPremium() {
+        String retorno ="";
+        if(datos.getClientes("ClientePremium").isEmpty()){
+            retorno = colores.consola("No hay Clientes Premium", 42);
+        }else{
+            for(Cliente clt : datos.getClientes("ClientePremium")) {
+                retorno += clt.toString();
+            }
+        }
+        return retorno;
     }
 
-    public List<Cliente> listClientesPremium() {
-        return datos.getClientes("ClientePremium");
-    }
-
-    public List<Cliente> listClientes() {
-        return datos.getClientes();
-    }
 
     public boolean addClienteStandard(String email, String nif, String nombre, String domicilio) {
         Cliente cliente = new ClienteStandard(email, nif, nombre, domicilio);
         return  datos.addCliente(cliente);
     }
-
     public boolean addClientePremium(String email, String nif, String nombre, String domicilio) {
         Cliente cliente = new ClientePremium(email, nif, nombre, domicilio);
         return  datos.addCliente(cliente);
     }
-
     public Cliente getClienteByEmail(String email){
         return datos.getClienteByEmail(email);
     }
-
     public boolean existCliente(String email){
         return datos.getClienteByEmail(email) != null;
     }
 
-    public List<Pedido> listPedidos() { return datos.getPedidos();}
 
-    public boolean addPedido(int numPedido, Cliente cliente, Articulo articulo, int cantidad, LocalDateTime fechaPedido){
+    public String listPedidos() {
+        String retorno ="";
+        if(datos.getPedidos().isEmpty()){
+            retorno = colores.consola("No hay Pedidos", 42);
+        }else{
+            for(Pedido pd : datos.getPedidos()) {
+                retorno += pd.toString();
+            }
+        }
+        return retorno;
+    }
+    public boolean addPedido(Cliente cliente, Articulo articulo, int cantidad, LocalDateTime fechaPedido){
+        int numPedido = datos.getPedidos().size() + 1;
         Pedido pedido = new Pedido(numPedido, cliente, articulo, cantidad, fechaPedido);
         return datos.addPedido(pedido);
     }
-
     public String deletePedido(int numPedido){
         Pedido pedido = datos.getPedidoById(numPedido);
         if (pedido != null) {
@@ -95,61 +130,4 @@ public class Controlador {
         }
     }
 
-    public String printListaArticulos() {
-        String retorno = "";
-        if(this.listArticulos().isEmpty()){
-            retorno = colores.consola("No hay Artículos", 42);
-        }else{
-            for(Articulo art : this.listArticulos()) {
-                retorno += art.toString();
-            }
-        }
-        return retorno;
-    }
-    public String printListaClientesAll(){
-        String retorno ="";
-        if(this.listClientes().isEmpty()){
-            retorno = colores.consola("No hay Clientes", 42);
-        }else{
-            for(Cliente clt : this.listClientes()) {
-                retorno += clt.toString();
-            }
-        }
-        return retorno;
-    }
-
-    public String printListaClientesPremium(){
-        String retorno ="";
-        if(this.listClientesPremium().isEmpty()){
-            retorno = colores.consola("No hay Clientes Premium", 42);
-        }else{
-            for(Cliente clt : this.listClientesPremium()) {
-                retorno += clt.toString();
-            }
-        }
-        return retorno;
-    }
-    public String printListaClientesStandard(){
-        String retorno ="";
-        if(this.listClientesStandard().isEmpty()){
-            retorno = colores.consola("No hay Clientes Standard", 42);
-        }else{
-            for(Cliente clt : this.listClientesStandard()) {
-                retorno += clt.toString();
-            }
-        }
-        return retorno;
-    }
-
-    public String printListaPedidos() {
-        String retorno ="";
-        if(this.listPedidos().isEmpty()){
-            retorno = colores.consola("No hay Pedidos", 42);
-        }else{
-            for(Pedido pd : this.listPedidos()) {
-                retorno += pd.toString();
-            }
-        }
-        return retorno;
-    }
 }

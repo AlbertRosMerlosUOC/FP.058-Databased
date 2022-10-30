@@ -143,7 +143,7 @@ public class GestionOS {
     }
 
     public void printListArticulos() {
-        System.out.println(controlador.printListaArticulos());
+        System.out.println(controlador.listArticulos());
     }
 
     /* Gestión Clientes */
@@ -236,20 +236,22 @@ public class GestionOS {
                 return true;
             } else if (tipoCliente == '2') {
                 return false;
+            }else{
+                System.out.println(colores.consola("Opción invalida. Selecione [(1: Standard),(2: Premium)]", 44));
             }
         }while(true);
     }
-
+    public void printListClientesStandard() {
+        System.out.println(controlador.listClientesStandard());
+    }
     public void printListClientesAll(){
-        System.out.println(controlador.printListaClientesAll());
+        System.out.println(controlador.listClientes());
     }
     public void printListClientesPremium() {
-        System.out.println(controlador.printListaClientesPremium());
+        System.out.println(controlador.listClientesPremium());
     }
 
-    public void printListClientesStandard() {
-        System.out.println(controlador.printListaClientesStandard());
-    }
+
 
     /* Gestión Pedidos */
     private void printMenuPedidos(){
@@ -297,11 +299,11 @@ public class GestionOS {
     }
 
     private void printListPedidos() {
-        System.out.println(controlador.printListaPedidos());
+        System.out.println(controlador.listPedidos());
     }
 
     private void printAddPedido() {
-        int numPedido = controlador.listPedidos().size() + 1;
+
         String codigo;
         int cantidad;
         System.out.print("Ingrese el email del cliente: ");
@@ -339,7 +341,7 @@ public class GestionOS {
                 teclado.nextLine();
             } while (continuar);
 
-            if (controlador.addPedido(numPedido,controlador.getClienteByEmail(email),controlador.getArticuloByCodigo(codigo),cantidad, LocalDateTime.now())) {
+            if (controlador.addPedido(controlador.getClienteByEmail(email),controlador.getArticuloByCodigo(codigo),cantidad, LocalDateTime.now())) {
                 System.out.println(colores.consola("Pedido creado correctamente", 43));
             } else {
                 System.out.println(colores.consola("Error en la creación del pedido", 42));

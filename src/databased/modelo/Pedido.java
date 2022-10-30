@@ -59,10 +59,16 @@ public class Pedido {
     }
 
     public boolean pedidoEnviado(){
+
         //Se debe indicar si ha transcurrido el tiempo de preparación
         long minutosTranscurridos = ChronoUnit.MINUTES.between(this.getFechaPedido(), LocalDateTime.now());
-        if(articulo.getTiempoPreparacion() < minutosTranscurridos) return false;
-        else return true;
+        System.out.println("Creado: "+this.getFechaPedido());
+        System.out.println("Ahora: "+LocalDateTime.now());
+        System.out.println("transcurridos: "+ minutosTranscurridos);
+        System.out.println("tiempo Preparación: " + articulo.getTiempoPreparacion());
+
+        return (articulo.getTiempoPreparacion() < minutosTranscurridos);
+
     }
 
     public Double precioEnvio(){
