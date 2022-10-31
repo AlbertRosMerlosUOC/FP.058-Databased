@@ -60,33 +60,20 @@ public class Pedido {
 
     public boolean pedidoEnviado(){
 
-        //Se debe indicar si ha transcurrido el tiempo de preparación
         long minutosTranscurridos = ChronoUnit.MINUTES.between(this.getFechaPedido(), LocalDateTime.now());
-        System.out.println("Creado: "+this.getFechaPedido());
-        System.out.println("Ahora: "+LocalDateTime.now());
-        System.out.println("transcurridos: "+ minutosTranscurridos);
-        System.out.println("tiempo Preparación: " + articulo.getTiempoPreparacion());
 
         return (articulo.getTiempoPreparacion() < minutosTranscurridos);
 
     }
 
     public Double precioEnvio(){
-        //Para calcular el precio del pedido hay que tener en cuenta el precio de venta,
-        // las unidades pedidas,
-        // el coste del envío y si el cliente que lo ha realizado es premium.
-        // Si es premium paga una cuota anual de 30 euros y se le aplica un 20% de descuento en los gastos de envío de cada pedido
 
         Double descuentoEnvio = articulo.getGastosEnvio() * cliente.descuentoEnvio() / 100;
         Double gastosEnvio = articulo.getGastosEnvio() - descuentoEnvio;
-        Double precioTotal = articulo.getPrecioVenta() * this.cantidad - gastosEnvio;
+        Double precioTotal = articulo.getPrecioVenta() * this.cantidad + gastosEnvio;
 
         return precioTotal;
     }
-
-    // El método toString debe construir una cadena con los datos siguientes:
-    // número de pedido, fecha y hora del pedido, Nif y nombre del cliente, código y descripción del artículo,
-    // cantidad, precio artículo, coste envío, precio total y si ya se ha enviado.
 
     @Override
     public String toString() {
