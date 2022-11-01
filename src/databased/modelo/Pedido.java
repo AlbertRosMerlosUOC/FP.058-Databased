@@ -62,7 +62,7 @@ public class Pedido {
 
         long minutosTranscurridos = ChronoUnit.MINUTES.between(this.getFechaPedido(), LocalDateTime.now());
 
-        return (articulo.getTiempoPreparacion() < minutosTranscurridos);
+        return (articulo.getTiempoPreparacion() <= minutosTranscurridos);
 
     }
 
