@@ -62,7 +62,7 @@ public class Pedido {
 
         long minutosTranscurridos = ChronoUnit.MINUTES.between(this.getFechaPedido(), LocalDateTime.now());
 
-        return (articulo.getTiempoPreparacion() < minutosTranscurridos);
+        return (articulo.getTiempoPreparacion() <= minutosTranscurridos);
 
     }
 
@@ -87,7 +87,7 @@ public class Pedido {
                 ", Cantidad: " + cantidad +
                 ", Precio artículo: " + articulo.getPrecioVenta() +
                 ", Coste envío: " + articulo.getGastosEnvio() +
-                ", Precio total: " + this.precioEnvio() + //TODO Duda de si esto es el precio total o el precio de envio por el numero de articulos
+                ", Precio total: " + this.precioEnvio() +
                 ", Enviado: " + this.pedidoEnviado() +
                 '}';
     }
