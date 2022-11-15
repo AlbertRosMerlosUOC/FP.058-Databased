@@ -1,24 +1,27 @@
 package databased.modelo;
 
 import databased.dao.ArticuloDAO;
+import databased.factory.FactoryDao;
 
 import java.util.List;
 
 //el controlador solo llamará a los métodos de esta clase.
 public class Datos {
+
     private final ListaClientes clientes;
     //private final ListaArticulos articulos;
     private final ListaPedidos pedidos;
-
+    FactoryDao mysqlDAO;
     private final ArticuloDAO articuloDAO;
 
     public Datos() {
+        this.mysqlDAO = new FactoryDao();
 
         this.clientes = new ListaClientes();
         //this.articulos = new ListaArticulos();
         this.pedidos = new ListaPedidos();
 
-        this. articuloDAO = new ArticuloDAO();
+        this.articuloDAO = mysqlDAO.getArticuloDAO();
 
 
     }
