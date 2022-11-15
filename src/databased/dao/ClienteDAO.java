@@ -1,14 +1,47 @@
 package databased.dao;
 
+import databased.conexion.ConexionBD;
+import databased.interfaces.InterfaceClienteDAO;
 import databased.interfaces.InterfaceDAO;
 import databased.modelo.Articulo;
 import databased.modelo.Cliente;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-public class ClienteDAO implements InterfaceDAO<Cliente, Integer> {
+public class ClienteDAO implements InterfaceClienteDAO<Cliente, String> {
+    private static final String SQL_INSERT = "INSERT INTO Cliente (email, nif, nombre, domicilio, tipo_cliente) VALUES (?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE Cliente SET email = ?, nif = ?, nombre = ?, domicilio = ?, tipo_cliente = ? WHERE email = ?";
+    private static final String SQL_DELETE = "DELETE * FROM Cliente WHERE email = ?";
+    private static final String SQL_READ = "SELECT * FROM Cliente WHERE email = ?";
+    private static final String SQL_READALL = "SELECT * FROM Cliente;";
+
+    private static final ConexionBD con = ConexionBD.getInstance();
+
     @Override
     public boolean create(Cliente cliente) {
+        PreparedStatement ps = null;
+        try {
+            ps = con.getConexion().prepareStatement(SQL_INSERT);
+
+            ps.setString(1, cliente.getEmail());
+            ps.setString(2, cliente.getNif());
+            ps.setString(3, cliente.getNombre());
+            ps.setString(4, cliente.getDomicilio());
+            ps.setString(5, cliente.tipoCliente());
+
+            if (ps.executeUpdate() > 0) {
+                return true;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            con.closeConexion();
+        }
         return false;
     }
 
@@ -23,12 +56,38 @@ public class ClienteDAO implements InterfaceDAO<Cliente, Integer> {
     }
 
     @Override
-    public Cliente read(Integer id) {
+    public Cliente read(String email) {
         return null;
     }
 
     @Override
     public List<Cliente> readAll() {
+        PreparedStatement ps;
+        ResultSet res;
+        ArrayList<Cliente> clientes = new ArrayList<>();
+
+        try {
+            ps = con.getConexion().prepareStatement(SQL_READALL);
+            res = ps.executeQuery();
+
+            while (res.next()){
+                //TODO Crear per tipo de client...
+                //clientes.add();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            con.closeConexion();
+        }
+        return clientes;
+    }
+
+    //TODO Es necesario en este caso crear interfaces concretas? o es suficiente implementar el método directamente?
+    // Quitar la interfaz generica y crear interfaces para cada DAO?
+    @Override
+    public List<Cliente> readByTipoCliente(String type) {
         return null;
     }
+
+
 }
