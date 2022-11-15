@@ -1,45 +1,46 @@
 package databased.modelo;
 
 import databased.dao.ArticuloDAO;
+import databased.dao.ClienteDAO;
 import databased.factory.FactoryDao;
 
 import java.util.List;
 
-//el controlador solo llamará a los métodos de esta clase.
+/*
+TODO MAntenemos esta clase como requisito del P1: el controlador solo llamará a los métodos de esta clase.
+ Y nos sirve para no tener que modificar los métodos del controlador
+*/
 public class Datos {
-
-    private final ListaClientes clientes;
-    //private final ListaArticulos articulos;
     private final ListaPedidos pedidos;
     FactoryDao mysqlDAO;
     private final ArticuloDAO articuloDAO;
-
+    private final ClienteDAO clienteDAO;
     public Datos() {
         this.mysqlDAO = new FactoryDao();
 
-        this.clientes = new ListaClientes();
-        //this.articulos = new ListaArticulos();
         this.pedidos = new ListaPedidos();
 
         this.articuloDAO = mysqlDAO.getArticuloDAO();
-
-
+        this.clienteDAO = mysqlDAO.getClienteDAO();
     }
 
     public List<Cliente> getClientes() {
-        return clientes.getArrayList();
+        //return clientes.getArrayList();
+        return clienteDAO.readAll();
     }
 
     public List<Cliente> getClientes(String tipoCliente) {
-        return clientes.getClientes(tipoCliente);
+        //return clientes.getClientes(tipoCliente);
+        return clienteDAO.readByTipoCliente(tipoCliente);
     }
 
     public Cliente getClienteByEmail(String email) {
-        return clientes.getClienteByEmail(email);
+        //return clientes.getClienteByEmail(email);
+        return clienteDAO.read(email);
     }
 
     public boolean addCliente(Cliente cliente) {
-        return clientes.add(cliente);
+        return clienteDAO.create(cliente);
     }
 
     public List<Articulo> getArticulos() {
@@ -53,7 +54,7 @@ public class Datos {
     }
 
     public boolean addArticulo(Articulo articulo){
-        //return articulos.add(articulo);
+        //TODO verificar si existe el articulo antes de indsertar...aqui, en articuloDAO o en el controlador
         if(articuloDAO.read(articulo.getCodigo()) == null) {
             return articuloDAO.create(articulo);
         }

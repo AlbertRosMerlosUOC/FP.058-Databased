@@ -60,7 +60,7 @@ public class ArticuloDAO implements InterfaceDAO<Articulo, String> {
     }
 
     @Override
-    public Articulo read(String id) {
+    public Articulo read(String codigo) {
         //TODO
         PreparedStatement ps;
         ResultSet res;
@@ -68,7 +68,7 @@ public class ArticuloDAO implements InterfaceDAO<Articulo, String> {
 
         try {
             ps = con.getConexion().prepareStatement(SQL_READ);
-            ps.setString(1, id);
+            ps.setString(1, codigo);
             res = ps.executeQuery();
 
             while (res.next()){
