@@ -75,7 +75,17 @@ public class Datos {
         return pedidoDAO.create(pedido);
     }
 
-    public boolean deletePedido(Pedido pedido) {
-        return pedidoDAO.delete(pedido);
+    public int deletePedido(int numPedido) {
+        Pedido pedido = pedidoDAO.read(numPedido);
+        if (pedido != null) {
+            if (!(pedido.pedidoEnviado())) {
+                if (pedidoDAO.delete(numPedido)) {
+                    return 1;
+                }
+                return 3;
+            }
+            return 2;
+        }
+        return 0;
     }
 }

@@ -9,13 +9,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class ArticuloDAO implements InterfaceDAO<Articulo, String> {
 
     private static final String SQL_INSERT = "INSERT INTO Articulo (codigo, descripcion, precio_venta, gastos_envio, tiempo_preparacion) VALUES (?, ?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE Articulo SET descripcion = ?, precio_venta = ?, gastos_envio = ?, tiempo_preparacion = ? WHERE codigo = ?";
-    private static final String SQL_DELETE = "DELETE * FROM Articulo WHERE codigo = ?";
+    private static final String SQL_UPDATE = "";
+    private static final String SQL_DELETE = "";
     private static final String SQL_READ = "SELECT * FROM Articulo WHERE codigo = ?";
     private static final String SQL_READALL = "SELECT * FROM Articulo;";
 
@@ -54,7 +53,7 @@ public class ArticuloDAO implements InterfaceDAO<Articulo, String> {
     }
 
     @Override
-    public boolean delete(Articulo articulo) {
+    public boolean delete(String codigo) {
         //TODO
         return false;
     }

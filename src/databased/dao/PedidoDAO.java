@@ -13,21 +13,10 @@ import java.util.List;
 
 public class PedidoDAO implements InterfaceDAO<Pedido, Integer> {
     private static final String SQL_INSERT = "INSERT INTO Pedido (email, codigo, cantidad, local_date_time) VALUES (?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE Pedido SET x=? WHERE  num_pedido = ?";
+    private static final String SQL_UPDATE = "";
     private static final String SQL_DELETE = "DELETE FROM Pedido WHERE num_pedido = ?";
-    private static final String SQL_READ =  "SELECT p.num_pedido , c.*, a.*, p.cantidad, p.local_date_time fecha_pedido\n" +
-                                            "FROM Pedido AS p\n" +
-                                            "INNER JOIN Cliente AS c\n" +
-                                            "    ON p.email = c.email\n" +
-                                            "INNER JOIN Articulo AS a\n" +
-                                            "    ON p.codigo = a.codigo\n" +
-                                            "WHERE p.num_pedido = ?;";
-    private static final String SQL_READALL = "SELECT p.num_pedido , c.*, a.*, p.cantidad, p.local_date_time fecha_pedido\n" +
-                                                "FROM Pedido AS p\n" +
-                                                "INNER JOIN Cliente AS c\n" +
-                                                "    ON p.email = c.email\n" +
-                                                "INNER JOIN Articulo AS a\n" +
-                                                "    ON p.codigo = a.codigo";
+    private static final String SQL_READ =  "{call get_product_by_num_pedido(?)}";
+    private static final String SQL_READALL = "{call get_all_products_detail()}";
 
     private static final ConexionBD con = ConexionBD.getInstance();
     @Override
@@ -62,11 +51,11 @@ public class PedidoDAO implements InterfaceDAO<Pedido, Integer> {
     }
 
     @Override
-    public boolean delete(Pedido pedido) {
+    public boolean delete(Integer numPedido) {
         PreparedStatement ps = null;
         try {
             ps = con.getConexion().prepareStatement(SQL_DELETE);
-            ps.setInt(1, pedido.getNumPedido());
+            ps.setInt(1, numPedido);
             if (ps.executeUpdate() > 0) {
                 return true;
             }
