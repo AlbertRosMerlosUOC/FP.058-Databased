@@ -48,12 +48,12 @@ public class ClientePremium extends Cliente {
     @Override
     public String toString() {
         return "\nClientePremium{" +
-                "cuota=" + cuota +
-                ", descuento=" + descuento +
-                ", email='" + email + '\'' +
+                "email='" + email + '\'' +
                 ", nif='" + nif + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", domicilio='" + domicilio + '\'' +
+                ", cuota=" + cuota +'\'' +
+                ", descuento=" + descuento + '\'' +
                 '}';
     }
 
