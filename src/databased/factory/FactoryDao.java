@@ -4,7 +4,7 @@ import databased.conexion.ConexionBD;
 import databased.dao.ArticuloDAO;
 import databased.dao.ClienteDAO;
 import databased.dao.PedidoDAO;
-import databased.modelo.Pedido;
+
 
 public class FactoryDao {
 
