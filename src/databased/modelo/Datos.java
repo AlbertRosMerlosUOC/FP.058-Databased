@@ -12,15 +12,12 @@ TODO MAntenemos esta clase como requisito del P1: el controlador solo llamará a
  Y nos sirve para no tener que modificar los métodos del controlador
 */
 public class Datos {
-    private final ListaPedidos pedidos;
     FactoryDao mysqlDAO;
     private final ArticuloDAO articuloDAO;
     private final ClienteDAO clienteDAO;
     private final PedidoDAO pedidoDAO;
     public Datos() {
         this.mysqlDAO = new FactoryDao();
-
-        this.pedidos = new ListaPedidos();
 
         this.articuloDAO = mysqlDAO.getArticuloDAO();
         this.clienteDAO = mysqlDAO.getClienteDAO();
@@ -50,12 +47,10 @@ public class Datos {
     }
 
     public List<Articulo> getArticulos() {
-        //return articulos.getArrayList();
         return articuloDAO.readAll();
     }
 
     public Articulo getArticuloByCodigo(String codigo) {
-        //return articulos.getArticuloByCodigo(codigo);
         return articuloDAO.read(codigo);
     }
 
@@ -68,19 +63,19 @@ public class Datos {
     }
 
     public List<Pedido> getPedidos() {
-        //return pedidos.getArrayList();
         return pedidoDAO.readAll();
     }
 
     public Pedido getPedidoById(int idPedido) {
-        return pedidos.getPedidoById(idPedido);
+       return pedidoDAO.read(idPedido);
     }
 
     public boolean addPedido(Pedido pedido) {
-        return pedidos.add(pedido);
+        //TODO La clave primaria es un INT auto incremetable, por lo que no hace falta verificar si el pedido exosite antes de crearlo
+        return pedidoDAO.create(pedido);
     }
 
     public boolean deletePedido(Pedido pedido) {
-        return pedidos.delete(pedido);
+        return pedidoDAO.delete(pedido);
     }
 }

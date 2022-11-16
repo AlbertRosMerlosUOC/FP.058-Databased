@@ -113,6 +113,9 @@ public class Controlador {
         Pedido pedido = new Pedido(numPedido, cliente, articulo, cantidad, fechaPedido);
         return datos.addPedido(pedido);
     }
+
+    //TODO, esta logica no me cuadra aquí ya que las demás están en Datos...quitar datos o mover esta?
+
     public String deletePedido(int numPedido){
         Pedido pedido = datos.getPedidoById(numPedido);
         if (pedido != null) {

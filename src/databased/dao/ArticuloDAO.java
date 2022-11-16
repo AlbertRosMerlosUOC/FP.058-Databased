@@ -61,7 +61,6 @@ public class ArticuloDAO implements InterfaceDAO<Articulo, String> {
 
     @Override
     public Articulo read(String codigo) {
-        //TODO
         PreparedStatement ps;
         ResultSet res;
         Articulo articulo = null;

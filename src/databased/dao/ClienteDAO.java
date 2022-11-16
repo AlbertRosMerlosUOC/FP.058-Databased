@@ -59,7 +59,7 @@ public class ClienteDAO implements InterfaceClienteDAO<Cliente, String> {
     }
 
     @Override
-    public Cliente read(String email) {2
+    public Cliente read(String email) {
         PreparedStatement ps;
         ResultSet res;
         Cliente cliente = null;
