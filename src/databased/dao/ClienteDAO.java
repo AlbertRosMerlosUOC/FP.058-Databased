@@ -59,12 +59,12 @@ public class ClienteDAO implements InterfaceClienteDAO<Cliente, String> {
     }
 
     @Override
-    public Cliente read(String email) {
+    public Cliente read(String email) {2
         PreparedStatement ps;
         ResultSet res;
         Cliente cliente = null;
         try {
-            ps = con.getConexion().prepareStatement(SQL_READ_BY_TIPO_CLIENTE);
+            ps = con.getConexion().prepareStatement(SQL_READ);
             ps.setString(1, email);
             res = ps.executeQuery();
 

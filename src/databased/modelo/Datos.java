@@ -43,7 +43,10 @@ public class Datos {
     }
 
     public boolean addCliente(Cliente cliente) {
-        return clienteDAO.create(cliente);
+        if(clienteDAO.read(cliente.getEmail()) == null){
+           return  clienteDAO.create(cliente);
+        }
+        return false;
     }
 
     public List<Articulo> getArticulos() {
