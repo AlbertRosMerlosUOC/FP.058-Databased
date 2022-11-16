@@ -16,8 +16,8 @@ import java.util.List;
 
 public class ClienteDAO implements InterfaceClienteDAO<Cliente, String> {
     private static final String SQL_INSERT = "INSERT INTO Cliente (email, nif, nombre, domicilio, tipo_cliente) VALUES (?, ?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE Cliente SET email = ?, nif = ?, nombre = ?, domicilio = ?, tipo_cliente = ? WHERE email = ?";
-    private static final String SQL_DELETE = "DELETE * FROM Cliente WHERE email = ?";
+    private static final String SQL_UPDATE = "";
+    private static final String SQL_DELETE = "";
     private static final String SQL_READ = "SELECT * FROM Cliente WHERE email = ?";
     private static final String SQL_READ_BY_TIPO_CLIENTE = "SELECT * FROM Cliente WHERE tipo_cliente = ?";
     private static final String SQL_READALL = "SELECT * FROM Cliente;";
@@ -54,7 +54,7 @@ public class ClienteDAO implements InterfaceClienteDAO<Cliente, String> {
     }
 
     @Override
-    public boolean delete(Cliente cliente) {
+    public boolean delete(String email) {
         return false;
     }
 

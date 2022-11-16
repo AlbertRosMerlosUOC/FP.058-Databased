@@ -114,22 +114,20 @@ public class Controlador {
         return datos.addPedido(pedido);
     }
 
-    //TODO, esta logica no me cuadra aquí ya que las demás están en Datos...quitar datos o mover esta?
 
     public String deletePedido(int numPedido){
-        Pedido pedido = datos.getPedidoById(numPedido);
-        if (pedido != null) {
-            if (!(pedido.pedidoEnviado())) {
-                if (datos.deletePedido(pedido)) {
-                    return colores.consola("Pedido eliminado correctamente", 43);
-                } else {
-                    return colores.consola("Error eliminando el pedido", 42);
-                }
-            } else {
+        //0 no existe, 1 enviado, 2 eliminado
+        int res = datos.deletePedido(numPedido);
+        switch (res) {
+            case 0:
+                return colores.consola("No se ha encontrado ningún pedido con el número indicado", 42);
+            case 1:
+                return colores.consola("Pedido eliminado correctamente", 43);
+            case 2:
                 return colores.consola("El pedido ya ha sido enviado y no se ha podido eliminar", 42);
-            }
-        } else {
-            return colores.consola("No se ha encontrado ningún pedido con el número indicado", 42);
+            default:
+                return colores.consola("Error eliminando el pedido", 42);
+
         }
     }
 
