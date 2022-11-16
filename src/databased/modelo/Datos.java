@@ -2,6 +2,7 @@ package databased.modelo;
 
 import databased.dao.ArticuloDAO;
 import databased.dao.ClienteDAO;
+import databased.dao.PedidoDAO;
 import databased.factory.FactoryDao;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class Datos {
     FactoryDao mysqlDAO;
     private final ArticuloDAO articuloDAO;
     private final ClienteDAO clienteDAO;
+    private final PedidoDAO pedidoDAO;
     public Datos() {
         this.mysqlDAO = new FactoryDao();
 
@@ -22,6 +24,7 @@ public class Datos {
 
         this.articuloDAO = mysqlDAO.getArticuloDAO();
         this.clienteDAO = mysqlDAO.getClienteDAO();
+        this.pedidoDAO = mysqlDAO.getPedidoDAO();
     }
 
     public List<Cliente> getClientes() {
@@ -62,7 +65,8 @@ public class Datos {
     }
 
     public List<Pedido> getPedidos() {
-        return pedidos.getArrayList();
+        //return pedidos.getArrayList();
+        return pedidoDAO.readAll();
     }
 
     public Pedido getPedidoById(int idPedido) {
