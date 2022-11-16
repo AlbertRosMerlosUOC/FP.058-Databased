@@ -5,6 +5,8 @@ import databased.interfaces.InterfaceClienteDAO;
 import databased.interfaces.InterfaceDAO;
 import databased.modelo.Articulo;
 import databased.modelo.Cliente;
+import databased.modelo.ClientePremium;
+import databased.modelo.ClienteStandard;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +19,7 @@ public class ClienteDAO implements InterfaceClienteDAO<Cliente, String> {
     private static final String SQL_UPDATE = "UPDATE Cliente SET email = ?, nif = ?, nombre = ?, domicilio = ?, tipo_cliente = ? WHERE email = ?";
     private static final String SQL_DELETE = "DELETE * FROM Cliente WHERE email = ?";
     private static final String SQL_READ = "SELECT * FROM Cliente WHERE email = ?";
+    private static final String SQL_READ_BY_TIPO_CLIENTE = "SELECT * FROM Cliente WHERE tipo_cliente = ?";
     private static final String SQL_READALL = "SELECT * FROM Cliente;";
 
     private static final ConexionBD con = ConexionBD.getInstance();
@@ -57,7 +60,28 @@ public class ClienteDAO implements InterfaceClienteDAO<Cliente, String> {
 
     @Override
     public Cliente read(String email) {
-        return null;
+        PreparedStatement ps;
+        ResultSet res;
+        Cliente cliente = null;
+        try {
+            ps = con.getConexion().prepareStatement(SQL_READ_BY_TIPO_CLIENTE);
+            ps.setString(1, email);
+            res = ps.executeQuery();
+
+            while (res.next()){
+                if (res.getString("tipo_cliente").equals("ClientePremium")) {
+                    cliente = new ClientePremium(res.getString("email"), res.getString("nif"), res.getString("nombre"), res.getString("domicilio"));
+                } else {
+                    cliente = new ClienteStandard(res.getString("email"), res.getString("nif"), res.getString("nombre"), res.getString("domicilio"));
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            con.closeConexion();
+        }
+        return cliente;
     }
 
     @Override
@@ -65,14 +89,19 @@ public class ClienteDAO implements InterfaceClienteDAO<Cliente, String> {
         PreparedStatement ps;
         ResultSet res;
         ArrayList<Cliente> clientes = new ArrayList<>();
-
+        Cliente cliente = null;
         try {
             ps = con.getConexion().prepareStatement(SQL_READALL);
             res = ps.executeQuery();
 
             while (res.next()){
-                //TODO Crear per tipo de client...
-                //clientes.add();
+                //(email, nif, nombre, domicilio, tipo_cliente), la cuota y el descuento se tratan como constantes en la clase ClientePremium)
+                if (res.getString("tipo_cliente").equals("ClientePremium")) {
+                    cliente = new ClientePremium(res.getString("email"), res.getString("nif"), res.getString("nombre"), res.getString("domicilio"));
+                } else {
+                    cliente = new ClienteStandard(res.getString("email"), res.getString("nif"), res.getString("nombre"), res.getString("domicilio"));
+                }
+                clientes.add(cliente);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -85,8 +114,32 @@ public class ClienteDAO implements InterfaceClienteDAO<Cliente, String> {
     //TODO Es necesario en este caso crear interfaces concretas? o es suficiente implementar el método directamente?
     // Quitar la interfaz generica y crear interfaces para cada DAO?
     @Override
-    public List<Cliente> readByTipoCliente(String type) {
-        return null;
+    public List<Cliente> readByTipoCliente(String tipoCliente) {
+            PreparedStatement ps;
+            ResultSet res;
+            ArrayList<Cliente> clientes = new ArrayList<>();
+            Cliente cliente = null;
+            try {
+                ps = con.getConexion().prepareStatement(SQL_READ_BY_TIPO_CLIENTE);
+                ps.setString(1, tipoCliente);
+                res = ps.executeQuery();
+
+                while (res.next()){
+                    //(email, nif, nombre, domicilio, tipo_cliente), la cuota y el descuento se tratan como constantes en la clase ClientePremium)
+                    if (tipoCliente.equals("ClientePremium")) {
+                        cliente = new ClientePremium(res.getString("email"), res.getString("nif"), res.getString("nombre"), res.getString("domicilio"));
+                    } else {
+                        cliente = new ClienteStandard(res.getString("email"), res.getString("nif"), res.getString("nombre"), res.getString("domicilio"));
+                    }
+                    clientes.add(cliente);
+                }
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } finally {
+                con.closeConexion();
+            }
+            return clientes;
     }
 
 
