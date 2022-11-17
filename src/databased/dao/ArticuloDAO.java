@@ -29,7 +29,8 @@ public class ArticuloDAO implements InterfaceDAO<Articulo, String> {
 
                 ps.setString(1, articulo.getCodigo());
                 ps.setString(2, articulo.getDescripcion());
-                ps.setDouble(3, articulo.getGastosEnvio());
+               // ps.setDouble(3, articulo.getGastosEnvio());
+                ps.setDouble(3, articulo.getPrecioVenta());
                 ps.setDouble(4, articulo.getGastosEnvio());
                 ps.setInt(5, articulo.getTiempoPreparacion());
 
