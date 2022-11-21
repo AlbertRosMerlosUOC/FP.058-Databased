@@ -39,7 +39,7 @@ public class ArticuloDAO implements InterfaceDAO<Articulo, String> {
                 }
 
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                throw new DAOException(e);
             } finally {
                 con.closeConexion();
             }
@@ -75,7 +75,7 @@ public class ArticuloDAO implements InterfaceDAO<Articulo, String> {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         }finally {
             con.closeConexion();
         }
@@ -96,7 +96,7 @@ public class ArticuloDAO implements InterfaceDAO<Articulo, String> {
                 articulos.add(new Articulo(res.getString(1), res.getString(2), res.getDouble(3), res.getDouble(4), res.getInt(5)));
             }
         } catch (SQLException e) {
-        throw new RuntimeException(e);
+        throw new DAOException(e);
         } finally {
             con.closeConexion();
         }

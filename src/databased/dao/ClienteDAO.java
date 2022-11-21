@@ -38,7 +38,7 @@ public class ClienteDAO implements InterfaceClienteDAO<Cliente, String> {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         } finally {
             con.closeConexion();
         }
@@ -74,7 +74,7 @@ public class ClienteDAO implements InterfaceClienteDAO<Cliente, String> {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         } finally {
             con.closeConexion();
         }
@@ -101,7 +101,7 @@ public class ClienteDAO implements InterfaceClienteDAO<Cliente, String> {
                 clientes.add(cliente);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         } finally {
             con.closeConexion();
         }
@@ -132,7 +132,7 @@ public class ClienteDAO implements InterfaceClienteDAO<Cliente, String> {
                 }
 
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                throw new DAOException(e);
             } finally {
                 con.closeConexion();
             }

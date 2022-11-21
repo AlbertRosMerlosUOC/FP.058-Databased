@@ -39,7 +39,7 @@ public class PedidoDAO implements InterfacePedidoDAO<Pedido, Integer> {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         } finally {
             con.closeConexion();
         }
@@ -63,7 +63,7 @@ public class PedidoDAO implements InterfacePedidoDAO<Pedido, Integer> {
                 return true;
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         } finally {
             con.closeConexion();
         }
@@ -94,7 +94,7 @@ public class PedidoDAO implements InterfacePedidoDAO<Pedido, Integer> {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         }finally {
             con.closeConexion();
         }
@@ -123,7 +123,7 @@ public class PedidoDAO implements InterfacePedidoDAO<Pedido, Integer> {
                 pedidos.add(new Pedido(res.getInt("num_pedido"), cliente, articulo,res.getInt("cantidad") , res.getTimestamp("fecha_pedido").toLocalDateTime()));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         } finally {
             con.closeConexion();
         }
@@ -142,7 +142,7 @@ public class PedidoDAO implements InterfacePedidoDAO<Pedido, Integer> {
             cs.executeUpdate();
             result = cs.getInt(2);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DAOException(e);
         } finally {
             con.closeConexion();
         }
