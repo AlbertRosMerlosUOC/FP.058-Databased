@@ -2,8 +2,6 @@ package databased.dao;
 
 import databased.conexion.ConexionBD;
 import databased.interfaces.InterfaceClienteDAO;
-import databased.interfaces.InterfaceDAO;
-import databased.modelo.Articulo;
 import databased.modelo.Cliente;
 import databased.modelo.ClientePremium;
 import databased.modelo.ClienteStandard;
@@ -21,7 +19,6 @@ public class ClienteDAO implements InterfaceClienteDAO<Cliente, String> {
     private static final String SQL_READ = "SELECT * FROM Cliente WHERE email = ?";
     private static final String SQL_READ_BY_TIPO_CLIENTE = "SELECT * FROM Cliente WHERE tipo_cliente = ?";
     private static final String SQL_READALL = "SELECT * FROM Cliente;";
-
     private static final ConexionBD con = ConexionBD.getInstance();
 
     @Override
@@ -111,7 +108,7 @@ public class ClienteDAO implements InterfaceClienteDAO<Cliente, String> {
         return clientes;
     }
 
-    //TODO Es necesario en este caso crear interfaces concretas? o es suficiente implementar el método directamente?
+    // TODO Es necesario en este caso crear interfaces concretas? o es suficiente implementar el método directamente?
     // Quitar la interfaz generica y crear interfaces para cada DAO?
     @Override
     public List<Cliente> readByTipoCliente(String tipoCliente) {
@@ -141,6 +138,4 @@ public class ClienteDAO implements InterfaceClienteDAO<Cliente, String> {
             }
             return clientes;
     }
-
-
 }
