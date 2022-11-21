@@ -76,6 +76,7 @@ public class Datos {
     }
 
     public int deletePedido(int numPedido) {
+        /* TODO Albert: Comento esta parte del código original por si se quiere usar en lugar del procedimiento.
         Pedido pedido = pedidoDAO.read(numPedido);
         if (pedido != null) {
             if (!(pedido.pedidoEnviado())) {
@@ -86,6 +87,7 @@ public class Datos {
             }
             return 2;
         }
-        return 0;
+        return 0;*/
+        return pedidoDAO.controlDelete(numPedido);
     }
 }

@@ -117,17 +117,24 @@ public class Controlador {
 
     public String deletePedido(int numPedido){
         //0 no existe, 1 enviado, 2 eliminado
+        // -2 error, -1 no existe, 0 no se puede eliminar, 1 eliminado
         int res = datos.deletePedido(numPedido);
         switch (res) {
+            /* TODO Albert: Comento esta parte del código original por si se quiere usar en lugar del procedimiento.
             case 0:
                 return colores.consola("No se ha encontrado ningún pedido con el número indicado", 42);
             case 1:
                 return colores.consola("Pedido eliminado correctamente", 43);
             case 2:
+                return colores.consola("El pedido ya ha sido enviado y no se ha podido eliminar", 42);*/
+            case -1:
+                return colores.consola("No se ha encontrado ningún pedido con el número indicado", 42);
+            case 0:
                 return colores.consola("El pedido ya ha sido enviado y no se ha podido eliminar", 42);
+            case 1:
+                return colores.consola("Pedido eliminado correctamente", 43);
             default:
                 return colores.consola("Error eliminando el pedido", 42);
-
         }
     }
 
