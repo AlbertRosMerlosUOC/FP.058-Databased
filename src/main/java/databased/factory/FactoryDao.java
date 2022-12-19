@@ -9,10 +9,8 @@ import jakarta.persistence.Persistence;
 
 
 public class FactoryDao {
-    EntityManagerFactory emf;
-    public FactoryDao() {
-        emf = Persistence.createEntityManagerFactory("onlineStoreJPA");
-    }
+    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("onlineStoreJPA");;
+
     public ArticuloDAO getArticuloDAO(){
         return new ArticuloDAO(emf);
     }
