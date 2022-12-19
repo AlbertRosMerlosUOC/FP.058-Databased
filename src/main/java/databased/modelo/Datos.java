@@ -55,7 +55,7 @@ public class Datos {
     }
 
     public boolean addArticulo(Articulo articulo){
-        //TODO verificar si existe el articulo antes de indsertar...aqui, en articuloDAO o en el controlador
+
         if(articuloDAO.read(articulo.getCodigo()) == null) {
             return (articuloDAO.create(articulo) != null);
         }
