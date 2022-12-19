@@ -4,13 +4,13 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>databased.modelo.Articulo</class>
         <properties>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://172.104.205.29:3306/online_store_DB?serverTimezone=Europe/Madrid"/>
-            <property name="jakarta.persistence.jdbc.user" value="databased"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://172.104.205.29:3306/online_store?serverTimezone=Europe/Madrid"/>
+            <property name="jakarta.persistence.jdbc.user" value="toni"/>
             <property name="jakarta.persistence.jdbc.password" value="P@ssX0rra!"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update" />
-            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.generate_statistics" value="true"/>
         </properties>
     </persistence-unit>

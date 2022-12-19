@@ -1,5 +1,6 @@
 package databased.modelo;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -9,9 +10,13 @@ import jakarta.persistence.Table;
 public class Articulo {
     @Id
     private String codigo;
+    @Column(name = "")
     private String descripcion;
+    @Column(name = "precio_venta")
     private double precioVenta;
+    @Column(name = "gastos_envio")
     private double gastosEnvio;
+    @Column(name = "tiempo_preparacion")
     private int tiempoPreparacion;
 
     public Articulo() {
