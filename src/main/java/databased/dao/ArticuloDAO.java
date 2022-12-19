@@ -18,12 +18,17 @@ public class ArticuloDAO implements InterfaceDAO<Articulo, String> {
 
     @Override
     public Articulo create(Articulo articulo) {
-
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        em.persist(articulo);
-        em.getTransaction().commit();
-        em.close();
+        try {
+            em.persist(articulo);
+            em.getTransaction().commit();
+        }catch(Exception e){
+            em.getTransaction().rollback();
+            throw new DAOException(e);
+        }finally {
+            em.close();
+        }
         return articulo;
     }
 
