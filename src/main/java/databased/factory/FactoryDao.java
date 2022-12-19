@@ -4,13 +4,17 @@ import databased.conexion.ConexionBD;
 import databased.dao.ArticuloDAO;
 import databased.dao.ClienteDAO;
 import databased.dao.PedidoDAO;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
 
 public class FactoryDao {
-
-   //TODO En el ejemplo de J2EE aqui crea el objeto conexion...?
+    EntityManagerFactory emf;
+    public FactoryDao() {
+        emf = Persistence.createEntityManagerFactory("onlineStoreJPA");
+    }
     public ArticuloDAO getArticuloDAO(){
-        return new ArticuloDAO();
+        return new ArticuloDAO(emf);
     }
 
     public ClienteDAO getClienteDAO(){

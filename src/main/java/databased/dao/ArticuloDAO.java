@@ -4,19 +4,21 @@ import databased.interfaces.InterfaceDAO;
 import databased.modelo.Articulo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ArticuloDAO implements InterfaceDAO<Articulo, String> {
+    private EntityManagerFactory emf;
+
+    public ArticuloDAO(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
 
     @Override
     public Articulo create(Articulo articulo) {
 
-        EntityManagerFactory emf =
-                Persistence.createEntityManagerFactory("onlineStoreJPA");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(articulo);
@@ -39,8 +41,7 @@ public class ArticuloDAO implements InterfaceDAO<Articulo, String> {
 
     @Override
     public Articulo read(String codigo) {
-        EntityManagerFactory emf =
-                Persistence.createEntityManagerFactory("onlineStoreJPA");
+
         EntityManager em = emf.createEntityManager();
         Articulo articulo = em.find(Articulo.class, codigo);
         em.close();
@@ -50,8 +51,6 @@ public class ArticuloDAO implements InterfaceDAO<Articulo, String> {
     @Override
     public List<Articulo> readAll() {
 
-        EntityManagerFactory emf =
-                Persistence.createEntityManagerFactory("onlineStoreJPA");
         EntityManager em = emf.createEntityManager();
         Query query = em.createQuery("select a from Articulo a");
         ArrayList articulos =(ArrayList<Articulo>) query.getResultList();
