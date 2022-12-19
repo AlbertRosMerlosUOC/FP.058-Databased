@@ -1,50 +1,28 @@
 package databased.dao;
 
-import databased.conexion.ConexionBD;
 import databased.interfaces.InterfaceDAO;
 import databased.modelo.Articulo;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.Query;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ArticuloDAO implements InterfaceDAO<Articulo, String> {
 
-    private static final String SQL_INSERT = "INSERT INTO Articulo (codigo, descripcion, precio_venta, gastos_envio, tiempo_preparacion) VALUES (?, ?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "";
-    private static final String SQL_DELETE = "";
-    private static final String SQL_READ = "SELECT * FROM Articulo WHERE codigo = ?";
-    private static final String SQL_READALL = "SELECT * FROM Articulo;";
-
-    private static final ConexionBD con = ConexionBD.getInstance();
-
     @Override
-    public boolean create(Articulo articulo) {
+    public Articulo create(Articulo articulo) {
 
-            PreparedStatement ps = null;
-            try {
-                ps = con.getConexion().prepareStatement(SQL_INSERT);
-
-                ps.setString(1, articulo.getCodigo());
-                ps.setString(2, articulo.getDescripcion());
-               // ps.setDouble(3, articulo.getGastosEnvio());
-                ps.setDouble(3, articulo.getPrecioVenta());
-                ps.setDouble(4, articulo.getGastosEnvio());
-                ps.setInt(5, articulo.getTiempoPreparacion());
-
-                if (ps.executeUpdate() > 0) {
-                    return true;
-                }
-
-            } catch (SQLException e) {
-                throw new DAOException(e);
-            } finally {
-                con.closeConexion();
-            }
-
-        return false;
+        EntityManagerFactory emf =
+                Persistence.createEntityManagerFactory("onlineStoreJPA");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(articulo);
+        em.getTransaction().commit();
+        em.close();
+        return articulo;
     }
 
     @Override
@@ -61,45 +39,24 @@ public class ArticuloDAO implements InterfaceDAO<Articulo, String> {
 
     @Override
     public Articulo read(String codigo) {
-        PreparedStatement ps;
-        ResultSet res;
-        Articulo articulo = null;
-
-        try {
-            ps = con.getConexion().prepareStatement(SQL_READ);
-            ps.setString(1, codigo);
-            res = ps.executeQuery();
-
-            while (res.next()){
-                articulo = new Articulo(res.getString(1), res.getString(2), res.getDouble(3), res.getDouble(4), res.getInt(5));
-            }
-
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        }finally {
-            con.closeConexion();
-        }
+        EntityManagerFactory emf =
+                Persistence.createEntityManagerFactory("onlineStoreJPA");
+        EntityManager em = emf.createEntityManager();
+        Articulo articulo = em.find(Articulo.class, codigo);
+        em.close();
         return articulo;
     }
 
     @Override
     public List<Articulo> readAll() {
-        PreparedStatement ps;
-        ResultSet res;
-        ArrayList<Articulo> articulos = new ArrayList<>();
 
-        try {
-            ps = con.getConexion().prepareStatement(SQL_READALL);
-            res = ps.executeQuery();
-
-            while (res.next()){
-                articulos.add(new Articulo(res.getString(1), res.getString(2), res.getDouble(3), res.getDouble(4), res.getInt(5)));
-            }
-        } catch (SQLException e) {
-        throw new DAOException(e);
-        } finally {
-            con.closeConexion();
-        }
+        EntityManagerFactory emf =
+                Persistence.createEntityManagerFactory("onlineStoreJPA");
+        EntityManager em = emf.createEntityManager();
+        Query query = em.createQuery("select a from Articulo a");
+        ArrayList articulos =(ArrayList<Articulo>) query.getResultList();
+        em.close();
         return articulos;
+
     }
 }

@@ -23,7 +23,7 @@ public class PedidoDAO implements InterfacePedidoDAO<Pedido, Integer> {
 
     private static final ConexionBD con = ConexionBD.getInstance();
     @Override
-    public boolean create(Pedido pedido) {
+    public Pedido create(Pedido pedido) {
         //(email, codigo, cantidad, local_date_time)
         PreparedStatement ps = null;
         try {
@@ -35,7 +35,7 @@ public class PedidoDAO implements InterfacePedidoDAO<Pedido, Integer> {
             ps.setTimestamp(4, Timestamp.valueOf(pedido.getFechaPedido()));
 
             if (ps.executeUpdate() > 0) {
-                return true;
+                return pedido;
             }
 
         } catch (SQLException e) {
@@ -44,7 +44,7 @@ public class PedidoDAO implements InterfacePedidoDAO<Pedido, Integer> {
             con.closeConexion();
         }
 
-        return false;
+        return null;
 
     }
 
