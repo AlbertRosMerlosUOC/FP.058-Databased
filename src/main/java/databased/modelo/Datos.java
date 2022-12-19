@@ -41,7 +41,7 @@ public class Datos {
 
     public boolean addCliente(Cliente cliente) {
         if(clienteDAO.read(cliente.getEmail()) == null){
-           return  clienteDAO.create(cliente);
+           return  clienteDAO.create(cliente) != null;
         }
         return false;
     }
@@ -57,7 +57,7 @@ public class Datos {
     public boolean addArticulo(Articulo articulo){
         //TODO verificar si existe el articulo antes de indsertar...aqui, en articuloDAO o en el controlador
         if(articuloDAO.read(articulo.getCodigo()) == null) {
-            return articuloDAO.create(articulo);
+            return (articuloDAO.create(articulo) != null);
         }
         return false;
     }
@@ -72,7 +72,7 @@ public class Datos {
 
     public boolean addPedido(Pedido pedido) {
         //TODO La clave primaria es un INT auto incremetable, por lo que no hace falta verificar si el pedido exosite antes de crearlo
-        return pedidoDAO.create(pedido);
+        return pedidoDAO.create(pedido) != null;
     }
 
     public int deletePedido(int numPedido) {

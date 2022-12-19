@@ -22,7 +22,7 @@ public class ClienteDAO implements InterfaceClienteDAO<Cliente, String> {
     private static final ConexionBD con = ConexionBD.getInstance();
 
     @Override
-    public boolean create(Cliente cliente) {
+    public Cliente create(Cliente cliente) {
         PreparedStatement ps = null;
         try {
             ps = con.getConexion().prepareStatement(SQL_INSERT);
@@ -34,7 +34,7 @@ public class ClienteDAO implements InterfaceClienteDAO<Cliente, String> {
             ps.setString(5, cliente.tipoCliente());
 
             if (ps.executeUpdate() > 0) {
-                return true;
+                return cliente;
             }
 
         } catch (SQLException e) {
@@ -42,7 +42,7 @@ public class ClienteDAO implements InterfaceClienteDAO<Cliente, String> {
         } finally {
             con.closeConexion();
         }
-        return false;
+        return null;
     }
 
     @Override

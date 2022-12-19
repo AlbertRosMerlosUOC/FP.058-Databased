@@ -1,12 +1,21 @@
 package databased.modelo;
 
-public class Articulo {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "Articulo")
+public class Articulo {
+    @Id
     private String codigo;
     private String descripcion;
     private double precioVenta;
     private double gastosEnvio;
     private int tiempoPreparacion;
+
+    public Articulo() {
+    }
 
     public Articulo(String codigo, String descripcion, double precioVenta, double gastosEnvio, int tiempoPreparacion) {
         this.codigo = codigo;
