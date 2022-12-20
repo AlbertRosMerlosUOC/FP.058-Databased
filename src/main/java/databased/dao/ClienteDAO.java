@@ -37,8 +37,8 @@ public class ClienteDAO implements InterfaceClienteDAO<Cliente, String> {
     }
 
     @Override
-    public boolean delete(String email) {
-        return false;
+    public Cliente delete(String email) {
+        return null;
     }
 
     @Override

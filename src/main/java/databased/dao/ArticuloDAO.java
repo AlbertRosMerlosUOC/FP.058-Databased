@@ -39,9 +39,9 @@ public class ArticuloDAO implements InterfaceDAO<Articulo, String> {
     }
 
     @Override
-    public boolean delete(String codigo) {
+    public Articulo delete(String codigo) {
         //TODO
-        return false;
+        return null;
     }
 
     @Override
