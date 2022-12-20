@@ -74,17 +74,10 @@ public class PedidoDAO implements InterfacePedidoDAO<Pedido, Integer> {
 
     @Override
     public Pedido read(Integer id) {
-
-        return null;
-    }
-
-    @Override
-    public List<Pedido> readAll() {
         EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("select p from Pedido p");
-        List pedidos = query.getResultList();
+        Pedido pedido = em.find(Pedido.class, id);
         em.close();
-        return pedidos;
+        return pedido;
     }
 
     @Override
