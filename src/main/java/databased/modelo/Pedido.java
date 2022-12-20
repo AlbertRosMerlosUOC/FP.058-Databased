@@ -22,6 +22,9 @@ public class Pedido {
     @Column(name = "fecha_pedido")
     private LocalDateTime fechaPedido;
 
+    public Pedido() {
+    }
+
     public Pedido(Cliente cliente, Articulo articulo, int cantidad, LocalDateTime fechaPedido) {
         this.cliente = cliente;
         this.articulo = articulo;
