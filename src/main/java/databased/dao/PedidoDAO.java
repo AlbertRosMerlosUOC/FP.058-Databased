@@ -3,6 +3,11 @@ package databased.dao;
 import databased.conexion.ConexionBD;
 import databased.interfaces.InterfacePedidoDAO;
 import databased.modelo.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Query;
+import jakarta.transaction.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.CallableStatement;
@@ -22,30 +27,27 @@ public class PedidoDAO implements InterfacePedidoDAO<Pedido, Integer> {
     private static final String SQL_CONTROL = "{call control_delete_pedido(?, ?)}";
 
     private static final ConexionBD con = ConexionBD.getInstance();
+    private EntityManagerFactory emf;
+
+
+    public PedidoDAO(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
+
     @Override
     public Pedido create(Pedido pedido) {
-        //(email, codigo, cantidad, local_date_time)
-        PreparedStatement ps = null;
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
         try {
-            ps = con.getConexion().prepareStatement(SQL_INSERT);
-
-            ps.setString(1, pedido.getCliente().getEmail());
-            ps.setString(2, pedido.getArticulo().getCodigo());
-            ps.setInt(3, pedido.getCantidad());
-            ps.setTimestamp(4, Timestamp.valueOf(pedido.getFechaPedido()));
-
-            if (ps.executeUpdate() > 0) {
-                return pedido;
-            }
-
-        } catch (SQLException e) {
+            em.persist(pedido);
+            em.getTransaction().commit();
+        }catch (Exception e){
+            em.getTransaction().rollback();
             throw new DAOException(e);
-        } finally {
-            con.closeConexion();
+        }finally {
+            em.close();
         }
-
-        return null;
-
+        return pedido;
     }
 
     @Override
@@ -72,61 +74,16 @@ public class PedidoDAO implements InterfacePedidoDAO<Pedido, Integer> {
 
     @Override
     public Pedido read(Integer id) {
-        PreparedStatement ps;
-        ResultSet res;
-        Pedido pedido = null;
-        Cliente cliente = null;
-        Articulo articulo = null;
 
-        try {
-            ps = con.getConexion().prepareStatement(SQL_READ);
-            ps.setInt(1, id);
-            res = ps.executeQuery();
-
-            while (res.next()){
-                if (res.getString("tipo_cliente").equals("ClientePremium")) {
-                    cliente = new ClientePremium(res.getString("email"), res.getString("nif"), res.getString("nombre"), res.getString("domicilio"));
-                } else {
-                    cliente = new ClienteStandard(res.getString("email"), res.getString("nif"), res.getString("nombre"), res.getString("domicilio"));
-                }
-                articulo = new Articulo(res.getString("codigo"), res.getString("descripcion"), res.getDouble("precio_venta"), res.getDouble("gastos_envio"), res.getInt("tiempo_preparacion"));
-                pedido = new Pedido(res.getInt("num_pedido"), cliente, articulo,res.getInt("cantidad") , res.getTimestamp("fecha_pedido").toLocalDateTime());
-            }
-
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        }finally {
-            con.closeConexion();
-        }
-        return pedido;
+        return null;
     }
 
     @Override
     public List<Pedido> readAll() {
-        PreparedStatement ps;
-        ResultSet res;
-        ArrayList<Pedido> pedidos = new ArrayList<>();
-        Pedido pedido = null;
-        Cliente cliente = null;
-        Articulo articulo = null;
-        try {
-            ps = con.getConexion().prepareStatement(SQL_READALL);
-            res = ps.executeQuery();
-
-            while (res.next()){
-                if (res.getString("tipo_cliente").equals("ClientePremium")) {
-                    cliente = new ClientePremium(res.getString("email"), res.getString("nif"), res.getString("nombre"), res.getString("domicilio"));
-                } else {
-                    cliente = new ClienteStandard(res.getString("email"), res.getString("nif"), res.getString("nombre"), res.getString("domicilio"));
-                }
-                articulo = new Articulo(res.getString("codigo"), res.getString("descripcion"), res.getDouble("precio_venta"), res.getDouble("gastos_envio"), res.getInt("tiempo_preparacion"));
-                pedidos.add(new Pedido(res.getInt("num_pedido"), cliente, articulo,res.getInt("cantidad") , res.getTimestamp("fecha_pedido").toLocalDateTime()));
-            }
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        } finally {
-            con.closeConexion();
-        }
+        EntityManager em = emf.createEntityManager();
+        Query query = em.createQuery("select p from Pedido p");
+        List pedidos = query.getResultList();
+        em.close();
         return pedidos;
     }
 

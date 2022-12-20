@@ -109,8 +109,7 @@ public class Controlador {
         return retorno;
     }
     public boolean addPedido(Cliente cliente, Articulo articulo, int cantidad, LocalDateTime fechaPedido){
-        int numPedido = datos.getPedidos().size() + 1;
-        Pedido pedido = new Pedido(numPedido, cliente, articulo, cantidad, fechaPedido);
+        Pedido pedido = new Pedido(cliente, articulo, cantidad, fechaPedido);
         return datos.addPedido(pedido);
     }
 

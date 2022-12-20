@@ -1,17 +1,28 @@
 package databased.modelo;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
+@Entity
+@Table(name = "Pedido")
 public class Pedido {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="num_pedido")
     private int numPedido;
+    @ManyToOne()
+    @JoinColumn(name = "email", nullable = false)
     private Cliente cliente;
+    @ManyToOne()
+    @JoinColumn(name = "codigo", nullable = false)
     private Articulo articulo;
     private int cantidad;
+    @Column(name = "fecha_pedido")
     private LocalDateTime fechaPedido;
 
-    public Pedido(int numPedido, Cliente cliente, Articulo articulo, int cantidad, LocalDateTime fechaPedido) {
-        this.numPedido = numPedido;
+    public Pedido(Cliente cliente, Articulo articulo, int cantidad, LocalDateTime fechaPedido) {
         this.cliente = cliente;
         this.articulo = articulo;
         this.cantidad = cantidad;

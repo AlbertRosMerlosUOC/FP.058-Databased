@@ -12,6 +12,7 @@ public class FactoryDao {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("onlineStoreJPA");;
 
     public ArticuloDAO getArticuloDAO(){
+
         return new ArticuloDAO(emf);
     }
 
@@ -20,7 +21,7 @@ public class FactoryDao {
     }
 
     public PedidoDAO getPedidoDAO(){
-        return new PedidoDAO();
+        return new PedidoDAO(emf);
     }
 
 }

@@ -58,7 +58,7 @@ public class ArticuloDAO implements InterfaceDAO<Articulo, String> {
 
         EntityManager em = emf.createEntityManager();
         Query query = em.createQuery("select a from Articulo a");
-        ArrayList articulos =(ArrayList<Articulo>) query.getResultList();
+        List articulos = query.getResultList();
         em.close();
         return articulos;
 
