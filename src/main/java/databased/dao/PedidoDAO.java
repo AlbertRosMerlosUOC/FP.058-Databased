@@ -56,26 +56,20 @@ public class PedidoDAO implements InterfacePedidoDAO<Pedido, Integer> {
     }
 
     @Override
-    public boolean delete(Integer numPedido) {
-        PreparedStatement ps = null;
-        try {
-            ps = con.getConexion().prepareStatement(SQL_DELETE);
-            ps.setInt(1, numPedido);
-            if (ps.executeUpdate() > 0) {
-                return true;
-            }
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        } finally {
-            con.closeConexion();
+    public Pedido delete(Integer numPedido) {
+        EntityManager em = emf.createEntityManager();
+        Pedido pedido = em.find(Pedido.class, numPedido);
+        if(pedido !=null){
+            em.remove(pedido);
         }
-        return false;
+        em.close();
+        return pedido;
     }
 
     @Override
-    public Pedido read(Integer id) {
+    public Pedido read(Integer numPedido) {
         EntityManager em = emf.createEntityManager();
-        Pedido pedido = em.find(Pedido.class, id);
+        Pedido pedido = em.find(Pedido.class, numPedido);
         em.close();
         return pedido;
     }
