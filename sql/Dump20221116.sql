@@ -118,7 +118,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`toni`@`%` PROCEDURE `get_all_products_detail`()
+CREATE DEFINER=`databased`@`%` PROCEDURE `get_all_products_detail`()
 BEGIN
 	SELECT p.num_pedido , c.*, a.*, p.cantidad, p.local_date_time fecha_pedido
 	FROM Pedido AS p
@@ -141,7 +141,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`toni`@`%` PROCEDURE `get_product_by_num_pedido`(IN p_num_pedido INT)
+CREATE DEFINER=`databased`@`%` PROCEDURE `get_product_by_num_pedido`(IN p_num_pedido INT)
 BEGIN
 	SELECT p.num_pedido , c.*, a.*, p.cantidad, p.local_date_time fecha_pedido
 	FROM Pedido AS p
