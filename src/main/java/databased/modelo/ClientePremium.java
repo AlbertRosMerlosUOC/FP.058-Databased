@@ -1,8 +1,19 @@
 package databased.modelo;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue(value="ClientePremium")
 public class ClientePremium extends Cliente {
+
     private int cuota = 30;
     private int descuento = 20;
+
+    public ClientePremium() {
+    }
 
     public ClientePremium(String email, String nif, String nombre, String domicilio) {
         super(email, nif, nombre, domicilio);

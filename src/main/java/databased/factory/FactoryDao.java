@@ -16,7 +16,7 @@ public class FactoryDao {
     }
 
     public ClienteDAO getClienteDAO(){
-        return new ClienteDAO();
+        return new ClienteDAO(emf);
     }
 
     public PedidoDAO getPedidoDAO(){

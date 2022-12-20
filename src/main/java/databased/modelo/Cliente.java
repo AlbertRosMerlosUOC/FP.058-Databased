@@ -1,10 +1,20 @@
 package databased.modelo;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Cliente")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo_cliente", discriminatorType = DiscriminatorType.STRING)
 public abstract class Cliente {
+    @Id
     protected String email;
     protected String nif;
     protected String nombre;
     protected String domicilio;
+
+    public Cliente() {
+    }
 
     public Cliente(String email, String nif, String nombre, String domicilio) {
         this.email = email;

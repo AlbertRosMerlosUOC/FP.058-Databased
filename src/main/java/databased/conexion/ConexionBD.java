@@ -9,8 +9,8 @@ import java.sql.SQLException;
 public class ConexionBD {
     private static ConexionBD instance;
     private Connection conexion;
-    private String url = "jdbc:mysql://172.104.205.29:3306/online_store";//_DB
-    private String user = "toni";//"databased";
+    private String url = "jdbc:mysql://172.104.205.29:3306/online_store_DB";//_DB
+    private String user = "databased";//"databased";
     private String pass = "P@ssX0rra!";
 
 

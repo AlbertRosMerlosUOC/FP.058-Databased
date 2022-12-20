@@ -25,17 +25,14 @@ public class Datos {
     }
 
     public List<Cliente> getClientes() {
-        //return clientes.getArrayList();
         return clienteDAO.readAll();
     }
 
     public List<Cliente> getClientes(String tipoCliente) {
-        //return clientes.getClientes(tipoCliente);
         return clienteDAO.readByTipoCliente(tipoCliente);
     }
 
     public Cliente getClienteByEmail(String email) {
-        //return clientes.getClienteByEmail(email);
         return clienteDAO.read(email);
     }
 
