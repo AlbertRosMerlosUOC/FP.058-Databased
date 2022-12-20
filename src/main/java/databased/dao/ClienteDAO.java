@@ -62,7 +62,8 @@ public class ClienteDAO implements InterfaceClienteDAO<Cliente, String> {
     @Override
     public List<Cliente> readByTipoCliente(String tipoCliente) {
 
-        //TODO con named parameters no me ha funcionado...?
+        //TODO con named parameters no me ha funcionado...no termino de entender esto del TUPE, me parece un poco chapuza pero funciona
+        //   ?
         EntityManager em = emf.createEntityManager();
         Query query = em.createQuery("SELECT c FROM Cliente c WHERE TYPE(c) = '"+tipoCliente+"'");
         List<Cliente> clientes = query.getResultList();
