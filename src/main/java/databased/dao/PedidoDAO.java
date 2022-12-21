@@ -1,32 +1,13 @@
 package databased.dao;
 
-import databased.conexion.ConexionBD;
 import databased.interfaces.InterfacePedidoDAO;
 import databased.modelo.*;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Query;
-import jakarta.transaction.Transactional;
+import jakarta.persistence.*;
 
-import java.sql.PreparedStatement;
-import java.sql.CallableStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.sql.Types;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PedidoDAO implements InterfacePedidoDAO<Pedido, Integer> {
-    private static final String SQL_INSERT = "INSERT INTO Pedido (email, codigo, cantidad, local_date_time) VALUES (?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "";
-    private static final String SQL_DELETE = "DELETE FROM Pedido WHERE num_pedido = ?";
-    private static final String SQL_READ =  "{call get_product_by_num_pedido(?)}";
-    private static final String SQL_READALL = "{call get_all_products_detail()}";
-    private static final String SQL_CONTROL = "{call control_delete_pedido(?, ?)}";
 
-    private static final ConexionBD con = ConexionBD.getInstance();
     private EntityManagerFactory emf;
 
 
@@ -85,24 +66,32 @@ public class PedidoDAO implements InterfacePedidoDAO<Pedido, Integer> {
 
     @Override
     public int controlDelete(int numPedido) {
-        CallableStatement cs = null;
-        int result = -2;
-        try {
-            cs = con.getConexion().prepareCall(SQL_CONTROL);
-            cs.setInt(1, numPedido);
-            cs.registerOutParameter(2, Types.INTEGER);
+        EntityManager em = emf.createEntityManager();
+        int result;
+        // Create call stored procedure
+        em.getTransaction().begin();
+        try{
+            StoredProcedureQuery cdsp = em.createStoredProcedureQuery("control_delete_pedido");
+            // set parameter v_num_pedido INT, OUT v_control INT
+            cdsp.registerStoredProcedureParameter("v_num_pedido", Integer.class, ParameterMode.IN);
+            cdsp.registerStoredProcedureParameter("v_control", Integer.class, ParameterMode.OUT);
+            cdsp.setParameter("v_num_pedido", numPedido);
+            // execute SP
+            cdsp.execute();
+            // get result
+            result = (int) cdsp.getOutputParameterValue("v_control");
+            em.getTransaction().commit();
 
-            cs.executeUpdate();
-            result = cs.getInt(2);
-        } catch (SQLException e) {
+        }catch (Exception e){
+            em.getTransaction().rollback();
             throw new DAOException(e);
-        } finally {
-            con.closeConexion();
+        }finally {
+            em.close();
         }
+
         return result;      // Posibles resultados:
                             //      1: Es posible borrar el pedido
                             //      0: No es posible borrar el pedido, ya que se ha superado la fecha máxima para hacerlo
                             //     -1: No se ha encontrado el pedido a borrar
-                            //     -2: Si algo falla en la procedure / método
     }
 }
