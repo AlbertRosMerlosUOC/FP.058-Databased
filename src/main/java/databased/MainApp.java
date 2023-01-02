@@ -1,5 +1,6 @@
 package databased;
 
+import databased.vista.GestionOS;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -23,17 +24,18 @@ public class MainApp extends Application {
     }
     private void initRootLayout() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainApp.class.getResource("javafx/PrincipalVista.fxml"));
+        loader.setLocation(MainApp.class.getResource("vistasJavafx/PrincipalVista.fxml"));
         rootLayout = (BorderPane) loader.load();
 
         Scene scene = new Scene(rootLayout);
         primaryStage.setScene(scene);
         primaryStage.show();
 
+
     }
     private void showClientesVista() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainApp.class.getResource("javafx/ClientesVista.fxml"));
+        loader.setLocation(MainApp.class.getResource("vistasJavafx/ClientesVista.fxml"));
         AnchorPane clientesVista = (AnchorPane) loader.load();
 
         rootLayout.setCenter(clientesVista);
@@ -41,6 +43,8 @@ public class MainApp extends Application {
 
 
     public static void main(String[] args) {
+        //GestionOS gestion = new GestionOS();
+        //gestion.inicio();
         launch(args);
     }
 }

@@ -1,4 +1,4 @@
-package databased.javafx;
+package databased.vistasJavafx;
 
 public class PrincipalVista {
 }
