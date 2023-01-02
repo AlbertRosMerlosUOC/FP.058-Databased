@@ -5,4 +5,6 @@ module databased.javafx {
 
     exports databased.javafx;
     opens databased.javafx to javafx.fxml;
+    exports databased;
+    opens databased to javafx.fxml;
 }
