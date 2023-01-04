@@ -18,7 +18,6 @@ public class Datos {
     private final PedidoDAO pedidoDAO;
     public Datos() {
         this.mysqlDAO = new FactoryDao();
-
         this.articuloDAO = mysqlDAO.getArticuloDAO();
         this.clienteDAO = mysqlDAO.getClienteDAO();
         this.pedidoDAO = mysqlDAO.getPedidoDAO();
