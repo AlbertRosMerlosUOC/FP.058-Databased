@@ -1,19 +1,22 @@
 package databased;
 
 import databased.modelo.Datos;
+import databased.vistasJavafx.AddArticuloVistaController;
 import databased.vistasJavafx.ArticulosVistaController;
 import databased.vistasJavafx.ClientesVistaController;
+import databased.vistasJavafx.PrincipalVistaController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class MainApp extends Application {
-    Datos datos;
+    private Datos datos;
     private Stage primaryStage;
     private BorderPane rootLayout;
 
@@ -32,42 +35,73 @@ public class MainApp extends Application {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("vistasJavafx/PrincipalVista.fxml"));
         rootLayout = (BorderPane) loader.load();
-
+        PrincipalVistaController principalVistaController = loader.getController();
+        //Pasamos el acceso al modelo al controlador
+        principalVistaController.setMainApp(this);
         Scene scene = new Scene(rootLayout);
         primaryStage.setScene(scene);
         primaryStage.show();
 
 
     }
-    private void showClientesVista() throws IOException {
+    public void showClientesVista() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("vistasJavafx/ClientesVista.fxml"));
         AnchorPane clientesVista = (AnchorPane) loader.load();
         //Reclamamos el controlador que se ha creado automáticamente a partir del FXML
         ClientesVistaController clientesVistaController = loader.getController();
         //Pasamos el acceso al modelo al controlador
-        clientesVistaController.setDatos(datos);
+        clientesVistaController.setMainApp(this);
         //Cargamos los datos en la tabla
         clientesVistaController.refreshClientesList();
         rootLayout.setCenter(clientesVista);
     }
 
-    private void showArticulosVista() throws IOException {
+    public void showArticulosVista() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("vistasJavafx/ArticulosVista.fxml"));
         AnchorPane articulosVista = (AnchorPane) loader.load();
         //Reclamamos el controlador que se ha creado automáticamente a partir del FXML
-       ArticulosVistaController articulosVistaController = loader.getController();
+        ArticulosVistaController articulosVistaController = loader.getController();
         //Pasamos el acceso al modelo al controlador
-        articulosVistaController.setDatos(datos);
+        articulosVistaController.setMainController(this);
         //Cargamos los datos en la tabla
         articulosVistaController.refreshArticulosList();
         rootLayout.setCenter(articulosVista);
     }
 
+    public boolean showAddArticuloDialog() throws IOException {
+        // Load the fxml file and create a new stage for the popup dialog.
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainApp.class.getResource("vistasJavafx/AddArticuloDialogVista.fxml"));
+        AnchorPane page = (AnchorPane) loader.load();
+
+        // Create the dialog Stage.
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Añadir Articulo");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(primaryStage);
+        Scene scene = new Scene(page);
+        dialogStage.setScene(scene);
+
+        // Set the person into the controller.
+        AddArticuloVistaController controller = loader.getController();
+        controller.setDialogStage(dialogStage);
+        controller.setMainApp(this);
+
+        // Show the dialog and wait until the user closes it
+        dialogStage.showAndWait();
+
+        //return controller.isOkClicked();
+        return true;
+
+    }
+
+    public Datos getDatos() {
+        return datos;
+    }
 
     public static void main(String[] args) {
-
         launch(args);
     }
 }

@@ -1,5 +1,6 @@
 package databased.vistasJavafx;
 
+import databased.MainApp;
 import databased.modelo.Cliente;
 import databased.modelo.Datos;
 import javafx.beans.Observable;
@@ -12,20 +13,22 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 
 public class ClientesVistaController {
-    private Datos datos;
+
     @FXML
     private TableView<Cliente> clientesTable;
     @FXML
     private TableColumn<Cliente, String> clienteNombre;
 
-    public void setDatos(Datos datos) {
-        this.datos = datos;
-    }
+   private MainApp mainApp;
 
     public void refreshClientesList() {
         //clienteNombre.seTcellFactoryProperty()
-        ObservableList<Cliente> clientes = FXCollections.observableArrayList(datos.getClientes());
+        ObservableList<Cliente> clientes = FXCollections.observableArrayList(mainApp.getDatos().getClientes());
         clienteNombre.setCellValueFactory(new PropertyValueFactory<Cliente, String>("nombre"));
         clientesTable.setItems(clientes);
+    }
+
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
     }
 }
