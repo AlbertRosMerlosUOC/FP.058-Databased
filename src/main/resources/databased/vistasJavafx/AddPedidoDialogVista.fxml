@@ -13,12 +13,14 @@
    <children>
       <VBox layoutX="30.0" layoutY="37.0" prefHeight="243.0" prefWidth="300.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label text="Cliente" />
-            <TextField fx:id="tEmailCliente" />
+            <Label text="Crear un cliente nuevo" />
+            <Button fx:id="btnShowAddCliente" mnemonicParsing="false" onAction="#showAddCliente" text="Nuevo Cliente" />
+            <Label text="Seleccionar Cliente Registrado " />
+            <ChoiceBox fx:id="selCliente" prefWidth="150.0" />
             <Label text="Articulo" />
             <ChoiceBox fx:id="selArticulo" prefWidth="150.0" />
             <Label fx:id="tPVP" text="Cantidad" />
-            <TextField fx:id="tCantidad" />
+            <TextField fx:id="tCantidad" text="0" />
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
               <buttons>
                 <Button fx:id="btnAddArticulo" mnemonicParsing="false" onAction="#addPedido" text="Añadir" />
