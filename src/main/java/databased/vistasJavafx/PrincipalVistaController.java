@@ -31,8 +31,8 @@ public class PrincipalVistaController {
 
     }
     @FXML
-    public void showGestionPedidos(){
-
+    public void showGestionPedidos() throws IOException {
+        this.mainApp.showPedidosVista();
     }
 
 

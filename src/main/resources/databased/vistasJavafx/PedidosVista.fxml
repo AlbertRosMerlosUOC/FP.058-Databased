@@ -12,15 +12,21 @@
    <children>
       <VBox layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
          <children>
-            <Label styleClass="title" text="Gestión de artículos" />
+            <Label styleClass="title" text="Gestión de pedidos" />
       
-            <TableView fx:id="tblArticulos" prefHeight="396.0" prefWidth="770.0">
+            <TableView fx:id="tblPedidos" prefHeight="396.0" prefWidth="770.0">
               <columns>
-                <TableColumn fx:id="clCodigo" prefWidth="75.0" text="Código" />
-                <TableColumn fx:id="clDescripcion" prefWidth="75.0" text="Descripción" />
-                  <TableColumn fx:id="clGastosEnvio" prefWidth="75.0" text="PVP" />
-                  <TableColumn fx:id="clPrecioVenta" prefWidth="75.0" text="Gastos de envio" />
-                  <TableColumn fx:id="clTiempoPreparacion" prefWidth="75.0" text="Min. preparación" />
+                <TableColumn fx:id="numPedido" prefWidth="75.0" text="Núm. pedido" />
+                <TableColumn fx:id="fechaPedido" prefWidth="75.0" text="Fecha pedido" />
+                  <TableColumn fx:id="nif" prefWidth="75.0" text="Nif Cliente" />
+                  <TableColumn fx:id="nombre" prefWidth="75.0" text="Nombre cliente" />
+                  <TableColumn fx:id="codArticulo" prefWidth="75.0" text="Cód. Articulo" />
+                  <TableColumn fx:id="descripcion" prefWidth="75.0" text="Descripcion" />
+                  <TableColumn fx:id="precioUnidad" prefWidth="75.0" text="P. Unidad" />
+                  <TableColumn fx:id="cantidad" prefWidth="75.0" text="Cantidad" />
+                  <TableColumn fx:id="precioEnvio" prefWidth="75.0" text="P. Envio" />
+                  <TableColumn fx:id="precioTotal" prefWidth="75.0" text="P. Total" />
+                  <TableColumn fx:id="enviado" prefWidth="75.0" text="Enviado" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
