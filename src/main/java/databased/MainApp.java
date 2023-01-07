@@ -15,12 +15,13 @@ import java.io.IOException;
 public class MainApp extends Application {
     private Datos datos;
     private Stage primaryStage;
-
+    private BorderPane rootLayout;
     public Stage getPrimaryStage() {
         return primaryStage;
     }
-
-    private BorderPane rootLayout;
+    public Datos getDatos() {
+        return datos;
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -55,7 +56,6 @@ public class MainApp extends Application {
         clientesVistaController.refreshClientesList();
         rootLayout.setCenter(clientesVista);
     }
-
     public void showArticulosVista() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("vistasJavafx/ArticulosVista.fxml"));
@@ -68,7 +68,18 @@ public class MainApp extends Application {
         articulosVistaController.refreshArticulosList();
         rootLayout.setCenter(articulosVista);
     }
-
+    public void showPedidosVista() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainApp.class.getResource("vistasJavafx/PedidosVista.fxml"));
+        AnchorPane clientesVista = (AnchorPane) loader.load();
+        //Reclamamos el controlador que se ha creado automáticamente a partir del FXML
+        PedidosVistaController pedidosVistaController= loader.getController();
+        //Pasamos el acceso al modelo al controlador
+        pedidosVistaController.setMainApp(this);
+        //Cargamos los datos en la tabla
+        pedidosVistaController.refreshPedidosList();
+        rootLayout.setCenter(clientesVista);
+    }
     public void showAddArticuloDialog() throws IOException {
         // Load the fxml file and create a new stage for the popup dialog.
         FXMLLoader loader = new FXMLLoader();
@@ -107,13 +118,29 @@ public class MainApp extends Application {
 
         dialogStage.showAndWait();
     }
-    public Datos getDatos() {
-        return datos;
+    public void showAddPedidoDialog() throws IOException {
+        // Load the fxml file and create a new stage for the popup dialog.
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainApp.class.getResource("vistasJavafx/AddArticuloDialogVista.fxml"));
+        AnchorPane page = (AnchorPane) loader.load();
+
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Añadir Articulo");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(primaryStage);
+        Scene scene = new Scene(page);
+        dialogStage.setScene(scene);
+
+        AddArticuloDialogVistaController controller = loader.getController();
+        controller.setDialogStage(dialogStage);
+        controller.setMainApp(this);
+
+        dialogStage.showAndWait();
+
     }
 
     public static void main(String[] args) {
         launch(args);
     }
-
 
 }
