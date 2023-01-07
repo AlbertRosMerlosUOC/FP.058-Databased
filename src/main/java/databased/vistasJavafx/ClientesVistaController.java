@@ -10,9 +10,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.io.IOException;
 
 
 public class ClientesVistaController {
@@ -33,6 +36,8 @@ public class ClientesVistaController {
     private TableColumn<ClientePremium, Integer> clCuota;
     @FXML
     private TableColumn<ClientePremium, Integer> clDescuento;
+    @FXML
+    private Button showAddCliente;
    private MainApp mainApp;
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
@@ -68,6 +73,11 @@ public class ClientesVistaController {
     }
 
     //TODO modal para el formulario
+    @FXML
+    public void showAddCliente() throws IOException {
+        mainApp.showAddClienteDialog();
+        refreshClientesList();
+    }
     //Reestructurar en carpetas
     //mostrar por tipo
     //Documentar con comentarios

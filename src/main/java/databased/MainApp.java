@@ -1,10 +1,7 @@
 package databased;
 
 import databased.modelo.Datos;
-import databased.vistasJavafx.AddArticuloDialogVistaController;
-import databased.vistasJavafx.ArticulosVistaController;
-import databased.vistasJavafx.ClientesVistaController;
-import databased.vistasJavafx.PrincipalVistaController;
+import databased.vistasJavafx.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -66,7 +63,7 @@ public class MainApp extends Application {
         //Reclamamos el controlador que se ha creado automáticamente a partir del FXML
         ArticulosVistaController articulosVistaController = loader.getController();
         //Pasamos el acceso al modelo al controlador
-        articulosVistaController.setMainController(this);
+        articulosVistaController.setMainApp(this);
         //Cargamos los datos en la tabla
         articulosVistaController.refreshArticulosList();
         rootLayout.setCenter(articulosVista);
@@ -92,7 +89,24 @@ public class MainApp extends Application {
         dialogStage.showAndWait();
 
     }
+    public void showAddClienteDialog() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainApp.class.getResource("vistasJavafx/AddClienteDialogVista.fxml"));
+        AnchorPane page = (AnchorPane) loader.load();
 
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Añadir Cliente");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(primaryStage);
+        Scene scene = new Scene(page);
+        dialogStage.setScene(scene);
+
+        AddClienteDialogVistaController controller = loader.getController();
+        controller.setDialogStage(dialogStage);
+        controller.setMainApp(this);
+
+        dialogStage.showAndWait();
+    }
     public Datos getDatos() {
         return datos;
     }
@@ -100,4 +114,6 @@ public class MainApp extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+
 }
