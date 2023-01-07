@@ -34,7 +34,6 @@ public class ArticulosVistaController {
     private MainApp mainApp;
     @FXML
     public void refreshArticulosList() {
-
         ObservableList<Articulo> articulos = FXCollections.observableArrayList(mainApp.getDatos().getArticulos());
         System.out.println(articulos);
         clCodigo.setCellValueFactory(new PropertyValueFactory<Articulo, String>("codigo"));
@@ -50,7 +49,7 @@ public class ArticulosVistaController {
         refreshArticulosList();
     }
 
-    public void setMainController(MainApp mainApp) {
+    public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
 }

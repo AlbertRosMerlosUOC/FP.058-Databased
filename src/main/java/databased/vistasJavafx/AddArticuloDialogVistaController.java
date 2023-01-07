@@ -2,8 +2,6 @@ package databased.vistasJavafx;
 
 import databased.MainApp;
 import databased.modelo.Articulo;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -65,10 +63,6 @@ public class AddArticuloDialogVistaController {
            alert.setContentText("Los campos no pueden estasr vacios y los campos numéricos deben ser correctos");
            alert.showAndWait();
        }
-
-    }
-    @FXML
-    public void initialize(){
 
     }
 
