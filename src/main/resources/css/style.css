@@ -4,6 +4,6 @@
     -fx-font-weight: bold;
 }
 
-.form_container{
-
+.button{
+    -fx-background-color: #03AAFF;
 }
