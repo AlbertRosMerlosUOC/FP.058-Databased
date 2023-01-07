@@ -8,23 +8,25 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="databased.vistasJavafx.PrincipalVistaController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="databased.vistasJavafx.PrincipalVistaController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" text="Close" onAction="#showPrincipalClose"/>
             </items>
           </Menu>
+          <!-- Albert: Comento para no borrar nada.
           <Menu mnemonicParsing="false" text="Edit">
             <items>
               <MenuItem mnemonicParsing="false" text="Delete" />
             </items>
           </Menu>
+          -->
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" text="About" onAction="#showPrincipalAbout"/>
             </items>
           </Menu>
         </menus>
@@ -34,7 +36,7 @@
       <VBox prefHeight="575.0" prefWidth="180.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="showClientesVista" mnemonicParsing="false" onAction="#showGestionClientes" prefWidth="200.0" text="Gestión de Clientes" />
-            <Button fx:id="showArticulosVista" mnemonicParsing="false" onAction="#showGestionArticulos" prefWidth="200.0" text="Gestión de Articulos" />
+            <Button fx:id="showArticulosVista" mnemonicParsing="false" onAction="#showGestionArticulos" prefWidth="200.0" text="Gestión de Artículos" />
             <Button fx:id="showPedidosVista" mnemonicParsing="false" onAction="#showGestionPedidos" prefWidth="200.0" text="Gestión de Pedidos" />
          </children>
          <BorderPane.margin>

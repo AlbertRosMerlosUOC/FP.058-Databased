@@ -37,13 +37,13 @@ public class AddArticuloDialogVistaController {
     }
 
     @FXML
-    public void addArticulo(){
+    public void addArticulo() {
        try {
-           Articulo articulo = new Articulo(tCodigo.getText(),
-                   tDescripcion.getText(),
-                   Double.parseDouble(tPrecioVenta.getText()),
-                   Double.parseDouble(tGastosEnvio.getText()),
-                   Integer.parseInt(tTiempoPreparacion.getText()));
+           Articulo articulo = new Articulo(   tCodigo.getText(),
+                                               tDescripcion.getText(),
+                                               Double.parseDouble(tPrecioVenta.getText()),
+                                               Double.parseDouble(tGastosEnvio.getText()),
+                                               Integer.parseInt(tTiempoPreparacion.getText()) );
 
            if (mainApp.getDatos().addArticulo(articulo)) {
                dialogStage.close();
@@ -55,15 +55,14 @@ public class AddArticuloDialogVistaController {
                alert.setContentText("Escribe otro código");
                alert.showAndWait();
            }
-       }catch (NullPointerException | NumberFormatException ex){
+       } catch (NullPointerException | NumberFormatException ex) {
            Alert alert = new Alert(Alert.AlertType.WARNING);
            alert.initOwner(mainApp.getPrimaryStage());
-           alert.setTitle("Articulo");
+           alert.setTitle("Artículo");
            alert.setHeaderText("Revisa los datos del formulario");
-           alert.setContentText("Los campos no pueden estasr vacios y los campos numéricos deben ser correctos");
+           alert.setContentText("Los campos no pueden estar vacíos y los campos numéricos deben ser correctos");
            alert.showAndWait();
        }
-
     }
 
     @FXML
