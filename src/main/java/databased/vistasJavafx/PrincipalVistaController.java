@@ -1,7 +1,9 @@
 package databased.vistasJavafx;
 
 import databased.MainApp;
+import databased.modelo.Articulo;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
 import java.io.IOException;
@@ -34,6 +36,18 @@ public class PrincipalVistaController {
     public void showGestionPedidos(){
 
     }
-
+    @FXML
+    public void showPrincipalAbout() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.initOwner(mainApp.getPrimaryStage());
+        alert.setTitle("About");
+        alert.setHeaderText("Online Store");
+        alert.setContentText("Online Store es un producto del grupo Databased.");
+        alert.showAndWait();
+    }
+    @FXML
+    public void showPrincipalClose() {
+        System.exit(0);
+    }
 
 }
