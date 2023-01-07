@@ -1,5 +1,6 @@
 package databased;
 
+import databased.modelo.Cliente;
 import databased.modelo.Datos;
 import databased.vistasJavafx.*;
 import javafx.application.Application;
@@ -100,7 +101,7 @@ public class MainApp extends Application {
         dialogStage.showAndWait();
 
     }
-    public void showAddClienteDialog() throws IOException {
+    public Cliente showAddClienteDialog() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("vistasJavafx/AddClienteDialogVista.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
@@ -115,8 +116,9 @@ public class MainApp extends Application {
         AddClienteDialogVistaController controller = loader.getController();
         controller.setDialogStage(dialogStage);
         controller.setMainApp(this);
-
         dialogStage.showAndWait();
+
+        return controller.getCliente();
     }
     public void showAddPedidoDialog() throws IOException {
         // Load the fxml file and create a new stage for the popup dialog.
@@ -135,6 +137,7 @@ public class MainApp extends Application {
         controller.setDialogStage(dialogStage);
         controller.setMainApp(this);
         controller.initSelectArticulo();
+        controller.initSelectCliente();
 
         dialogStage.showAndWait();
 

@@ -1,7 +1,6 @@
 package databased.vistasJavafx;
 
 import databased.MainApp;
-import databased.modelo.Articulo;
 import databased.modelo.Cliente;
 import databased.modelo.ClientePremium;
 import databased.modelo.ClienteStandard;
@@ -30,6 +29,8 @@ public class AddClienteDialogVistaController {
 
     private MainApp mainApp;
     private Stage dialogStage;
+
+    private Cliente cliente;
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
@@ -48,14 +49,14 @@ public class AddClienteDialogVistaController {
             alert.setContentText("Escribe otro email");
             alert.showAndWait();
         } else{
-            Cliente cliente;
+
             if (ckIsPremium.isSelected()) {
-                cliente = new ClientePremium(tEmail.getText(),
+                this.cliente = new ClientePremium(tEmail.getText(),
                         tNif.getText(),
                         tNombre.getText(),
                         tDomicilio.getText());
             } else {
-                cliente = new ClienteStandard(tEmail.getText(),
+                this.cliente = new ClienteStandard(tEmail.getText(),
                         tNif.getText(),
                         tNombre.getText(),
                         tDomicilio.getText());
@@ -75,5 +76,9 @@ public class AddClienteDialogVistaController {
     @FXML
     public void cancelAddCliente(){
         dialogStage.close();
+    }
+
+    public Cliente getCliente() {
+        return this.cliente;
     }
 }
