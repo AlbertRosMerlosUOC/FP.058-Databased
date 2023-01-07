@@ -13,6 +13,8 @@ public abstract class Cliente {
     protected String nombre;
     protected String domicilio;
 
+
+
     public Cliente() {
     }
 

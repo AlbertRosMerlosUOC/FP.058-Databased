@@ -1,7 +1,7 @@
 package databased;
 
 import databased.modelo.Datos;
-import databased.vistasJavafx.AddArticuloVistaController;
+import databased.vistasJavafx.AddArticuloDialogVistaController;
 import databased.vistasJavafx.ArticulosVistaController;
 import databased.vistasJavafx.ClientesVistaController;
 import databased.vistasJavafx.PrincipalVistaController;
@@ -28,8 +28,7 @@ public class MainApp extends Application {
         this.datos = new Datos();
 
         initRootLayout();
-        showArticulosVista();
-        //showClientesVista();
+        showClientesVista();
     }
     private void initRootLayout() throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -41,8 +40,6 @@ public class MainApp extends Application {
         Scene scene = new Scene(rootLayout);
         primaryStage.setScene(scene);
         primaryStage.show();
-
-
     }
     public void showClientesVista() throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -70,13 +67,12 @@ public class MainApp extends Application {
         rootLayout.setCenter(articulosVista);
     }
 
-    public boolean showAddArticuloDialog() throws IOException {
+    public void showAddArticuloDialog() throws IOException {
         // Load the fxml file and create a new stage for the popup dialog.
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("vistasJavafx/AddArticuloDialogVista.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
-        // Create the dialog Stage.
         Stage dialogStage = new Stage();
         dialogStage.setTitle("Añadir Articulo");
         dialogStage.initModality(Modality.WINDOW_MODAL);
@@ -84,16 +80,11 @@ public class MainApp extends Application {
         Scene scene = new Scene(page);
         dialogStage.setScene(scene);
 
-        // Set the person into the controller.
-        AddArticuloVistaController controller = loader.getController();
+        AddArticuloDialogVistaController controller = loader.getController();
         controller.setDialogStage(dialogStage);
         controller.setMainApp(this);
 
-        // Show the dialog and wait until the user closes it
         dialogStage.showAndWait();
-
-        //return controller.isOkClicked();
-        return true;
 
     }
 
