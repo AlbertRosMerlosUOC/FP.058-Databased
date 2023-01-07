@@ -2,7 +2,10 @@ package databased.vistasJavafx;
 
 import databased.MainApp;
 import databased.modelo.Articulo;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -21,7 +24,7 @@ public class AddArticuloDialogVistaController {
     private TextField tTiempoPreparacion;
 
     @FXML
-    private Button btnAdArticulo;
+    private Button btnAddArticulo;
     @FXML
     private Button btnCancelAddArticulo;
 
@@ -37,24 +40,41 @@ public class AddArticuloDialogVistaController {
 
     @FXML
     public void addArticulo(){
-        if(!tCodigo.getText().equals("")) {
-            Articulo articulo = new Articulo(tCodigo.getText(),
-                    tDescripcion.getText(),
-                    Double.parseDouble(tPrecioVenta.getText()),
-                    Double.parseDouble(tGastosEnvio.getText()),
-                    Integer.parseInt(tTiempoPreparacion.getText()));
+       try {
+           Articulo articulo = new Articulo(tCodigo.getText(),
+                   tDescripcion.getText(),
+                   Double.parseDouble(tPrecioVenta.getText()),
+                   Double.parseDouble(tGastosEnvio.getText()),
+                   Integer.parseInt(tTiempoPreparacion.getText()));
 
-            mainApp.getDatos().addArticulo(articulo);
-            dialogStage.close();
-        }
+           if (mainApp.getDatos().addArticulo(articulo)) {
+               dialogStage.close();
+           } else {
+               Alert alert = new Alert(Alert.AlertType.WARNING);
+               alert.initOwner(mainApp.getPrimaryStage());
+               alert.setTitle("Articulo");
+               alert.setHeaderText("El articulo " + articulo.getCodigo() + " ya existe");
+               alert.setContentText("Escribe otro código");
+               alert.showAndWait();
+           }
+       }catch (NullPointerException | NumberFormatException ex){
+           Alert alert = new Alert(Alert.AlertType.WARNING);
+           alert.initOwner(mainApp.getPrimaryStage());
+           alert.setTitle("Articulo");
+           alert.setHeaderText("Revisa los datos del formulario");
+           alert.setContentText("Los campos no pueden estasr vacios y los campos numéricos deben ser correctos");
+           alert.showAndWait();
+       }
+
+    }
+    @FXML
+    public void initialize(){
+
     }
 
     @FXML
     public void cancelAddArticulo(){
         dialogStage.close();
     }
-
-    //TODO Validación del formulario antes de enviar los datos
-
 
 }

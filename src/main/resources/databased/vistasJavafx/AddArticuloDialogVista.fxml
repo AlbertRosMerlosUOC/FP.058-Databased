@@ -24,7 +24,7 @@
             <TextField fx:id="tTiempoPreparacion" />
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
               <buttons>
-                <Button fx:id="btnAdArticulo" mnemonicParsing="false" onAction="#addArticulo" text="Añadir" />
+                <Button fx:id="btnAddArticulo" mnemonicParsing="false" onAction="#addArticulo" text="Añadir" />
                   <Button fx:id="btnCancelAddArticulo" mnemonicParsing="false" onAction="#cancelAddArticulo" text="Cancelar" />
               </buttons>
             </ButtonBar>
