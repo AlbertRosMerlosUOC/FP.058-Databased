@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class AddArticuloVistaController {
+public class AddArticuloDialogVistaController {
 
     @FXML
     private TextField tCodigo;
@@ -27,7 +27,6 @@ public class AddArticuloVistaController {
 
     private MainApp mainApp;
     private Stage dialogStage;
-
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
@@ -51,7 +50,11 @@ public class AddArticuloVistaController {
     }
 
     @FXML
-    public void setBtnCancelAddArticulo(){
+    public void cancelAddArticulo(){
         dialogStage.close();
     }
+
+    //TODO Validación del formulario antes de enviar los datos
+
+
 }
