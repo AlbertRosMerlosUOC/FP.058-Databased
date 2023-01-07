@@ -100,7 +100,8 @@ public class AddPedidoDialogVistaController {
     public void showAddCliente() throws IOException {
         Cliente cliente = mainApp.showAddClienteDialog();
         initSelectCliente();
-        selCliente.setValue(cliente.getEmail());
+        if(cliente != null)
+            selCliente.setValue(cliente.getEmail());
     }
 
     @FXML
