@@ -121,19 +121,20 @@ public class MainApp extends Application {
     public void showAddPedidoDialog() throws IOException {
         // Load the fxml file and create a new stage for the popup dialog.
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainApp.class.getResource("vistasJavafx/AddArticuloDialogVista.fxml"));
+        loader.setLocation(MainApp.class.getResource("vistasJavafx/AddPedidoDialogVista.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
         Stage dialogStage = new Stage();
-        dialogStage.setTitle("Añadir Articulo");
+        dialogStage.setTitle("Crear Pedido");
         dialogStage.initModality(Modality.WINDOW_MODAL);
         dialogStage.initOwner(primaryStage);
         Scene scene = new Scene(page);
         dialogStage.setScene(scene);
 
-        AddArticuloDialogVistaController controller = loader.getController();
+        AddPedidoDialogVistaController controller = loader.getController();
         controller.setDialogStage(dialogStage);
         controller.setMainApp(this);
+        controller.initSelectArticulo();
 
         dialogStage.showAndWait();
 
