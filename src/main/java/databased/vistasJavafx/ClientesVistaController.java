@@ -10,9 +10,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
@@ -38,6 +36,12 @@ public class ClientesVistaController {
     private TableColumn<ClientePremium, Integer> clDescuento;
     @FXML
     private Button showAddCliente;
+    @FXML
+    private CheckBox chkFiltroTipoCliente;
+    @FXML
+    private RadioButton rClientePremium;
+    @FXML
+    private RadioButton rClienteStandard;
    private MainApp mainApp;
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
@@ -71,16 +75,60 @@ public class ClientesVistaController {
         });
         clientesTable.setItems(clientes);
     }
+    public void refreshClientesListByTipo(boolean isPremium) {
 
-    //TODO modal para el formulario
+        System.out.println(mainApp.getDatos().getClientes());
+        ObservableList<Cliente> clientes;
+        if(isPremium) {
+            clientes = FXCollections.observableArrayList(mainApp.getDatos().getClientes("ClientePremium"));
+        }else{
+            clientes = FXCollections.observableArrayList(mainApp.getDatos().getClientes("ClienteStandard"));
+        }
+        clNombre.setCellValueFactory(new PropertyValueFactory<Cliente, String>("nombre"));
+        clEmail.setCellValueFactory(new PropertyValueFactory<Cliente, String>("email"));
+        clNif.setCellValueFactory(new PropertyValueFactory<Cliente, String>("nif"));
+        clDomicilio.setCellValueFactory(new PropertyValueFactory<Cliente, String>("domicilio"));
+
+        clTipo.setCellValueFactory(cellData -> {
+            Cliente cl = cellData.getValue();
+            return  new SimpleStringProperty(cl.tipoCliente());
+        });
+        clCuota.setCellValueFactory(cellData -> {
+            Cliente cl = cellData.getValue();
+            if(cl instanceof ClientePremium){
+                return new SimpleIntegerProperty(((ClientePremium) cl).getCuota()).asObject();
+            }
+            return null;
+
+        });
+        clDescuento.setCellValueFactory(cellData -> {
+            Cliente cl = cellData.getValue();
+            if(cl instanceof ClientePremium) {
+                return new SimpleIntegerProperty(((ClientePremium) cl).getDescuento()).asObject();
+            }
+            return null;
+        });
+        clientesTable.setItems(clientes);
+    }
+
     @FXML
     public void showAddCliente() throws IOException {
         mainApp.showAddClienteDialog();
         refreshClientesList();
     }
-    //Reestructurar en carpetas
-    //mostrar por tipo
-    //Documentar con comentarios
 
+    @FXML
+    public void filtrarPorTipoCliente(){
+        if(chkFiltroTipoCliente.isSelected()){
+            rClientePremium.setDisable(false);
+            rClienteStandard.setDisable(false);
+            refreshClientesListByTipo(rClientePremium.isSelected());
+        }else{
+            rClientePremium.setDisable(true);
+            rClienteStandard.setDisable(true);
+            refreshClientesList();
+        }
+
+    }
 
 }
