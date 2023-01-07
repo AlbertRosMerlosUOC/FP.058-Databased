@@ -18,6 +18,11 @@ import java.io.IOException;
 public class MainApp extends Application {
     private Datos datos;
     private Stage primaryStage;
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
     private BorderPane rootLayout;
 
     @Override
