@@ -1,9 +1,0 @@
-.title{
-    -fx-font-size: 2em;
-    -fx-font-fill: #016A91;
-    -fx-font-weight: bold;
-}
-
-.button:hover{
-    -fx-background-color: #03AAFF;
-}
