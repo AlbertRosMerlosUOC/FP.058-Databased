@@ -1,4 +1,4 @@
-package databased.vistasJavafx;
+package databased.vistasControllerJavafx;
 
 import databased.MainApp;
 import databased.modelo.Articulo;
@@ -35,7 +35,7 @@ public class ArticulosVistaController {
     @FXML
     public void refreshArticulosList() {
         ObservableList<Articulo> articulos = FXCollections.observableArrayList(mainApp.getDatos().getArticulos());
-        System.out.println(articulos);
+        //System.out.println(articulos);
         clCodigo.setCellValueFactory(new PropertyValueFactory<Articulo, String>("codigo"));
         clDescripcion.setCellValueFactory(new PropertyValueFactory<Articulo, String>("descripcion"));
         clPrecioVenta.setCellValueFactory(new PropertyValueFactory<Articulo, Double>("precioVenta"));

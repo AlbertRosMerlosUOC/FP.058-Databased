@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="databased.vistasJavafx.AddArticuloDialogVistaController">
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="databased.vistasControllerJavafx.AddArticuloDialogVistaController">
    <children>
       <VBox layoutX="30.0" layoutY="37.0" prefHeight="367.0" prefWidth="300.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>

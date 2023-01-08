@@ -1,4 +1,4 @@
-package databased.vistasJavafx;
+package databased.vistasControllerJavafx;
 
 import databased.MainApp;
 import databased.modelo.Cliente;

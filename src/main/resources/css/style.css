@@ -4,6 +4,6 @@
     -fx-font-weight: bold;
 }
 
-.button{
+.button:hover{
     -fx-background-color: #03AAFF;
 }

@@ -2,7 +2,7 @@ package databased;
 
 import databased.modelo.Cliente;
 import databased.modelo.Datos;
-import databased.vistasJavafx.*;
+import databased.vistasControllerJavafx.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

@@ -1,4 +1,4 @@
-package databased.vistasJavafx;
+package databased.vistasControllerJavafx;
 
 import databased.MainApp;
 import databased.modelo.Cliente;
@@ -47,7 +47,7 @@ public class ClientesVistaController {
         this.mainApp = mainApp;
     }
     public void refreshClientesList() {
-        System.out.println(mainApp.getDatos().getClientes());
+        //System.out.println(mainApp.getDatos().getClientes());
         ObservableList<Cliente> clientes = FXCollections.observableArrayList(mainApp.getDatos().getClientes());
         clNombre.setCellValueFactory(new PropertyValueFactory<Cliente, String>("nombre"));
         clEmail.setCellValueFactory(new PropertyValueFactory<Cliente, String>("email"));
