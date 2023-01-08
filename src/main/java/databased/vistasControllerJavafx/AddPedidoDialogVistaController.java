@@ -1,6 +1,5 @@
 package databased.vistasControllerJavafx;
 
-import com.sun.javafx.charts.Legend;
 import databased.MainApp;
 import databased.modelo.Articulo;
 import databased.modelo.Cliente;
@@ -19,7 +18,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AddPedidoDialogVistaController {
