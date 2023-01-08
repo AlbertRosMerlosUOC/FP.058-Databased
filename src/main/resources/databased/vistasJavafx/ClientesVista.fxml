@@ -13,15 +13,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="415.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="databased.vistasControllerJavafx.ClientesVistaController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="databased.vistasControllerJavafx.ClientesVistaController">
    <children>
-      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label styleClass="title" text="Gestión de Clientes">
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin></Label>
-            <TableView fx:id="clientesTable" prefHeight="336.0" prefWidth="600.0">
+            <TableView fx:id="clientesTable" prefHeight="554.0" prefWidth="780.0">
               <columns>
                 <TableColumn fx:id="clNombre" prefWidth="75.0" text="Nombre" />
                   <TableColumn fx:id="clEmail" prefWidth="75.0" text="Email" />
@@ -48,7 +48,10 @@
                         <Insets />
                      </HBox.margin>
                   </CheckBox>
-                  <RadioButton fx:id="rClienteStandard" disable="true" mnemonicParsing="false" onAction="#filtrarPorTipoCliente" selected="true" text="Clientes Standard" toggleGroup="$tipo" />
+                  <RadioButton fx:id="rClienteStandard" disable="true" mnemonicParsing="false" onAction="#filtrarPorTipoCliente" selected="true" text="Clientes Standard">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="tipo" />
+                     </toggleGroup></RadioButton>
                   <RadioButton fx:id="rClientePremium" disable="true" mnemonicParsing="false" onAction="#filtrarPorTipoCliente" text="Clientes Premium" toggleGroup="$tipo" />
                </children>
                <padding>

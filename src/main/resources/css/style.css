@@ -1,129 +1,441 @@
-.title{
-    -fx-font-size: 1.75em;
-    -fx-font-fill: #016A91;
-    -fx-font-weight: bold;
+/*
+*		FLATBEE by KarlTheBee´
+* An javafx css style for a smooth & flat user interface
+* Website : github.com/karlthebee/flatbee
+* Mail    : karlthebee@gmail.com
+*
+*	Version 1.0.0
+*
+* The license is pretty much a CC-BY-NC 4.0 license (https://creativecommons.org/licenses/by-nc/4.0/).
+* In simple (non legal) english :
+* you can modify and distribute it, ship in in your application,
+* but not use/sell it commercially.
+* And you have to give credits,
+* like "FlatBee theme by karlthebee (https://github.com/karlthebee/flatbee)"
+*/
+
+/*
+	* These are values you can edit safely.
+	The "color" is your main color (in this case greenish)
+	*/
+* {
+	-color : #2ecc71;
+	-white : #efefef;
+	-gray : #dfdfdf;
+	-darkGray : derive(-gray,-20%);
+	-black : #444444dd;
+	-abort : #e74c3c;
 }
 
-.form_container{
-
+.root{
+	-fx-background-color : -white;
+	-fx-fill-width : true;
+	-fx-color : -color;
+	-fx-fill-height : true;
+	-fx-font-family: 'Segoe UI';
+	/* remove the ugly focus shade */
+	-fx-focus-color : transparent;
+	-fx-faint-focus-color: transparent;
 }
 
-.menu_bar{
-    -fx-background-color: #efefef;
+#flatbee-tiny{
+	-fx-font-size : 8.0;
 }
 
-.button{
-    -fx-background-color: #dfdfdf;
-    -fx-font-weight: bold;
-    -fx-font-family: "sans-serif";
-    -fx-effect: dropshadow(gaussian, #d6d6d6, -2, -2, 2, 2);
+#flatbee-small{
+	-fx-font-size : 10.0;
 }
 
-.button::hover{
-    -fx-background-color: #dfdfdf;
-    -fx-effect: dropshadow(gaussian, #d6d6d6, 0, 0, 0, 0);
-    -fx-effect: innershadow(gaussian, #d6d6d6, -2, -2, 2, 2);
+#flatbee-medium{
+	-fx-font-size : 12.0;
 }
 
-.menu-bar {
-    -fx-background-color: #dfdfdf;
-    -fx-opacity: 0.5;
-    -fx-border-width: 2.0;
-    -fx-border-color: #d6d6d6 transparent transparent transparent;
-}
-.menu-bar .label {
-    -fx-font-size: 14.0 pt;
-    -fx-font-family: "sans-serif";
-    -fx-text-fill: #333;
-    -fx-font-weight: bold;
-    -fx-padding: 10.0px;
-
-}
-.menu-bar .menu-button:hover, .menu-bar .menu-button:focused, .menu-bar .menu-button:showing {
-    -fx-background: #dfdfdf;
-    -fx-opacity: 0.5;
-    -fx-text-fill: #333;
+#flatbee-large{
+	-fx-font-size : 18.0;
 }
 
-.menu-item {
-    -fx-padding: 0.0em 0.0em 0.0em 0.0em;
-    -fx-text-fill: #333;
-    -fx-background: darkgray ;
-}
-.menu-item .label{
-    -fx-font-size: 14.0 pt;
-    -fx-text-fill: #333;
-}
-.menu-item .label:hover{
-    -fx-font-size: 14.0 pt;
-    -fx-background: #333 ;
-    -fx-text-fill: #333;
+#flatbee-xlarge{
+	-fx-font-size : 24.0;
 }
 
-.table-cell {
-    -fx-padding: 0.2em 0.2em 0.1em 0.15em;
-    -fx-border-color: -fx-box-border transparent transparent transparent;
-    -fx-font: 13px "sans-serif";
-    -fx-border-insets: 0;
+#flatbee-xxlarge{
+	-fx-font-size : 32.0;
+	-fx-font-weight: bold;
 }
 
-.table-cell:hover {
-    -fx-background-color: #9900ff;
+#flatbee-xxxlarge{
+	-fx-font-size : 40.0;
+	-fx-font-weight: bold;
 }
 
-.table-row-cell:empty, .table-cell:empty:hover {
-    -fx-background-color: whitesmoke;
+#flatbee-jumbo{
+	-fx-font-size : 48.0;
+	-fx-font-weight: bold;
 }
 
-.table-row-cell:empty .table-cell {
-    -fx-border-width: 0px;
+#flatbee-card{
+	-fx-spacing : 12.0;
+	-fx-padding : 10;
+	-fx-hgap : 10;
+	-fx-vgap : 10;
+	-fx-background-color : -white;
+	-fx-effect : dropshadow(two-pass-box,-black,10,0,0,0);
 }
 
-.table-view:row-selection .table-row-cell:filled:hover {
-    -fx-background-color: rgba(28, 183, 236, 0.25);
+#flatbee-container{
+	-fx-spacing : 12.0;
+	-fx-padding : 10;
+	-fx-hgap : 10;
+	-fx-vgap : 10;
 }
 
-.table-view:row-selection .table-row-cell:filled:selected:hover {
-    -fx-background-color: rgba(228, 183, 236, 0.90);
+#flatbee-panel{
+	-fx-padding : 10;
 }
 
-.table-view:row-selection .table-row-cell:filled:selected {
-    -fx-background-color: rgba(28, 183, 236, 0.65);
+/*
+ * **********
+ * LABELS
+ * **********
+*/
+.label{
+	 -fx-text-fill : -black;
+ }
+
+/*
+ * **********
+ * BUTTONS
+ * **********
+ *
+ */
+.button {
+	-fx-background-color : -gray,-gray,-gray,-gray;
+}
+.button:default{
+	-fx-background-color : -color;
+}
+.button:cancel{
+	-fx-background-color : -abort;
 }
 
-.table-view, .table-view:focused {
-  -fx-background-color: transparent,#d6d6d6,-fx-control-inner-background;
-  -fx-background-insets: -1.4, 0, 1;
-  -fx-background-radius: 1.4, 0, 0;
+.button:focused {
+	-fx-color : -darkGray;
+   -fx-background-color : -darkGray;
+   -fx-focus-color : -darkGray;
+}
+.button:hover {
+    -fx-color: -darkGray;
+	-fx-inner-border : -color;
+	-fx-background-color : -color;
+	-fx-body-color : -darkGray;
 }
 
-.table-view .column-header .label{
-    -fx-text-fill: #333;
-    -fx-alignment: CENTER;
+.button:armed {
+    -fx-color: -white;
 }
 
-// color de fondo del titulo de columna cuando en roton esta sobre ella
-.table-view .column-header:hover {
-    -fx-background-color: whitesmoke;
+
+.toggle-button{
+        -fx-background-color : -gray;
 }
 
-// tamaño, bordes y color de fondo de los titulos
-.table-view .column-header, .table-view .filler {
-    -fx-background-color: white;
-    -fx-size: 45;
-    -fx-border-color: -fx-box-border;
-    -fx-border-width: 0 1 3 0;
-    -fx-border-insets: 0;
+.toggle-button:selected{
+	-fx-background-color : -darkGray;
 }
 
-// hacer transparente el fondo de los titulos
-.table-view .column-header-background {
-    -fx-background-color: transparent;
+.menu-button{
+	-fx-background-color : -gray;
 }
 
-// estylo para el boton que permite ocultar o mostrar las columnas
-.table-view .show-hide-columns-button {
-    -fx-background-color: white;
-    -fx-border-color: -fx-box-border;
-    -fx-border-insets: 0;
+.split-menu-button{
+	-fx-background-color : -gray;
+}
+
+.split-menu-button>*.label{
+	-fx-background-color : -gray;
+}
+
+.split-menu-button>*.arrow-button{
+	-fx-background-color : -gray;
+}
+
+
+/*
+ * **********
+ * PROGRESSBAR
+ * **********
+ *
+ */
+.progress-indicator {
+	-fx-indeterminate-segment-count : 12;
+	-fx-progress-color : -color;
+	-fx-spin-enabled : true;
+}
+
+.progress-bar>*.bar{
+	 -fx-background-color : -color;
+ }
+
+.progress-bar>*.track{
+	 -fx-background-color : -gray;
+ }
+
+.progress-bar:determinate>*.determinate-indicator>*.track{
+	 -fx-background-color : -gray;
+ }
+
+.progress-bar:determinate>*.determinate-indicator>*.indicator{
+	 -fx-background-color : -gray;
+ }
+
+ /*
+ * **********
+ * DATE PICKER
+ * **********
+ *
+ */
+.date-picker{
+	-fx-background-color : -white,-gray,gray;
+}
+
+.date-picker>*.arrow-button{
+	-fx-background-color : -white,-gray,-gray;
+}
+
+ .date-picker>*.arrow-button>*.arrow{
+	-fx-background-color : -darkGray, -black;
+}
+/*
+ * **********
+ * SLIDER
+ * **********
+ *
+ */
+ .slider>*.track{
+	 -fx-background-color : -gray;
+ }
+.slider>*.axis:bottom{
+	-fx-tick-label-font-family : 'Segoe UI';
+}
+
+.slider>*.thumb{
+	-fx-background-color : -color;
+}
+
+/*
+ * **********
+ * COMBOBOX
+ * **********
+ *
+ */
+.combo-box {
+	-fx-background-color : -gray;
+}
+
+.check-box>*.box{
+	-fx-background-color : -color;
+}
+
+
+/*
+ * **********
+ * TABPANE
+ * **********
+ *
+ */
+ .tab-pane>*.tab-header-area{
+	 -fx-padding : 0,0,0,0;
+ }
+.tab-pane>*.tab-header-area>*.headers-region>*.tab:selected:top{
+	-fx-padding : 6,6,6,6;
+	-fx-text-fill : -white;
+	-fx-background-color : -color;
+}
+.tab-pane>*.tab-header-area>*.headers-region>*.tab:selected>*.tab-container>*.tab-label{
+	-fx-font-size : 13.0;
+	-fx-font-weight: bold;
+}
+
+.tab-pane>*.tab-header-area>*.headers-region>*.tab:top{
+	-fx-padding : 4,4,4,4;
+	-fx-text-fill : -white;
+	-fx-background-color : -white;
+}
+
+.tab-pane>*.tab-header-area>*.control-buttons-tab>*.container>*.tab-down-button{
+	-fx-background-color : -white;
+}
+
+.tab-pane>*.tab-header-area>*.control-buttons-tab>*.container>*.tab-down-button>*.arrow{
+	-fx-background-color : -darkGray;
+}
+
+
+/*
+ * **********
+ * MENU
+ * **********
+ *
+ */
+.menu-bar{
+	-fx-background-color : -gray;
+}
+
+
+/*
+ * **********
+ * Checkbox
+ * **********
+ *
+ */
+ .check-box>*.box{
+	 -fx-background-color : -gray;
+ }
+
+ .check-box:selected>*.box>*.mark{
+	 -fx-background-color : -black;
+ }
+.check-box:indeterminate>*.box>*.mark{
+	 -fx-background-color : -black;
+ }
+
+
+ /*
+ * **********
+ * RADIO BUTTONS
+ * **********
+ *
+ */
+ .radio-button>*.radio{
+	-fx-background-color : -gray;
+ }
+
+ .radio-button:selected>*.radio>*.dot{
+	 -fx-background-color : -black;
+ }
+
+/*
+ * **********
+ * Text fields / inputs
+ * **********
+ *
+ */
+.text-field{
+	-fx-highlight-fill : -color;
+	-fx-highlight-text-fill : -white;
+}
+
+.text-area{
+	-fx-highlight-fill : -color;
+	-fx-highlight-text-fill : -white;
+}
+
+.spinner>*.increment-arrow-button{
+	-fx-background-color : -gray;
+}
+
+.spinner>*.decrement-arrow-button{
+	-fx-background-color : -gray;
+}
+/*
+ * **********
+ * Titled Pane
+ * **********
+ *
+ */
+
+.first-titled-pane:expanded>*.title{
+	-fx-background-color : -color;
+}
+
+.titled-pane:expanded>*.title{
+	-fx-background-color : -color;
+}
+
+.titled-pane:collapsed>*.title{
+	-fx-background-color : -gray;
+}
+
+.titled-pane*>*.title>*.arrow-button>*.arrow{
+	-fx-background-color : -black;
+}
+
+/*
+ * **********
+ * Table
+ * **********
+ *
+ */
+.table-view:row-selection{
+	-fx-background-color : -gray;
+}
+
+.table-view:row-selection>*.column-header-background{
+	-fx-background-color : -white;
+}
+
+.table-view>*.column-resize-line{
+	-fx-background-color : -black;
+}
+
+.table-view>*.column-header-background>*.nested-column-header>*.table-column{
+	-fx-background-color : -darkGray, -white;
+}
+
+.table-view>*.column-header-background>*.filler{
+	-fx-background-color : -darkGray, -gray;
+}
+
+.table-view>*.column-header-background>*.show-hide-columns-button{
+	-fx-background-color : -gray;
+}
+
+
+.tree-table-view:row-selection{
+	-fx-background-color : -gray;
+}
+
+.tree-table-view:row-selection>*.column-header-background{
+	-fx-background-color : -white;
+}
+
+.tree-table-view>*.column-resize-line{
+	-fx-background-color : -black;
+}
+
+.tree-table-view>*.column-header-background>*.nested-column-header>*.table-column{
+	-fx-background-color : -darkGray, -white;
+}
+
+.tree-table-view>*.column-header-background>*.filler{
+	-fx-background-color : -darkGray, -gray;
+}
+
+.tree-table-view>*.column-header-background>*.show-hide-columns-button{
+	-fx-background-color : -gray;
+}
+
+
+/*
+ * **********
+ * Color picker
+ * **********
+ *
+ */
+.color-picker{
+	-fx-background-color : -gray;
+}
+
+/*
+ * **********
+ * Scroll pane
+ * **********
+ *
+ */
+.scroll-pane>*.scroll-bar{
+	-fx-background-color : -gray;
+}
+
+.scroll-pane>*.scroll-bar>*.thumb{
+	-fx-background-color : -color;
 }
