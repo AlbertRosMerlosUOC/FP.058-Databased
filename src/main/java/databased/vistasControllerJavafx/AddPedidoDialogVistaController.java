@@ -1,4 +1,4 @@
-package databased.vistasJavafx;
+package databased.vistasControllerJavafx;
 
 import com.sun.javafx.charts.Legend;
 import databased.MainApp;

@@ -1,4 +1,4 @@
-package databased.vistasJavafx;
+package databased.vistasControllerJavafx;
 
 import databased.MainApp;
 import databased.modelo.Articulo;
@@ -54,7 +54,7 @@ public class PedidosVistaController {
     @FXML
     public void refreshPedidosList() {
         ObservableList<Pedido> pedidos = FXCollections.observableArrayList(mainApp.getDatos().getPedidos());
-        System.out.println(pedidos);
+       // System.out.println(pedidos);
         numPedido.setCellValueFactory(new PropertyValueFactory<Pedido, Integer>("numPedido"));
         fechaPedido.setCellValueFactory(new PropertyValueFactory<Pedido, LocalDateTime>("fechaPedido"));
         nif.setCellValueFactory(cellData -> {
@@ -107,50 +107,58 @@ public class PedidosVistaController {
 
     public void showDelPedido(ActionEvent event) throws IOException {
         Pedido pedido = tblPedidos.getSelectionModel().getSelectedItem();
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.initOwner(mainApp.getPrimaryStage());
-        alert.setTitle("Confirmación de eliminación");
-        alert.setHeaderText("Eliminar pedido número " + pedido.getNumPedido());
-        alert.setContentText("Está a punto de eliminar el pedido con número " + pedido.getNumPedido() + ". ¿Desea continuar?");
+        if(pedido != null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("Confirmación de eliminación");
+            alert.setHeaderText("Eliminar pedido número " + pedido.getNumPedido());
+            alert.setContentText("Está a punto de eliminar el pedido con número " + pedido.getNumPedido() + ". ¿Desea continuar?");
 
-        ButtonType siBtn = new ButtonType("Sí");
-        ButtonType noBtn = new ButtonType("No");
-        alert.getButtonTypes().setAll(siBtn, noBtn);
+            ButtonType siBtn = new ButtonType("Sí");
+            ButtonType noBtn = new ButtonType("No");
+            alert.getButtonTypes().setAll(siBtn, noBtn);
 
-        Optional<ButtonType> clicked = alert.showAndWait();
+            Optional<ButtonType> clicked = alert.showAndWait();
 
-        if (clicked.isPresent() && clicked.get() == siBtn) {
-            int resultado = mainApp.getDatos().deletePedido(pedido.getNumPedido());
-            Alert alertRes = null;
-            switch (resultado) {
-                // Este caso no debería darse nunca
-                case -1:
-                    alertRes = new Alert(Alert.AlertType.ERROR);
-                    alertRes.setTitle("Error en la eliminación");
-                    alertRes.setHeaderText("Eliminar pedido número " + pedido.getNumPedido());
-                    alertRes.setContentText("Está a punto de eliminar el pedido con número " + pedido.getNumPedido() + ". ¿Desea continuar?");
-                    alertRes.showAndWait();
-                    break;
-                case 0:
-                    alertRes = new Alert(Alert.AlertType.WARNING);
-                    alertRes.setTitle("Error en la eliminación");
-                    alertRes.setHeaderText("No se ha podido eliminar el pedido número " + pedido.getNumPedido());
-                    alertRes.setContentText("El pedido ya ha sido enviado y no se ha podido eliminar.");
-                    alertRes.showAndWait();
-                    break;
-                case 1:
-                    alertRes = new Alert(Alert.AlertType.CONFIRMATION);
-                    alertRes.setTitle("Éxito en la eliminación");
-                    alertRes.setHeaderText("Pedido número " + pedido.getNumPedido() + " eliminado correctamente");
-                    alertRes.setContentText("El pedido se ha eliminado correctamente.");
-                    alertRes.showAndWait();
-                    refreshPedidosList();
-                    break;
-                default:
-                    break;
+            if (clicked.isPresent() && clicked.get() == siBtn) {
+                int resultado = mainApp.getDatos().deletePedido(pedido.getNumPedido());
+                Alert alertRes = null;
+                switch (resultado) {
+                    // Este caso no debería darse nunca
+                    case -1:
+                        alertRes = new Alert(Alert.AlertType.ERROR);
+                        alertRes.setTitle("Error en la eliminación");
+                        alertRes.setHeaderText("Eliminar pedido número " + pedido.getNumPedido());
+                        alertRes.setContentText("Está a punto de eliminar el pedido con número " + pedido.getNumPedido() + ". ¿Desea continuar?");
+                        alertRes.showAndWait();
+                        break;
+                    case 0:
+                        alertRes = new Alert(Alert.AlertType.WARNING);
+                        alertRes.setTitle("Error en la eliminación");
+                        alertRes.setHeaderText("No se ha podido eliminar el pedido número " + pedido.getNumPedido());
+                        alertRes.setContentText("El pedido ya ha sido enviado y no se ha podido eliminar.");
+                        alertRes.showAndWait();
+                        break;
+                    case 1:
+                        alertRes = new Alert(Alert.AlertType.CONFIRMATION);
+                        alertRes.setTitle("Éxito en la eliminación");
+                        alertRes.setHeaderText("Pedido número " + pedido.getNumPedido() + " eliminado correctamente");
+                        alertRes.setContentText("El pedido se ha eliminado correctamente.");
+                        alertRes.showAndWait();
+                        refreshPedidosList();
+                        break;
+                    default:
+                        break;
+                }
             }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("Selecciona el pedido");
+            alert.setHeaderText("Selecciona el pedido a eliminar");
+            alert.setContentText("");
+            alert.showAndWait();
         }
-
     }
 
 
